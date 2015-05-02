@@ -1,0 +1,83 @@
+<h1>New User Profile</h1>
+
+<% if @profile.errors.any? %>
+      <ul>
+      <% @profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+<% end %>
+
+<%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :html => { :multipart => true } do |f| %>
+  <div class="form-group">
+    <%= f.label :username, t("profile.username") %>
+    <%= f.text_field :username, :placeholder => t("profile.username_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :first_name, t("profile.first_name") %> <br />
+    <%= f.text_field :first_name, :placeholder => t("profile.first_name_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :last_name, t("profile.last_name"), :class => "has-tooltip", "data-toggle" => t("profile.last_name_placeholder") %> <br />
+    <%= f.text_field :last_name, :placeholder => t("profile.last_name_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :avatar, t("profile.avatar") %> <br />
+    <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :phone, t("profile.phone") %> <br />
+    <%= f.text_field :phone, :placeholder => t("profile.phone_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :domain_ids, t("domain_ids") %> <br />
+    <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :pricing_ids, t("princing") %> <br />
+
+    <% CaseType.all.each do |c| %>
+      <%= t(c.name) %>/<%= t(c.unit) %> <br>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :short_summary, t("profile.short_summary") %> <br />
+    <%= f.text_field :short_summary, :placeholder => t("profile.short_summary_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :professional, t("profile.professional") %> <br />
+    <%= f.text_area :professional, :placeholder => t("profile.professional_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :education, t("profile.education") %> <br />
+    <%= f.text_area :education, :placeholder => t("profile.education_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :certification, t("profile.certification") %> <br />
+    <%= f.text_area :certification, :placeholder => t("profile.certification_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :about, t("profile.about") %> <br />
+    <%= f.text_area :about, :placeholder => t("profile.about_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :payment_info, t("profile.payment_info") %> <br />
+    <%= f.text_area :payment_info, :placeholder => t("profile.payment_info_placeholder"), :class=> "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "送出", :class => "btn btn-primary" %>
+  </div>
+<% end %>

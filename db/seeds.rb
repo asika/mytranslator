@@ -5,3 +5,11 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+CaseType.create(:name => "case_type.e2c", :unit => "case_type.unit.word", :min_price => 0.7)
+CaseType.create(:name => "case_type.c2e", :unit => "case_type.unit.word", :min_price => 0.7)
+
+Domain.create(:name => "domain.group01")
+Domain.create(:name => "domain.group02")
+Domain.create(:name => "domain.group03")
+Domain.create(:name => "domain.group04")
