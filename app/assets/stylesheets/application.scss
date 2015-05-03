@@ -3,10 +3,68 @@
 
 div {
     /*outline: 1px solid #3c1;*/
-    /*outline: 1px solid rgba(51, 204, 17, 0.5);*/
+    outline: 1px solid rgba(51, 204, 17, 0.5);
 }
 
 .wrapper {
 	width: 90%;
 	margin: auto;
+}
+.section {
+	margin-bottom: 30px;
+}
+
+.main {
+	background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg");
+	background-size: cover;
+	/*max-height: 600px;*/
+	text-align: center;
+	padding-top: 200px;
+	padding-bottom: 200px;
+}
+.main > h1 {
+	font-size: 64px;
+	font-weight: 900;
+	color: #fff;
+	margin: auto;
+}
+.main > h2 {
+	font-size: 28px;
+	/*font-weight: 900;*/
+	color: #fff;
+	margin: auto;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+.main .btn-primary {
+	font-size: 28px !important;
+}
+.joinus {
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	background-color: #eee;
+	border-radius: 5px;
+}
+.joinus > span {
+	font-size: 20px;
+	display: inline;
+}
+.joinus > .btn {
+}
+.joinus .btn-success {
+	font-size: 20px !important;
+}
+
+.founder-intro {}
+.founder-intro > .avatar {
+	text-align: center;
+}
+.founder-intro > .avatar img {
+	margin: auto;
+	/*height: 360px;*/
+}
+.founder-intro p {
+	font-size: 24px;
+	font-weight: 900;
 }

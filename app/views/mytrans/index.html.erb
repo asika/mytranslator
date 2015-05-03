@@ -1,0 +1,28 @@
+<div class="row section">
+  <div class="jumbotron main">
+    <h1><%= t("mytrans.main.title") %></h1>
+    <h2><%= t("mytrans.main.subtitle") %></h2> <br><br>
+    <%= link_to t("mytrans.main.search_button"), users_path, :class => "btn btn-primary main-button" %>
+  </div>
+</div>
+<div class="row section">
+  <div class="col-md-12 joinus">
+    <span><%= t("mytrans.joinus.title") %></span>
+    <% unless current_user %>
+      <%= link_to t("mytrans.joinus.join_button"), new_user_registration_path, :class => "btn btn-success" %>
+    <% else %>
+      <%= link_to t("mytrans.joinus.join_button"), new_user_profile_path(current_user), :class => "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row section founder-intro">
+  <div class="col-md-6 avatar"><%= image_tag "http://lingosolutions.weebly.com/uploads/5/0/0/6/50063493/826678.jpg?454", :class => "image-responsive" %></div>
+  <div class="col-md-6">
+<p>您好，我是 Sylvia，我是一位口筆譯員，曾在外交部擔任專職翻譯。在工作中，我自己最清楚，為了將委託案件在另一個語言完美呈現，譯者必須在背後付出無數心血。</p>
+
+<p>然而，由於翻譯產業結構的關係，譯者不斷面對開價過低與佣金過高的問題；而客戶在尋找翻譯時，也一再面對價格不透明及品質無保障的狀況。</p>
+
+<p>因此，我成立了【公平翻譯交易所】，作為連接客戶及譯者的橋樑，希望客戶能夠在取得充分資訊後，選擇最適合的專業譯者；而優質譯者的付出，也能夠在這裡被看見，受到肯定。</p>
+  </div>
+</div>

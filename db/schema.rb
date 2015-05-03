@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502001152) do
+ActiveRecord::Schema.define(version: 20150503041527) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 20150502001152) do
   end
 
   add_index "domains", ["name"], name: "index_domains_on_name"
+
+  create_table "languages", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "pricings", force: :cascade do |t|
     t.integer  "category_id"

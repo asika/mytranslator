@@ -21,10 +21,11 @@
 
 en:
   nav:
-    logo: "MyTranslator"
+    logo: "公平翻譯交易所"
     signup: "Sign Up"
     login: "Login"
     backstage: "Backstage"
+    dashboard: "案件管理"
   profile:
     username: "User ID"
     username_placeholder: "Helper text"
@@ -60,3 +61,11 @@ en:
     group02: "Group 2"
     group03: "Group 3"
     group04: "Group 4"
+  mytrans:
+    main:
+      title: "搜尋譯者的全新方法"
+      subtitle: "現在就試試！"
+      search_button: "委託翻譯案件"
+    joinus:
+      title: "加入我們，現在就開始承接你的翻譯案件吧！"
+      join_button: "譯者登錄"

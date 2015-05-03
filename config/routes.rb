@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
+    get "dashboard" => "users#dashboard"
 
     resource :profile do
       get "complete" => "profiles#complete"
