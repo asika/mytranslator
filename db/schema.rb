@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503071940) do
+ActiveRecord::Schema.define(version: 20150503073053) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name"
@@ -19,6 +19,22 @@ ActiveRecord::Schema.define(version: 20150503071940) do
     t.decimal  "min_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "cases", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "translator_id"
+    t.integer  "case_type_id"
+    t.integer  "domain_id"
+    t.integer  "word_count"
+    t.decimal  "price"
+    t.datetime "due"
+    t.datetime "valid_before"
+    t.integer  "quality_level"
+    t.string   "friendly_id"
+    t.string   "status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "categories", force: :cascade do |t|
