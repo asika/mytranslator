@@ -15,13 +15,21 @@ class User < ActiveRecord::Base
     self.friendly_id
   end
 
-  def admin?
+  def is_client?
+    self.profile.present? && self.profile.username && self.profile.first_name && self.profile.last_name && self.profile.phone
+  end
+
+  def is_translator?
+    true
+  end
+
+  def is_admin?
     false
   end
 
   def setup_friendly_id
     if self.friendly_id.blank?
-     self.friendly_id = SecureRandom.hex(8)
+     self.friendly_id = Digest::MD5.hexdigest(self.email)
      self.save!
     end
   end
