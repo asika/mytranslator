@@ -14,7 +14,7 @@ development:
   database: mytrans_dev
   host: localhost
   username: root
-  password: <%= ENV["MYSQL_PASSWORD"] %>
+  password:
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,18 +24,18 @@ test:
   database: mytrans_test
   host: localhost
   username: root
-  password: <%= ENV["MYSQL_PASSWORD"] %>
+  password:
 
 staging:
   <<: *default
   database: mytrans_staging
   host: localhost
   username: root
-  password: <%= ENV["MYSQL_PASSWORD"] %>
+  password:
 
 production:
   <<: *default
   database: mytrans_prod
   host: localhost
   username: root
-  password: <%= ENV["MYSQL_PASSWORD"] %>
+  password:
