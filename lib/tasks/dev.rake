@@ -2,61 +2,38 @@ namespace :dev do
 
   task :create_users => :environment do
     10.times do |i|
-      username = Faker::Name.last_name.downcase
+      username = Faker::Internet.user_name
 
-      newuser = User.create(:username => username, :password => "12345678", :email => username+"@ac.co")
+      newuser = User.create(:password => "12345678", :email => username+"@ac.com")
 
-      newuser.profile.build
-    end
-  end
+      np = newuser.build_profile(
+          :username => username,
+          :first_name => Faker::Name.first_name,
+          :last_name => Faker::Name.last_name,
+          :phone => Faker::PhoneNumber.cell_phone,
+          :short_summary => Faker::Lorem.sentence(3),
+          :about => Faker::Lorem.sentence(50),
+          :education => Faker::Lorem.sentence(100),
+          :professional => Faker::Lorem.sentence(100),
+          :certification => Faker::Lorem.sentence(100),
+          :payment_info => Faker::Lorem.sentence(20)
+        )
 
-  task :create_users_ac => :environment do
-    emails = ["ihower@gmail.com", "frozenfung@gmail.com", "vneverz@gmail.com", "tim.du@alphacamp.co"]
-
-    emails.each do |email|
-      username = Faker::Name.last_name.downcase
-
-      User.create(:username => username, :password => "12345678", :email => email)
-    end
-  end
-
-  task :fake_topics => :environment do
-    # user = User.first
-
-    100.times do |i|
-      category_ids = []
-
-      (0..rand(Category.all.count)).each do
-        # category_ids << rand(Category.all.count)+1
-
-        # get random record
-        category_ids << Category.offset(rand(Category.all.count)).first.id
+      domain_ids = []
+      (0..rand(Domain.all.count)).each do
+        domain_ids << Domain.offset(rand(Domain.all.count)).first.id
       end
-      category_ids = category_ids.uniq
+      domain_ids = domain_ids.uniq
+      np.domain_ids = domain_ids
 
-      user_id = User.offset(rand(User.all.count)).first.id
+      CaseType.all.each do |ct|
+        # Pricing.create(:profile_id => np.id, :case_type_id => ct.id, :amount => Random.rand(4.0)+ct.min_price)
+        np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+ct.min_price)
+      end
 
-      nr = Topic.create(
-          :title => Faker::Name.title,
-          :content => Faker::Lorem.sentence(144, false, 4),
-          :user_id => user_id, #rand(User.all.count)+1,
-          :category_ids => category_ids
-        )
-      nr.save
-    end
-  end
+      np.save!
 
-  task :fake_comments => :environment do
-    200.times do |i|
-      user_id = User.offset(rand(User.all.count)).first.id
-      topic_id = Topic.offset(rand(Topic.all.count)).first.id
-
-      nr = Comment.create(
-          :content => Faker::Lorem.sentence(30, false, 4),
-          :user_id => user_id,
-          :topic_id => topic_id
-        )
-      nr.save
+      puts "Created user #{newuser.id}: #{newuser.profile.username}"
     end
   end
 
