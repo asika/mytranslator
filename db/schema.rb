@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503073053) do
+ActiveRecord::Schema.define(version: 20150504032037) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name"
@@ -60,11 +60,22 @@ ActiveRecord::Schema.define(version: 20150503073053) do
   end
 
   create_table "pricings", force: :cascade do |t|
-    t.integer  "category_id"
+    t.integer  "case_type_id"
     t.decimal  "amount"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "profile_id"
   end
+
+  create_table "profile_domainships", force: :cascade do |t|
+    t.integer  "profile_id"
+    t.integer  "domain_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profile_domainships", ["domain_id"], name: "index_profile_domainships_on_domain_id"
+  add_index "profile_domainships", ["profile_id"], name: "index_profile_domainships_on_profile_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username"
@@ -100,7 +111,6 @@ ActiveRecord::Schema.define(version: 20150503073053) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "profile_id"
     t.string   "friendly_id"
   end
 
