@@ -3,7 +3,7 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'mytranslators'
+set :application, 'mytranslator'
 set :repo_url, 'git@github.com:asika/mytranslator.git'
 
 # Default branch is :master
