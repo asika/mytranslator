@@ -7,6 +7,7 @@ gem "paperclip", "~> 4.2"
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootstrap-tagsinput-rails'
 
+gem 'mysql2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
