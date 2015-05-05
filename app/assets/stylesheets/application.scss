@@ -7,7 +7,7 @@ div {
 }
 
 .wrapper {
-	width: 90%;
+	width: 80%;
 	margin: auto;
 }
 .section {
@@ -69,6 +69,16 @@ div {
 	font-weight: 900;
 }
 
+.avatar-lg {
+	width: 180px;
+	height: 180px;
+	border-radius: 90px;
+}
+.avatar {
+	width: 120px;
+	height: 120px;
+	border-radius: 60px;
+}
 .avatar-sm {
 	width: 60px;
 	height: 60px;

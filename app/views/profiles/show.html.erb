@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="media">
+      <div class="media-left">
+        <a href="#">
+          <%= image_tag "https://robohash.org/#{@profile.user.friendly_id}", :class => "media-object avatar" %>
+        </a>
+      </div>
+      <div class="media-body">
+        <h2 class="media-heading"><%= @profile.full_name %></h2>
+        <p><%= @profile.short_summary %></p>
+      </div>
+    </div>
+  <!-- col-md-8 -->
+  </div>
+
+  <div class="col-md-4">
+    <h4><%= t("profile.pricings") %></h4>
+    <table class="table">
+      <% @profile.pricings.each do |pr| %>
+        <tr>
+          <td><%= t(pr.case_type.name) %></td>
+          <td><%= t(pr.case_type.unit) %></td>
+          <td><%= pr.amount.to_f %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
+
+<table class="table">
+  <tr>
+    <td><%= t("profile.about") %></td>
+    <td><%= simple_format @profile.about %></td>
+  </tr>
+  <tr>
+    <td><%= t("profile.professional") %></td>
+    <td><%= simple_format @profile.professional %></td>
+  </tr>
+  <tr>
+    <td><%= t("profile.education") %></td>
+    <td><%= simple_format @profile.education %></td>
+  </tr>
+  <tr>
+    <td><%= t("profile.certification") %></td>
+    <td><%= simple_format @profile.certification %></td>
+  </tr>
+</table>
