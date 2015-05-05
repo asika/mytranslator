@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504032037) do
+ActiveRecord::Schema.define(version: 20150504141846) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -22,19 +22,19 @@ ActiveRecord::Schema.define(version: 20150504032037) do
   end
 
   create_table "cases", force: :cascade do |t|
-    t.integer  "client_id",     limit: 4
-    t.integer  "translator_id", limit: 4
-    t.integer  "case_type_id",  limit: 4
-    t.integer  "domain_id",     limit: 4
-    t.integer  "word_count",    limit: 4
-    t.decimal  "price",                     precision: 10
+    t.integer  "client_id",        limit: 4
+    t.integer  "translator_id",    limit: 4
+    t.integer  "case_type_id",     limit: 4
+    t.integer  "domain_id",        limit: 4
+    t.integer  "word_count",       limit: 4
+    t.decimal  "price",                        precision: 10
     t.datetime "due"
     t.datetime "valid_before"
-    t.integer  "quality_level", limit: 4
-    t.string   "friendly_id",   limit: 255
-    t.string   "status",        limit: 255
-    t.datetime "created_at",                               null: false
-    t.datetime "updated_at",                               null: false
+    t.integer  "quality_level_id", limit: 4
+    t.string   "friendly_id",      limit: 255
+    t.string   "status",           limit: 255
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -96,6 +96,13 @@ ActiveRecord::Schema.define(version: 20150504032037) do
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "user_id",             limit: 4
+  end
+
+  create_table "quality_levels", force: :cascade do |t|
+    t.integer  "level",      limit: 4
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
   create_table "users", force: :cascade do |t|
