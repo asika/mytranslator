@@ -1,0 +1,55 @@
+<h1>Translator Suggestion</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>Case Conditions</h2>
+    <table class="table table-striped">
+      <tr>
+        <td><%= t("case.case_type") %></td>
+        <td><%= @case.case_type.name_i18n %></td>
+      </tr>
+      <tr>
+        <td><%= t("case.domain") %></td>
+        <td><%= @case.domain.name_i18n %></td>
+      </tr>
+      <tr>
+        <td><%= t("case.word_count") %></td>
+        <td><%= @case.word_count %></td>
+      </tr>
+      <tr>
+        <td><%= t("case.due") %></td>
+        <td><%= @case.due.to_s(:short) %></td>
+      </tr>
+      <tr>
+        <td><%= t("case.valid_before") %></td>
+        <td><%= @case.valid_before.to_s(:short) %></td>
+      </tr>
+      <tr>
+        <td><%= t("case.quality_level") %></td>
+        <td><%= t(@case.quality_level.name_i18n) %></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<h2>Suggested Translators</h2>
+<table class="table">
+  <% @suggested_translators.each do |t| %>
+    <tr>
+      <td>
+        <%= image_tag "https://robohash.org/#{t.user.friendly_id}", :class => "avatar-sm pull-left" %>
+      </td>
+      <td>
+        <h3><%= t.full_name %></h3>
+        <span><%= t.short_summary %></span>
+      </td>
+      <td>
+        <span><%= 10000 %></span>
+      </td>
+      <td>
+        <%= link_to "Invite", cases_path, :class => "btn btn-success pull-right" %>
+        <%= link_to "Profile", cases_path, :class => "btn btn-default pull-right" %>
+      </td>
+    </tr>
+  <% end %>
+</table>

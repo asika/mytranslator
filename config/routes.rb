@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :cases
+  resources :cases do
+    get "suggestion" => "cases#suggestion"
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -22,8 +22,8 @@
 en:
   nav:
     logo: "公平翻譯交易所"
-    signup: "Sign Up"
-    login: "Login"
+    signup: "註冊帳號"
+    login: "登入"
     backstage: "Backstage"
     dashboard: "案件管理"
   profile:
@@ -50,17 +50,17 @@ en:
     short_summary: "Short Summary"
     short_summary_placeholder: ""
   case_type:
-    e2c: "English to Chinese"
-    c2e: "Chinese to English"
+    e2c: "英翻中（筆譯）"
+    c2e: "中翻英（筆譯）"
     unit:
-      word: "Word"
-  pricing: "Pricings"
+      word: "字"
+  pricing: "收費列表"
   domain_ids: "Select Your Domains"
   domain:
-    group01: "Group 1"
-    group02: "Group 2"
-    group03: "Group 3"
-    group04: "Group 4"
+    group01: "領域分類 1"
+    group02: "領域分類 2"
+    group03: "領域分類 3"
+    group04: "領域分類 4"
   mytrans:
     main:
       title: "搜尋譯者的全新方法"

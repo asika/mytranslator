@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_user
+  before_action :get_profile, :only => %i[show edit update destroy]
 
   def new
     @profile = Profile.new
@@ -26,7 +26,8 @@ class ProfilesController < ApplicationController
 
   protected
 
-  def get_user
+  def get_profile
+    @profile = Profile.find(params[:id])
   end
 
   def profile_params
