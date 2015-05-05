@@ -7,6 +7,9 @@ class Profile < ActiveRecord::Base
   has_many :profile_domainships
   has_many :domains, :through => :profile_domainships
 
+  has_many :profile_langships
+  has_many :languages, :through => :profile_langships
+
   has_many :pricings, :dependent => :destroy
 
   has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"

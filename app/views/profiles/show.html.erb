@@ -9,6 +9,16 @@
       <div class="media-body">
         <h2 class="media-heading"><%= @profile.full_name %></h2>
         <p><%= @profile.short_summary %></p>
+        <div>
+          <% @profile.languages.each do |l| %>
+            <span class="label label-warning"><%= t(l.name_i18n) %></span>
+          <% end %>
+        </div>
+        <div>
+          <% @profile.domains.each do |d| %>
+            <span class="label label-success"><%= t(d.name_i18n) %></span>
+          <% end %>
+        </div>
       </div>
     </div>
   <!-- col-md-8 -->
