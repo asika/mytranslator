@@ -34,21 +34,21 @@
 
 <h2>Suggested Translators</h2>
 <table class="table">
-  <% @suggested_translators.each do |t| %>
+  <% @suggested_translators.each do |profile| %>
     <tr>
       <td>
-        <%= image_tag "https://robohash.org/#{t.user.friendly_id}", :class => "avatar-sm pull-left" %>
+        <%= image_tag "https://robohash.org/#{profile.user.friendly_id}", :class => "avatar-sm pull-left" %>
       </td>
       <td>
-        <h3><%= t.full_name %></h3>
-        <span><%= t.short_summary %></span>
+        <h3><%= profile.full_name %></h3>
+        <span><%= profile.short_summary %></span>
       </td>
       <td>
-        <span><%= 10000 %></span>
+        <span><%= @case.word_count*Pricing.where("profile_id = #{profile.id} AND case_type_id = #{@case.case_type_id}").first.amount.to_f %></span>
       </td>
       <td>
-        <%= link_to "Invite", cases_path, :class => "btn btn-success pull-right" %>
-        <%= link_to "Profile", cases_path, :class => "btn btn-default pull-right" %>
+        <%= link_to "Invite", user_profile_path(profile.user, profile), :class => "btn btn-success pull-right" %>
+        <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-default pull-right" %>
       </td>
     </tr>
   <% end %>
