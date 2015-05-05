@@ -1,5 +1,4 @@
 class Pricing < ActiveRecord::Base
   belongs_to :profile
-
-  has_one :case_type
+  belongs_to :case_type
 end
