@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150504141846) do
+ActiveRecord::Schema.define(version: 20150505042111) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -53,6 +53,18 @@ ActiveRecord::Schema.define(version: 20150504141846) do
 
   add_index "domains", ["name"], name: "index_domains_on_name", using: :btree
 
+  create_table "invitations", force: :cascade do |t|
+    t.integer  "client_id",     limit: 4
+    t.integer  "translator_id", limit: 4
+    t.datetime "valid_before"
+    t.string   "status",        limit: 255
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "invitations", ["client_id"], name: "index_invitations_on_client_id", using: :btree
+  add_index "invitations", ["translator_id"], name: "index_invitations_on_translator_id", using: :btree
+
   create_table "languages", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
@@ -76,6 +88,13 @@ ActiveRecord::Schema.define(version: 20150504141846) do
 
   add_index "profile_domainships", ["domain_id"], name: "index_profile_domainships_on_domain_id", using: :btree
   add_index "profile_domainships", ["profile_id"], name: "index_profile_domainships_on_profile_id", using: :btree
+
+  create_table "profile_langships", force: :cascade do |t|
+    t.integer  "profile_id",  limit: 4
+    t.integer  "language_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.string   "username",            limit: 255

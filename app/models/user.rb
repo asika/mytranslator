@@ -10,8 +10,12 @@ class User < ActiveRecord::Base
   before_validation :setup_friendly_id
 
   has_one :profile, :dependent => :destroy
+
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
+
+  has_many :client_invitations, :class_name => "Invitation"
+  has_many :translator_invitations, :class_name => "Invitation"
 
   def to_param
     self.friendly_id
