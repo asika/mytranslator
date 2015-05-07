@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150505042111) do
+ActiveRecord::Schema.define(version: 20150506144318) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -57,9 +57,10 @@ ActiveRecord::Schema.define(version: 20150505042111) do
     t.integer  "client_id",     limit: 4
     t.integer  "translator_id", limit: 4
     t.datetime "valid_before"
-    t.string   "status",        limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "status",        limit: 255, default: "new"
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
+    t.integer  "case_id",       limit: 4
   end
 
   add_index "invitations", ["client_id"], name: "index_invitations_on_client_id", using: :btree
