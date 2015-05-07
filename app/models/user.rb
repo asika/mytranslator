@@ -14,8 +14,9 @@ class User < ActiveRecord::Base
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
 
-  has_many :client_invitations, :class_name => "Invitation"
-  has_many :translator_invitations, :class_name => "Invitation"
+  has_many :invitations
+  # has_many :invitors, :through => :invitations
+  # has_many :invited_users, :through => :invitations
 
   def to_param
     self.friendly_id
@@ -31,6 +32,15 @@ class User < ActiveRecord::Base
 
   def is_admin?
     false
+  end
+
+  def has_invited?(case_id, translator_id)
+    Invitation.exists?(:case_id => case_id, :client_id => self.id, :translator_id => translator_id)
+  end
+
+  def can_invite?(case_id)
+    # TODO: customize max number of invitees
+    !Invitation.exists?(:case_id => case_id, :client_id => self.id)
   end
 
   def setup_friendly_id

@@ -2,15 +2,17 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    get "dashboard" => "users#dashboard"
+    get :dashboard
 
     resource :profile do
-      get "complete" => "profiles#complete"
+      get :complete
     end
   end
 
   resources :cases do
-    get "suggestion" => "cases#suggestion"
+    get :suggestion
+
+    resources :invitations, :only => [:create, :update, :destroy]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
