@@ -74,3 +74,26 @@ en:
     quality_low: "一般"
     quality_median: "中等"
     quality_high: "高難度"
+  case_show:
+    caption_case: "案件"
+    caption_status: "狀態"
+    edit_button: "修改"
+    cancel_button: "撤銷案件"
+    tabs:
+      messages: "案件進度"
+      suggestions: "推薦譯者"
+    status:
+      new: "新刊登"
+      ongoing: "進行中"
+      finish: "已完成"
+    case:
+      case_type: "案件類型"
+      domain: "專業領域"
+      quality_level: "專業程度"
+      word_count: "字數"
+      due: "交稿時間"
+    suggestions:
+      name: "譯者"
+      rating: "評價"
+      pricing: "本案收費"
+      actions: ""

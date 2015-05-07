@@ -84,3 +84,13 @@ div {
 	height: 60px;
 	border-radius: 30px;
 }
+
+.invite-button {
+	display: inline;
+}
+
+/*http://stackoverflow.com/questions/16240754/putting-button-to-inline-with-text-twitter-bootstrap-rails*/
+.button_to,
+.button_to div {
+  display: inline;
+}

@@ -1,39 +1,62 @@
-<h1>Translator Suggestion</h1>
-
 <div class="row">
   <div class="col-md-12">
-    <h2>Case Conditions</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <h2><%= t("case_show.caption_case") %> <%= @case.id %></h2>
+      </div>
+      <div class="col-md-4">
+        <span><%= t("case_show.caption_status") %></span>
+        <span class="label label-success"><%= t("case_show.status.#{@case.status}") %></span>
+      </div>
+      <div class="col-md-4">
+
+        <div class="btn-group pull-right" role="group" aria-label="">
+            <%= link_to t("case_show.edit_button"), root_path, :class => "btn btn-default" %>
+            <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+        </div>
+
+      </div>
+    </div>
+
     <table class="table table-striped">
       <tr>
-        <td><%= t("case.case_type") %></td>
+        <td><%= t("case_show.case.case_type") %></td>
         <td><%= @case.case_type.name_i18n %></td>
       </tr>
       <tr>
-        <td><%= t("case.domain") %></td>
+        <td><%= t("case_show.case.domain") %></td>
         <td><%= @case.domain.name_i18n %></td>
       </tr>
       <tr>
-        <td><%= t("case.word_count") %></td>
+        <td><%= t("case_show.case.quality_level") %></td>
+        <td><%= t(@case.quality_level.name_i18n) %></td>
+      </tr>
+      <tr>
+        <td><%= t("case_show.case.word_count") %></td>
         <td><%= @case.word_count %></td>
       </tr>
       <tr>
-        <td><%= t("case.due") %></td>
+        <td><%= t("case_show.case.due") %></td>
         <td><%= @case.due.to_s(:short) %></td>
-      </tr>
-      <tr>
-        <td><%= t("case.valid_before") %></td>
-        <td><%= @case.valid_before.to_s(:short) %></td>
-      </tr>
-      <tr>
-        <td><%= t("case.quality_level") %></td>
-        <td><%= t(@case.quality_level.name_i18n) %></td>
       </tr>
     </table>
   </div>
 </div>
 
-<h2>Suggested Translators</h2>
-<table class="table">
+<!-- <h2>Suggested Translators</h2> -->
+<ul class="nav nav-tabs">
+  <li role="presentation"><%= link_to t("case_show.tabs.messages") %></li>
+  <li role="presentation" class="active"><%= link_to t("case_show.tabs.suggestions") %></li>
+</ul>
+
+<table class="table table-hover">
+  <tr>
+    <th></th>
+    <th><%= t("case_show.suggestions.name") %></th>
+    <th><%= t("case_show.suggestions.rating") %></th>
+    <th><%= t("case_show.suggestions.pricing") %></th>
+    <th><%= t("case_show.suggestions.actions") %></th>
+  </tr>
   <% @suggested_translators.each do |profile| %>
     <tr>
       <td>
@@ -44,12 +67,25 @@
         <span><%= profile.short_summary %></span>
       </td>
       <td>
+        <!-- stars -->
+      </td>
+      <td>
         <span><%= @case.word_count*Pricing.where("profile_id = #{profile.id} AND case_type_id = #{@case.case_type_id}").first.amount.to_f %></span>
       </td>
       <td>
-        <%= link_to "Invite", user_profile_path(profile.user, profile), :class => "btn btn-success pull-right" %>
-        <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-default pull-right" %>
+        <div class="btn-group pull-right" role="group" aria-label="">
+          <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-default" %>
+
+          <% unless Invitation.exists?(:case_id => @case.id, :client_id => current_user.id, :translator_id => profile.user.id) %>
+            <%= button_to "Invite", case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button" %>
+          <% else %>
+            <%= button_to "Inviting", case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-warning disabled invite-button" %>
+          <% end %>
+
+        </div>
+
       </td>
+
     </tr>
   <% end %>
 </table>
