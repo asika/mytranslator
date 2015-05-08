@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508024910) do
+ActiveRecord::Schema.define(version: 20150508084541) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "unit",       limit: 255
-    t.decimal  "min_price",              precision: 10
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "min_price",              precision: 3, scale: 1
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "cases", force: :cascade do |t|
@@ -85,9 +85,9 @@ ActiveRecord::Schema.define(version: 20150508024910) do
 
   create_table "pricings", force: :cascade do |t|
     t.integer  "case_type_id", limit: 4
-    t.decimal  "amount",                 precision: 10
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "amount",                 precision: 3, scale: 1
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.integer  "profile_id",   limit: 4
   end
 
