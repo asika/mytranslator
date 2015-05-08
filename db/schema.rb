@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508084541) do
+ActiveRecord::Schema.define(version: 20150508085233) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20150508084541) do
     t.integer  "word_count",       limit: 4
     t.decimal  "price",                        precision: 10
     t.datetime "due"
-    t.datetime "valid_before"
     t.integer  "quality_level_id", limit: 4
     t.string   "friendly_id",      limit: 255
     t.string   "status",           limit: 255,                default: "new"
@@ -56,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150508084541) do
   create_table "invitations", force: :cascade do |t|
     t.integer  "client_id",     limit: 4
     t.integer  "translator_id", limit: 4
-    t.datetime "valid_before"
+    t.datetime "expire"
     t.string   "status",        limit: 255, default: "new"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
