@@ -21,3 +21,7 @@ Language.create(:name => "language.chs")
 Language.create(:name => "language.jpn")
 Language.create(:name => "language.fra")
 Language.create(:name => "language.esp")
+
+QualityLevel.create(:level => 1, :name => "low")
+QualityLevel.create(:level => 2, :name => "mid")
+QualityLevel.create(:level => 3, :name => "high")
