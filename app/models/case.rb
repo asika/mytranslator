@@ -8,4 +8,16 @@ class Case < ActiveRecord::Base
   belongs_to :case_type
   belongs_to :domain
   belongs_to :quality_level
+
+  def price_by_profile(profile)
+    word_count * Pricing.where("profile_id = #{profile.id} AND case_type_id = #{case_type_id}").first.amount
+  end
+
+  def invitation_sent? (kwargs)
+    client = kwargs[:client]
+    translator = kwargs[:translator]
+
+    Invitation.exists?(:case_id => self.id, :client_id => client.id, :translator_id => translator.id)
+  end
+
 end

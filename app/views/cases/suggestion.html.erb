@@ -11,8 +11,8 @@
       <div class="col-md-4">
 
         <div class="btn-group pull-right" role="group" aria-label="">
-            <%= link_to t("case_show.edit_button"), root_path, :class => "btn btn-default" %>
-            <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+          <%= link_to t("case_show.edit_button"), root_path, :class => "btn btn-default" %>
+          <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
         </div>
 
       </div>
@@ -43,7 +43,6 @@
   </div>
 </div>
 
-<!-- <h2>Suggested Translators</h2> -->
 <ul class="nav nav-tabs">
   <li role="presentation"><%= link_to t("case_show.tabs.messages") %></li>
   <li role="presentation" class="active"><%= link_to t("case_show.tabs.suggestions") %></li>
@@ -70,13 +69,16 @@
         <!-- stars -->
       </td>
       <td>
-        <span><%= @case.word_count*Pricing.where("profile_id = #{profile.id} AND case_type_id = #{@case.case_type_id}").first.amount.to_f %></span>
+        <span>
+          <%= @case.price_by_profile(profile) %>
+        </span>
       </td>
       <td>
         <div class="btn-group pull-right" role="group" aria-label="">
           <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-default" %>
 
-          <% unless Invitation.exists?(:case_id => @case.id, :client_id => current_user.id, :translator_id => profile.user.id) %>
+          <%= unless @case.invitation_sent?(:client => current_user, :translator => profile.user) %>
+
             <%= button_to "Invite", case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button" %>
           <% else %>
             <%= button_to "Inviting", case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-warning disabled invite-button" %>
