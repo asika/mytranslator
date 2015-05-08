@@ -14,7 +14,9 @@ class User < ActiveRecord::Base
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
 
-  has_many :invitations
+  # has_many :sent_invitations, :class => "Invitation", :foreign_key => "client_id"
+  # has_many :reveived_invitations, :class => "Invitation", :foreign_key => "translator_id"
+
   # has_many :invitors, :through => :invitations
   # has_many :invited_users, :through => :invitations
 
@@ -41,6 +43,25 @@ class User < ActiveRecord::Base
   def can_invite?(case_id)
     # TODO: customize max number of invitees
     !Invitation.exists?(:case_id => case_id, :client_id => self.id)
+  end
+
+  def cases_new
+    Case.where(:client => self, :status => "new")
+  end
+
+  def cases_ongoing
+    Case.where(:client => self, :status => "ongoing")
+  end
+
+  def cases_finish
+    Case.where(:client => self, :status => "finish")
+  end
+
+  def invitations
+    Invitation.where("client_id = ? OR translator_id = ?", id, id)
+  end
+
+  def cases_other
   end
 
   def setup_friendly_id

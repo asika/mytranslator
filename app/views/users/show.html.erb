@@ -1,0 +1,103 @@
+<h1>user dashboard</h1>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2>My New Cases</h2>
+    <table class="table table-striped">
+      <tr>
+        <th><%= t("dashboard.table.case_id") %></th>
+        <th><%= t("dashboard.table.due") %></th>
+        <th><%= t("dashboard.table.actions") %></th>
+      </tr>
+      <% @user.cases_new.each do |c| %>
+        <tr>
+          <td><%= c.id %></td>
+          <td><%= c.due.to_s(:short) %></td>
+          <td>
+            <div class="btn-group pull-right" role="group" aria-label="">
+              <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
+              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+            </div>
+
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <h2>Invitations</h2>
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Expires</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <% @user.invitations.each do |inv| %>
+        <tr>
+          <td><%= inv.id %></td>
+          <td><%= inv.client_id %></td>
+          <td><%= inv.translator_id %></td>
+          <td><%= inv.valid_before %></td>
+          <td><%= inv.status %></td>
+          <td></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
+  <div class="col-md-12">
+    <h2>Ongoing Cases</h2>
+    <table class="table table-striped">
+      <tr>
+        <th><%= t("dashboard.table.case_id") %></th>
+        <th><%= t("dashboard.table.due") %></th>
+        <th><%= t("dashboard.table.actions") %></th>
+      </tr>
+      <% @user.cases_ongoing.each do |c| %>
+        <tr>
+          <td><%= c.id %></td>
+          <td><%= c.due.to_s(:short) %></td>
+          <td>
+            <div class="btn-group pull-right" role="group" aria-label="">
+              <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
+              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+            </div>
+
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+
+  <div class="col-md-12">
+    <h2>Finished Cases</h2>
+
+    <table class="table table-striped">
+      <tr>
+        <th><%= t("dashboard.table.case_id") %></th>
+        <th><%= t("dashboard.table.due") %></th>
+        <th><%= t("dashboard.table.actions") %></th>
+      </tr>
+      <% @user.cases_finish.each do |c| %>
+        <tr>
+          <td><%= c.id %></td>
+          <td><%= c.due.to_s(:short) %></td>
+          <td>
+            <div class="btn-group pull-right" role="group" aria-label="">
+              <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
+              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+            </div>
+
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+
+</div>

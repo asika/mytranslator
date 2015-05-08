@@ -24,7 +24,7 @@ en:
     logo: "公平翻譯交易所"
     signup: "註冊帳號"
     login: "登入"
-    backstage: "Backstage"
+    backstage: "系統管理者"
     dashboard: "案件管理"
   profile:
     username: "User ID"
@@ -55,12 +55,12 @@ en:
     unit:
       word: "字"
   pricing: "收費列表"
-  domain_ids: "Select Your Domains"
+  domain_ids: "專業領域"
   domain:
-    group01: "領域分類 1"
-    group02: "領域分類 2"
-    group03: "領域分類 3"
-    group04: "領域分類 4"
+    group01: "領域分類 1（文史哲？）"
+    group02: "領域分類 2（理工？）"
+    group03: "領域分類 3（生物醫學？）"
+    group04: "領域分類 4（其他？）"
   mytrans:
     main:
       title: "搜尋譯者的全新方法"

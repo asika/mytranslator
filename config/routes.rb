@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :users do
-    get :dashboard
+    # get :dashboard
 
     resource :profile do
-      get :complete
+      get :complete, :on => :collection
     end
   end
 
