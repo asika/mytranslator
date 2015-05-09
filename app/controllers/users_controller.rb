@@ -11,6 +11,6 @@ class UsersController < ApplicationController
   protected
 
   def get_user
-    @user = User.find_by_friendly_id(params[:id])
+    @user = User.find_by_username(params[:id])
   end
 end
