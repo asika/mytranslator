@@ -1,5 +1,4 @@
 namespace :dev do
-
   task :create_users => :environment do
     10.times do |i|
       username = Faker::Internet.user_name
@@ -23,12 +22,16 @@ namespace :dev do
       (0..rand(Domain.all.count)).each do
         domain_ids << Domain.offset(rand(Domain.all.count)).first.id
       end
-      domain_ids = domain_ids.uniq
-      np.domain_ids = domain_ids
+      np.domain_ids = domain_ids.uniq
+
+      language_ids = []
+      (0..rand(Language.all.count)).each do
+        language_ids << Language.offset(rand(Language.all.count)).first.id
+      end
+      np.language_ids = language_ids.uniq
 
       CaseType.all.each do |ct|
-        # Pricing.create(:profile_id => np.id, :case_type_id => ct.id, :amount => Random.rand(4.0)+ct.min_price)
-        np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+ct.min_price)
+        np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
       end
 
       np.save!
@@ -37,4 +40,6 @@ namespace :dev do
     end
   end
 
+  task :create_cases => :environment do
+  end
 end
