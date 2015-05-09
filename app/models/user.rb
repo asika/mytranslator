@@ -12,6 +12,11 @@ class User < ActiveRecord::Base
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
 
+  def self.get_random_translators(number=10)
+    # https://ihower.tw/rails4/activerecord-relationships.html#joins--includes-
+    self.includes(:profile).order("RAND()").limit(number)
+  end
+
   def to_param
     self.username
   end

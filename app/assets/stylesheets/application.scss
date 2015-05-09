@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 div {
     /*outline: 1px solid #3c1;*/
@@ -36,7 +37,7 @@ div {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-.main .btn-primary {
+.btn-primary.main-button {
 	font-size: 28px !important;
 }
 .joinus {
@@ -93,4 +94,52 @@ div {
 .button_to,
 .button_to div {
   display: inline;
+}
+
+.align-center {
+	text-align: center;
+}
+.title-text {
+	font-size: 32px;
+	font-weight: 900;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.content-text {
+	font-size: 24px;
+	font-weight: 900;
+	color: #666;
+}
+
+.features {}
+.features h2 {
+	font-size: 32px;
+	font-weight: 900;
+}
+.features p {
+	font-size: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.showcase {}
+.showcase .demo-translator {
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	height: 400px;
+}
+
+.social-icon {
+	width: 36px;
+	height: 36px;
+	background-color: #666;
+	font-size: 18px;
+	font-weight: 900;
+	color: #fff;
+	line-height: 36px;
+	border-radius: 18px;
+	text-decoration: none !important;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

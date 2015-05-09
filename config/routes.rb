@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  namespace :welcome do
+    get :about
+  end
+
   resources :users do
     # get :dashboard
 
