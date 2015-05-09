@@ -3,11 +3,13 @@
     <div class="media">
       <div class="media-left">
         <a href="#">
-          <%= image_tag "https://robohash.org/#{@profile.user.friendly_id}", :class => "media-object avatar" %>
+          <%= image_tag "https://robohash.org/#{@profile.user.username}", :class => "media-object avatar" %>
         </a>
       </div>
       <div class="media-body">
-        <h2 class="media-heading"><%= @profile.full_name %></h2>
+        <% user = @profile.user %>
+
+        <h2 class="media-heading"><%= user.full_name %></h2>
         <p><%= @profile.short_summary %></p>
         <div>
           <% @profile.languages.each do |l| %>

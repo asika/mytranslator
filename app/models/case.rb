@@ -1,5 +1,5 @@
 class Case < ActiveRecord::Base
-  validates_presence_of :client_id, :case_type_id, :word_count, :due, :expire, :quality_level_id
+  validates_presence_of :client_id, :case_type_id, :word_count, :due, :quality_level_id
   validates :word_count, :numericality => {:only_integer => true, :greater_than => 0}
 
   belongs_to :client, :class_name => "User", :foreign_key => "client_id"

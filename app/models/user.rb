@@ -4,24 +4,16 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :friendly_id
-  validates_uniqueness_of :friendly_id
-
-  before_validation :setup_friendly_id
+  validates_presence_of :username, :first_name, :last_name, :phone
+  validates_uniqueness_of :username
 
   has_one :profile, :dependent => :destroy
 
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
 
-  # has_many :sent_invitations, :class => "Invitation", :foreign_key => "client_id"
-  # has_many :reveived_invitations, :class => "Invitation", :foreign_key => "translator_id"
-
-  # has_many :invitors, :through => :invitations
-  # has_many :invited_users, :through => :invitations
-
   def to_param
-    self.friendly_id
+    self.username
   end
 
   def is_client?
@@ -29,7 +21,7 @@ class User < ActiveRecord::Base
   end
 
   def is_translator?
-    true
+    !profile.nil?
   end
 
   def is_admin?
@@ -64,11 +56,7 @@ class User < ActiveRecord::Base
   def cases_other
   end
 
-  def setup_friendly_id
-    if self.friendly_id.blank?
-     self.friendly_id = Digest::MD5.hexdigest(self.email)
-     self.save!
-    end
+  def full_name
+    "#{first_name} #{last_name}"
   end
-
 end

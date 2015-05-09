@@ -57,12 +57,14 @@
     <th><%= t("case_show.suggestions.actions") %></th>
   </tr>
   <% @suggested_translators.each do |profile| %>
+    <% user = profile.user %>
+
     <tr>
       <td>
-        <%= image_tag "https://robohash.org/#{profile.user.friendly_id}", :class => "avatar-sm pull-left" %>
+        <%= image_tag "https://robohash.org/#{user.username}", :class => "avatar-sm pull-left" %>
       </td>
       <td>
-        <h3><%= profile.full_name %></h3>
+        <h3><%= user.full_name %></h3>
         <span><%= profile.short_summary %></span>
       </td>
       <td>

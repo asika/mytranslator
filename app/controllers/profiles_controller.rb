@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
   protected
 
   def get_user
-    @user = User.find_by_friendly_id(params[:user_id])
+    @user = User.find_by_username(params[:user_id])
   end
 
   def profile_params
