@@ -77,7 +77,7 @@
         <div class="btn-group pull-right" role="group" aria-label="">
           <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-default" %>
 
-          <%= unless @case.invitation_sent?(:client => current_user, :translator => profile.user) %>
+          <% unless @case.invitation_sent?(:client => current_user, :translator => profile.user) %>
 
             <%= button_to "Invite", case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button" %>
           <% else %>
