@@ -30,11 +30,6 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :expire, t("case.valid_before") %>
-    <%= f.date_field :expire, :class => "form-control" %>
-  </div>
-
-  <div class="form-group">
     <%= f.label :quality_level, t("case.quality_level") %>
     <%= collection_select :case, :quality_level_id, QualityLevel.all, :id, :name_i18n, {}, {:class => "form-control"} %>
   </div>
