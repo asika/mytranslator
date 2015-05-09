@@ -35,7 +35,7 @@ class CasesController < ApplicationController
   def suggestion
     @case = Case.find(params[:case_id])
 
-    @suggested_translators = Profile.all
+    @suggested_translators = Profile.page(params[:page]).per(10)
   end
 
   protected
