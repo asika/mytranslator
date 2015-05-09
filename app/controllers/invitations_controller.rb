@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
       :case_id => params[:case_id],
       :client_id => current_user.id,
       :translator_id => params[:translator_id],
-      :valid_before => Time.now + 1.day
+      :expire => Time.now + 1.day
       )
 
     invitation.save!
