@@ -1,3 +1,4 @@
+<div class="bg"></div>
 <div class="row section">
   <div class="jumbotron main">
     <h1><%= t("mytrans.main.title") %></h1>
@@ -93,6 +94,20 @@
     <br>
 
     <div class="fb-like" data-href="https://www.facebook.com/pages/&#x516c;&#x5e73;&#x7ffb;&#x8b6f;&#x4ea4;&#x6613;&#x6240;/1587904128145523?ref=aymt_homepage_panel" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    <br>
+    <span class="followus">在 Facebook 上尋找我們！</span>
 
   </div>
 </div>
+
+<script>
+var jumboHeight = $('.jumbotron').outerHeight();
+function parallax(){
+    var scrolled = $(window).scrollTop();
+    $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+}
+
+$(window).scroll(function(e){
+    parallax();
+});
+</script>
