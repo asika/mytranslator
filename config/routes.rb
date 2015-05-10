@@ -6,12 +6,12 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    # get :dashboard
-
     resource :profile do
       get :complete, :on => :collection
     end
   end
+
+  resources :profiles, :only => [:index, :show]
 
   resources :cases do
     get :suggestion

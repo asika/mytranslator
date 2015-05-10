@@ -33,12 +33,13 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
 
+            <li><%= link_to t("nav.about"), welcome_about_path %></li>
+            <li><%= link_to t("nav.translators"), profiles_path %></li>
+
             <% if user_signed_in? %>
                 <% if current_user.is_admin? %>
                     <li><%= link_to t("nav.backstage"), admin_root_path %></li>
                 <% end %>
-                <li><%= link_to t("nav.about"), welcome_about_path %></li>
-                <li><%= link_to t("nav.translators"), welcome_about_path %></li>
                 <% if current_user %>
                     <li><%= link_to t("nav.dashboard"), user_path(current_user) %></li>
                 <% end %>

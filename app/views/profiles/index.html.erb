@@ -1,0 +1,70 @@
+<div class="row joinus">
+  <div class="col-md-6">
+    <%= image_tag "http://lingosolutions.weebly.com/uploads/5/0/0/6/50063493/1430288480.jpg?458" %>
+  </div>
+  <div class="col-md-6">
+    <h2 class="title-text">成為譯者</h2>
+    <p class="content-text">加入我們，開始承接你的翻譯案件吧！</p>
+
+    <% unless current_user %>
+      <%= link_to t("mytrans.joinus.join_button"), new_user_registration_path, :class => "btn btn-success" %>
+    <% else %>
+      <%= link_to t("mytrans.joinus.join_button"), new_user_profile_path(current_user), :class => "btn btn-success" %>
+    <% end %>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2 class="title-text">我們的譯者</h2>
+
+    <table class="table table-hover">
+      <tr>
+        <th></th>
+        <th><%= t("case_show.suggestions.name") %></th>
+        <th><%= t("case_show.suggestions.domain") %></th>
+        <th><%= t("case_show.suggestions.rating") %></th>
+        <th><%= t("case_show.suggestions.actions") %></th>
+      </tr>
+      <% @profiles.each do |profile| %>
+        <% user = profile.user %>
+
+        <tr>
+          <td>
+            <%= image_tag "https://robohash.org/#{user.username}", :class => "avatar-sm pull-left" %>
+          </td>
+          <td>
+            <h3><%= user.full_name %></h3>
+            <span><%= profile.short_summary %></span>
+          </td>
+
+          <td>
+            <div>
+              <% profile.languages.each do |l| %>
+                <span class="label label-warning"><%= t(l.name_i18n) %></span>
+              <% end %>
+            </div>
+            <div>
+              <% profile.domains.each do |d| %>
+                <span class="label label-success"><%= t(d.name_i18n) %></span>
+              <% end %>
+            </div>
+          </td>
+
+          <td>
+            <!-- stars -->
+            <div>這裏會放譯者評價</div>
+          </td>
+
+          <td>
+            <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-primary" %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+    <%= paginate @profiles %>
+  </div>
+</div>
+

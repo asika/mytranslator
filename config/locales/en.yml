@@ -68,7 +68,7 @@ en:
       search_button: "委託翻譯案件"
     joinus:
       title: "加入我們，現在就開始承接你的翻譯案件吧！"
-      join_button: "譯者登錄"
+      join_button: "現在就加入"
   case:
     quality_level: "案件難度"
     quality_low: "一般"
@@ -96,4 +96,5 @@ en:
       name: "譯者"
       rating: "評價"
       pricing: "本案收費"
+      domain: "專業領域"
       actions: ""
