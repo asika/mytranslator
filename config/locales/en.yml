@@ -57,10 +57,10 @@ en:
   pricing: "收費列表"
   domain_ids: "專業領域"
   domain:
-    group01: "領域分類 1（文史哲？）"
-    group02: "領域分類 2（理工？）"
-    group03: "領域分類 3（生物醫學？）"
-    group04: "領域分類 4（其他？）"
+    group01: "文史哲？"
+    group02: "理工？"
+    group03: "生物醫學？"
+    group04: "其他？"
   mytrans:
     main:
       title: "搜尋譯者的全新方法"
@@ -98,3 +98,13 @@ en:
       pricing: "本案收費"
       domain: "專業領域"
       actions: ""
+      action_buttons:
+        profile: "詳細資料"
+        invite: "邀請"
+  language:
+    cht: "中文"
+    chs: "簡中"
+    eng: "英文"
+    jpn: "日文"
+    fra: "法文"
+    esp: "西文"

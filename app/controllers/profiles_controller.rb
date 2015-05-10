@@ -3,17 +3,6 @@ class ProfilesController < ApplicationController
   before_action :get_user, :only => %i[show edit update destroy]
 
   def index
-    # @profiles = Profile.all
-    @profiles = Profile.page(params[:page]).per(10)
-
-    # if params[:cate] == "0"
-    #   # uncategoried
-    #   uncat = Topic.select {|r| r.categories.size == 0}
-
-    #   # convert array to ActiveRecord::Relation
-    #   # http://stackoverflow.com/questions/17331862/converting-an-array-of-objects-to-activerecordrelation
-    #   @topics = Topic.where(id: uncat.map(&:id))
-
     # elsif params[:cate]
     #   @topics = Category.find(params[:cate]).topics
     # end
@@ -21,6 +10,18 @@ class ProfilesController < ApplicationController
     # @q = @topics.ransack(params[:q])
     # @q.sorts = 'updated_at DESC' if @q.sorts.empty?
     # @topics = @q.result.page(params[:page])
+
+    @q = Profile.all
+
+    if params[:lang]
+      @q = @q.joins(:languages).where("languages.id = #{params[:lang]}")
+    end
+
+    if params[:domain]
+      @q = @q.joins(:domains).where("domains.id = #{params[:domain]}")
+    end
+
+    @profiles = @q.page(params[:page]).per(10)
   end
 
   def new
