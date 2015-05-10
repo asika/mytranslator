@@ -132,8 +132,16 @@ div {
 }
 .content-text {
 	font-size: 24px;
-	font-weight: 900;
+	/*font-weight: 900;*/
 	color: #666;
+}
+.margin-text-40 {
+	margin-top: 80px;
+	margin-bottom: 40px;
+}
+.margin-text-20 {
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .features {}
@@ -177,7 +185,6 @@ div {
 }
 
 .bg {
-  /*background: url('/assets/example/bg_blueplane.jpg') no-repeat center center;*/
   background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg") no-repeat center center;
   background-size: cover;
   position: fixed;
@@ -187,9 +194,26 @@ div {
   left:0;
   z-index: -1;
 }
+.bg-about {
+  background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg") no-repeat center center;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 300px; /*same height as jumbotron */
+  top:0;
+  left:0;
+  z-index: -1;
+}
+
 
 .jumbotron {
   height: 650px;
+  color: white;
+  text-shadow: #444 0 1px 1px;
+  background:transparent;
+}
+.about {
+  height: 300px;
   color: white;
   text-shadow: #444 0 1px 1px;
   background:transparent;
