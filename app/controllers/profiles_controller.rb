@@ -3,14 +3,6 @@ class ProfilesController < ApplicationController
   before_action :get_user, :only => %i[show edit update destroy]
 
   def index
-    # elsif params[:cate]
-    #   @topics = Category.find(params[:cate]).topics
-    # end
-
-    # @q = @topics.ransack(params[:q])
-    # @q.sorts = 'updated_at DESC' if @q.sorts.empty?
-    # @topics = @q.result.page(params[:page])
-
     @q = Profile.all
 
     if params[:lang]
@@ -33,6 +25,11 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = @user.profile
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit

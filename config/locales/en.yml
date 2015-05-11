@@ -101,6 +101,15 @@ en:
       action_buttons:
         profile: "詳細資料"
         invite: "邀請"
+        inviting: "邀請中"
+        continue: "返回案件主控台"
+      modals:
+        confirm_title: "確認"
+        confirm_text: "是否送出邀請給"
+        confirm_button_cancel: "取消"
+        confirm_button_invite: "邀請"
+        thankyou_title: ""
+        thankyou_text: "已經為你送出邀請！"
   language:
     cht: "中文"
     chs: "簡中"

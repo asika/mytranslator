@@ -141,9 +141,9 @@ h2.title-text {
 	/*margin-bottom: 20px;*/
 }
 .content-text {
-	font-size: 24px;
+	font-size: 24px !important;
 	/*font-weight: 900;*/
-	color: #666;
+	color: #666 !important;
 }
 .margin-text-40 {
 	margin-top: 80px;
@@ -229,3 +229,16 @@ h2.title-text {
   background:transparent;
 }
 
+.modal {}
+.modal .custom-class {
+    width: 75%;
+}
+.dialog-box {
+    position: fixed;
+    top: 25% !important;
+    /*left: 50%;*/
+}
+
+.invite-button {
+	display: none;
+}

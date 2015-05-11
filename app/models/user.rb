@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
 
+  # TODO: customize max number of invitees
+  MAX_INVITATION = 1
+
   def self.get_random_translators(number=10)
     # https://ihower.tw/rails4/activerecord-relationships.html#joins--includes-
     self.includes(:profile).order("RAND()").limit(number)
@@ -38,8 +41,11 @@ class User < ActiveRecord::Base
   end
 
   def can_invite?(case_id)
-    # TODO: customize max number of invitees
     !Invitation.exists?(:case_id => case_id, :client_id => self.id)
+  end
+
+  def invitations_left(case_id)
+    MAX_INVITATION - Invitation.where("client_id = #{id} AND status = 'new'").count
   end
 
   def cases_new
