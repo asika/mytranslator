@@ -1,7 +1,7 @@
 namespace :dev do
   task :create_users => :environment do
     20.times do |i|
-      username = Faker::Internet.user_name
+      username = Faker::Internet.user_name.sub('.', '_')
 
       newuser = User.create(:password => "12345678", :email => username+"@ac.com", :username => username, :first_name => Faker::Name.first_name, :last_name => Faker::Name.last_name, :phone => Faker::PhoneNumber.cell_phone)
 
