@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     get :dashboard
 
     resource :profile do
+      get :edit2
+      patch :update2
       get :complete
     end
   end

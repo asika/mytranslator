@@ -11,14 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506144318) do
+ActiveRecord::Schema.define(version: 20150508085233) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "unit",       limit: 255
-    t.decimal  "min_price",              precision: 10
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "min_price",              precision: 3, scale: 1
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
   create_table "cases", force: :cascade do |t|
@@ -29,12 +29,11 @@ ActiveRecord::Schema.define(version: 20150506144318) do
     t.integer  "word_count",       limit: 4
     t.decimal  "price",                        precision: 10
     t.datetime "due"
-    t.datetime "valid_before"
     t.integer  "quality_level_id", limit: 4
     t.string   "friendly_id",      limit: 255
-    t.string   "status",           limit: 255
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
+    t.string   "status",           limit: 255,                default: "new"
+    t.datetime "created_at",                                                  null: false
+    t.datetime "updated_at",                                                  null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -56,7 +55,7 @@ ActiveRecord::Schema.define(version: 20150506144318) do
   create_table "invitations", force: :cascade do |t|
     t.integer  "client_id",     limit: 4
     t.integer  "translator_id", limit: 4
-    t.datetime "valid_before"
+    t.datetime "expire"
     t.string   "status",        limit: 255, default: "new"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
@@ -72,11 +71,22 @@ ActiveRecord::Schema.define(version: 20150506144318) do
     t.datetime "updated_at",             null: false
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.integer  "from",       limit: 4,     null: false
+    t.integer  "to",         limit: 4,     null: false
+    t.text     "content",    limit: 65535, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "messages", ["from"], name: "index_messages_on_from", using: :btree
+  add_index "messages", ["to"], name: "index_messages_on_to", using: :btree
+
   create_table "pricings", force: :cascade do |t|
     t.integer  "case_type_id", limit: 4
-    t.decimal  "amount",                 precision: 10
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
+    t.decimal  "amount",                 precision: 3, scale: 1
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
     t.integer  "profile_id",   limit: 4
   end
 
@@ -98,10 +108,6 @@ ActiveRecord::Schema.define(version: 20150506144318) do
   end
 
   create_table "profiles", force: :cascade do |t|
-    t.string   "username",            limit: 255
-    t.string   "first_name",          limit: 255
-    t.string   "last_name",           limit: 255
-    t.string   "phone",               limit: 255
     t.text     "about",               limit: 65535
     t.text     "education",           limit: 65535
     t.text     "professional",        limit: 65535
@@ -138,6 +144,10 @@ ActiveRecord::Schema.define(version: 20150506144318) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "username",               limit: 255,              null: false
+    t.string   "first_name",             limit: 255,              null: false
+    t.string   "last_name",              limit: 255,              null: false
+    t.string   "phone",                  limit: 255,              null: false
     t.string   "friendly_id",            limit: 255
   end
 

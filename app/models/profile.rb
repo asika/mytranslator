@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
-  validates_presence_of :username, :first_name, :last_name, :phone, :payment_info
+  
+  validates_presence_of :username, :first_name, :last_name, :phone
   validates_uniqueness_of :username
 
   belongs_to :user
