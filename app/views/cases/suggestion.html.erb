@@ -108,7 +108,7 @@
   <li role="presentation" class="active"><%= link_to t("case_show.tabs.suggestions") %></li>
 </ul>
 
-<table class="table table-hover">
+<table class="table table-hover suggestions">
   <tr>
     <th></th>
     <th><%= t("case_show.suggestions.name") %></th>
@@ -131,8 +131,9 @@
         <!-- stars -->
       </td>
       <td>
-        <span>
-          <%= @case.price_by_profile(profile) %>
+        <span>$</span>
+        <span class="price">
+          <%= number_to_currency(@case.price_by_profile(profile), :precision => 0, :unit => "") %>
         </span>
       </td>
       <td>

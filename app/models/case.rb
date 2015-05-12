@@ -10,7 +10,7 @@ class Case < ActiveRecord::Base
   belongs_to :quality_level
 
   def price_by_profile(profile)
-    word_count * Pricing.where("profile_id = #{profile.id} AND case_type_id = #{case_type_id}").first.amount
+    (word_count * Pricing.where("profile_id = #{profile.id} AND case_type_id = #{case_type_id}").first.amount).to_i
   end
 
   def invitation_sent? (kwargs)
