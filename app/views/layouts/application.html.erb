@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mytranslator</title>
+  <title><%= t("nav.logo") %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<nav class="navbar navbar-default" role="navigation">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v2.3&appId=572791186195828";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<nav class="navbar <% if controller_name == "welcome" %>navbar-fixed-top<% end %> main-navbar" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -24,12 +33,15 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
 
+            <li><%= link_to t("nav.about"), welcome_about_path %></li>
+            <li><%= link_to t("nav.translators"), profiles_path %></li>
+
             <% if user_signed_in? %>
                 <% if current_user.is_admin? %>
                     <li><%= link_to t("nav.backstage"), admin_root_path %></li>
                 <% end %>
                 <% if current_user %>
-                    <li><%= link_to t("nav.dashboard"), user_dashboard_path(current_user) %></li>
+                    <li><%= link_to t("nav.dashboard"), user_path(current_user) %></li>
                 <% end %>
                 <li><%= link_to "編輯profile", edit_user_profile_path(current_user) %></li>
                 <li class="dropdown">

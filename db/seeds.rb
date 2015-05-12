@@ -5,7 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(:email => "admin@ac.com", :password => "12345678", :friendly_id => "admin")
+User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
 
 CaseType.create(:name => "case_type.e2c", :unit => "case_type.unit.word", :min_price => 0.7)
 CaseType.create(:name => "case_type.c2e", :unit => "case_type.unit.word", :min_price => 0.7)
@@ -21,3 +21,7 @@ Language.create(:name => "language.chs")
 Language.create(:name => "language.jpn")
 Language.create(:name => "language.fra")
 Language.create(:name => "language.esp")
+
+QualityLevel.create(:level => 1, :name => "low")
+QualityLevel.create(:level => 2, :name => "mid")
+QualityLevel.create(:level => 3, :name => "high")

@@ -1,7 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-datepicker3";
-
+@import "font-awesome";
 
 div {
     /*outline: 1px solid #3c1;*/
@@ -16,10 +16,35 @@ div {
 	margin-bottom: 30px;
 }
 
+.main-navbar {
+	background-color: #000;
+	background: -webkit-linear-gradient(top, #222, rgba(200, 200, 200, 0.3));
+	border: none;
+}
+.navbar-brand {
+	font-size: 20px;
+    color: #fff;
+}
+.navbar-brand:hover {
+	color: #ccc;
+}
+.nav.navbar-nav.navbar-right li a {
+	font-size: 16px;
+    color: #fff;
+}
+.nav.navbar-nav.navbar-right li a:hover {
+	background-color: rgba(255, 0, 255, 0.5);
+}
+.dropdown-menu {
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+
 .main {
-	background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg");
-	background-size: cover;
+	/*background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg");*/
+	/*background-size: cover;*/
 	/*max-height: 600px;*/
+	height: 600px;
 	text-align: center;
 	padding-top: 200px;
 	padding-bottom: 200px;
@@ -38,7 +63,7 @@ div {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-.main .btn-primary {
+.btn-primary.main-button {
 	font-size: 28px !important;
 }
 .joinus {
@@ -85,4 +110,143 @@ div {
 	width: 60px;
 	height: 60px;
 	border-radius: 30px;
+}
+
+.invite-button {
+	display: inline;
+}
+
+/*http://stackoverflow.com/questions/16240754/putting-button-to-inline-with-text-twitter-bootstrap-rails*/
+.button_to,
+.button_to div {
+  display: inline;
+}
+
+.align-center {
+	text-align: center;
+}
+h2.title-text {
+	font-size: 32px;
+	font-weight: 900;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.qna {
+	margin-top: 60px;
+	margin-bottom: 20px;
+}
+.qna h3.title-text {
+	font-size: 24px;
+	font-weight: 900;
+	/*margin-top: 40px;*/
+	/*margin-bottom: 20px;*/
+}
+.content-text {
+	font-size: 24px !important;
+	/*font-weight: 900;*/
+	color: #666 !important;
+}
+.margin-text-40 {
+	margin-top: 80px;
+	margin-bottom: 40px;
+}
+.margin-text-20 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.features {}
+.features h2 {
+	font-size: 32px;
+	font-weight: 900;
+}
+.features p {
+	font-size: 20px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.showcase {}
+.showcase .demo-translator {
+	text-align: center;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	height: 400px;
+}
+
+.social-icon {
+	width: 36px;
+	height: 36px;
+	background-color: #666;
+	font-size: 18px;
+	font-weight: 900;
+	color: #fff;
+	line-height: 36px;
+	border-radius: 18px;
+	text-decoration: none !important;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+.followus {
+	font-size: 24px;
+	color: #4CAAC9;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	display: block;
+}
+
+.bg {
+  background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg") no-repeat center center;
+  background-size: cover;
+  position: fixed;
+  width: 100%;
+  height: 650px; /*same height as jumbotron */
+  top:0;
+  left:0;
+  z-index: -1;
+}
+.bg-about {
+	background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg") no-repeat center center;
+	background-size: cover;
+	background-position: 0 -100px;
+	position: fixed;
+	width: 100%;
+	height: 300px; /*same height as jumbotron */
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+.jumbotron {
+  height: 650px;
+  color: white;
+  text-shadow: #444 0 1px 1px;
+  background:transparent;
+}
+.about {
+  height: 300px;
+  color: white;
+  text-shadow: #444 0 1px 1px;
+  background:transparent;
+}
+
+.modal {}
+.modal .custom-class {
+    width: 75%;
+}
+.dialog-box {
+    position: fixed;
+    top: 25% !important;
+    /*left: 50%;*/
+}
+
+.invite-button {
+	display: none;
+}
+
+.suggestions .price {
+	font-size: 28px;
+	/*font-weight: 900;*/
+	color: #4CAAC9;
+	font-family: Tahoma, Verdana, Segoe, sans-serif;
 }

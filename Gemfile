@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 gem 'omniauth-facebook'
 gem 'devise'
 gem "paperclip", "~> 4.2"
+gem 'kaminari'
+
+gem "font-awesome-rails"
 
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'bootstrap-tagsinput-rails'

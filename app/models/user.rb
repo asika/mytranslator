@@ -4,22 +4,24 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates_presence_of :friendly_id
-  validates_uniqueness_of :friendly_id
-
-  before_validation :setup_friendly_id
+  validates_presence_of :username, :first_name, :last_name, :phone
+  validates_uniqueness_of :username
 
   has_one :profile, :dependent => :destroy
 
   has_many :client_cases, :class_name => "Case"
   has_many :translator_cases, :class_name => "Case"
 
-  has_many :invitations
-  # has_many :invitors, :through => :invitations
-  # has_many :invited_users, :through => :invitations
+  # TODO: customize max number of invitees
+  MAX_INVITATION = 1
+
+  def self.get_random_translators(number=10)
+    # https://ihower.tw/rails4/activerecord-relationships.html#joins--includes-
+    self.includes(:profile).order("RAND()").limit(number)
+  end
 
   def to_param
-    self.friendly_id
+    self.username
   end
 
   def is_client?
@@ -27,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def is_translator?
-    true
+    !profile.nil?
   end
 
   def is_admin?
@@ -39,15 +41,33 @@ class User < ActiveRecord::Base
   end
 
   def can_invite?(case_id)
-    # TODO: customize max number of invitees
     !Invitation.exists?(:case_id => case_id, :client_id => self.id)
   end
 
-  def setup_friendly_id
-    if self.friendly_id.blank?
-     self.friendly_id = Digest::MD5.hexdigest(self.email)
-     self.save!
-    end
+  def invitations_left(case_id)
+    MAX_INVITATION - Invitation.where("client_id = #{id} AND status = 'new'").count
   end
 
+  def cases_new
+    Case.where(:client => self, :status => "new")
+  end
+
+  def cases_ongoing
+    Case.where(:client => self, :status => "ongoing")
+  end
+
+  def cases_finish
+    Case.where(:client => self, :status => "finish")
+  end
+
+  def invitations
+    Invitation.where("client_id = ? OR translator_id = ?", id, id)
+  end
+
+  def cases_other
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

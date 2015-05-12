@@ -1,7 +1,21 @@
 class ProfilesController < ApplicationController
 
-  before_action :authenticate_user!
-  before_action :get_user, :only => %i[show]
+  before_action :authenticate_user!, :except => %i[index show]
+  before_action :get_user, :only => %i[show edit update destroy]
+
+  def index
+    @q = Profile.all
+
+    if params[:lang]
+      @q = @q.joins(:languages).where( "languages.id" => params[:lang] )
+    end
+
+    if params[:domain]
+      @q = @q.joins(:domains).where( "domains.id" => params[:domain] )
+    end
+
+    @profiles = @q.page(params[:page]).per(10)
+  end
 
   def new
     @profile = Profile.new
@@ -9,6 +23,11 @@ class ProfilesController < ApplicationController
 
   def show
     @profile = @user.profile
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
@@ -41,7 +60,7 @@ class ProfilesController < ApplicationController
   protected
 
   def get_user
-    @user = User.find_by_friendly_id(params[:user_id])
+    @user = User.find_by_username(params[:user_id])
   end
 
   def profile_params

@@ -1,15 +1,19 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  resources :users do
-    get :dashboard
+  namespace :welcome do
+    get :about
+  end
 
+  resources :users do
     resource :profile do
       get :edit2
       patch :update2
-      get :complete
+      get :complete, :on => :collection
     end
   end
+
+  resources :profiles, :only => [:index, :show]
 
   resources :cases do
     get :suggestion
@@ -17,11 +21,13 @@ Rails.application.routes.draw do
     resources :invitations, :only => [:create, :update, :destroy]
   end
 
+  resources :messages
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'mytrans#index'
+  root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

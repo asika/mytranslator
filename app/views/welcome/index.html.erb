@@ -1,0 +1,113 @@
+<div class="bg"></div>
+<div class="row section">
+  <div class="jumbotron main">
+    <h1><%= t("mytrans.main.title") %></h1>
+    <h2><%= t("mytrans.main.subtitle") %></h2> <br><br>
+    <%= link_to t("mytrans.main.search_button"), new_case_path, :class => "btn btn-primary main-button" %>
+  </div>
+</div>
+
+<div class="row section">
+  <div class="col-md-12 joinus">
+    <span><%= t("mytrans.joinus.title") %></span>
+    <% unless current_user %>
+      <%= link_to t("mytrans.joinus.join_button"), new_user_registration_path, :class => "btn btn-success" %>
+    <% else %>
+      <%= link_to t("mytrans.joinus.join_button"), new_user_profile_path(current_user), :class => "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
+<div class="row section founder-intro">
+  <div class="col-md-6 founder-pic"><%= image_tag "http://lingosolutions.weebly.com/uploads/5/0/0/6/50063493/826678.jpg?454", :class => "image-responsive" %></div>
+  <div class="col-md-6">
+    <p class="content-text">您好，我是 Sylvia，我是一位口筆譯員，曾在外交部擔任專職翻譯。在工作中，我自己最清楚，為了將委託案件在另一個語言完美呈現，譯者必須在背後付出無數心血。</p>
+
+    <p class="content-text">然而，由於翻譯產業結構的關係，譯者不斷面對開價過低與佣金過高的問題；而客戶在尋找翻譯時，也一再面對價格不透明及品質無保障的狀況。</p>
+
+    <p class="content-text">因此，我成立了【公平翻譯交易所】，作為連接客戶及譯者的橋樑，希望客戶能夠在取得充分資訊後，選擇最適合的專業譯者；而優質譯者的付出，也能夠在這裡被看見，受到肯定。</p>
+  </div>
+</div>
+
+<hr>
+
+<div class="row section features">
+  <div class="col-md-12">
+    <div class="align-center">
+      <h2 class="title-text">我們的特色</h2>
+    </div>
+    <ul><li><h2 class="title-text">透明價格</h2></li></ul>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; 譯者價格公開透明。客戶可自由查詢比價，取得充足資訊再做決定。</p>
+    <ul><li><h2 class="title-text">合理佣金</h2></li></ul>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; 手續費合理公開。公平支付譯者應得薪資，並向客戶誠實報價，杜絕抬價。</p>
+    <ul><li><h2 class="title-text">專業品質</h2></li></ul>
+    <p>&nbsp; &nbsp; &nbsp; &nbsp; 網站審核與評鑑機制。雙重篩選制度，幫助客戶挑選最適合的專業譯者。</p>
+  </div>
+</div>
+
+<hr>
+
+<div class="row section showcase">
+  <div class="col-md-12">
+
+    <h2 class="title-text">我們的譯者</h2>
+    <div class="row">
+      <% User.get_random_translators(3).each do |t| %>
+        <div class="col-md-4 demo-translator">
+          <%= image_tag "https://robohash.org/#{t.username}", :class => "avatar-lg" %>
+          <h2><%= t.full_name %></h2>
+          <p class="content-text"><%= t.profile.try(:short_summary) || '' %></p>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="align-center">
+      <h2 class="title-text">現有 <%= Profile.count %> 位專業譯者在線</h2>
+      <h2 class="title-text">更多國際級譯者，持續加入中</h2>
+    </div>
+
+  </div>
+</div>
+
+
+<hr>
+<div class="row section searchnow">
+  <div class="col-md-12 align-center joinus">
+    <h2 class="title-text">現在就嘗試我們的服務！</h2>
+    <%= link_to t("mytrans.main.search_button"), new_case_path, :class => "btn btn-primary main-button" %>
+  </div>
+</div>
+
+<hr>
+
+<div class="row section footer">
+  <div class="col-md-12">
+    <%= image_tag "http://lingosolutions.weebly.com/uploads/5/0/0/6/50063493/2569219.jpg?959" %>
+  </div>
+</div>
+
+<hr>
+<div class="row section align-center fanpage">
+  <div class="col-md-12 align-center">
+    <a href="https://www.facebook.com/pages/%E5%85%AC%E5%B9%B3%E7%BF%BB%E8%AD%AF%E4%BA%A4%E6%98%93%E6%89%80/1587904128145523?ref=aymt_homepage_panel" class="fa fa-facebook social-icon" target="_blank">
+    </a>
+    <br>
+
+    <div class="fb-like" data-href="https://www.facebook.com/pages/&#x516c;&#x5e73;&#x7ffb;&#x8b6f;&#x4ea4;&#x6613;&#x6240;/1587904128145523?ref=aymt_homepage_panel" data-layout="standard" data-action="like" data-show-faces="true" data-share="true"></div>
+    <br>
+    <span class="followus">在 Facebook 上尋找我們！</span>
+
+  </div>
+</div>
+
+<script>
+var jumboHeight = $('.jumbotron').outerHeight();
+function parallax(){
+    var scrolled = $(window).scrollTop();
+    $('.bg').css('height', (jumboHeight-scrolled) + 'px');
+}
+
+$(window).scroll(function(e){
+    parallax();
+});
+</script>

@@ -1,55 +1,177 @@
-<h1>Translator Suggestion</h1>
+<!-- Modal -->
+<div class="modal fade" id="modal-profile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-class">
+        <div class="modal-content">
+          <div class="modal-body"></div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<div class="modal fade dialog-box" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><%= t("case_show.suggestions.modals.confirm_title") %></h4>
+      </div>
+      <div class="modal-body">
+        <img src="" alt="" class="avatar-sm">
+        <span class="context-text">
+          <%= t("case_show.suggestions.modals.confirm_text") %>
+        </span>
+        <span class="content-text full-name"></span>
+        <span class="context-text">?</span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("case_show.suggestions.modals.confirm_button_cancel") %></button>
+
+        <!-- super violent, don't try it at home!! -->
+        <% @suggested_translators.each do |profile| %>
+          <%= button_to t("case_show.suggestions.action_buttons.invite")+profile.user.id.to_s, case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button", :id => "invite-#{profile.user.id}", :remote => true %>
+
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade dialog-box" id="modal-thankyou" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+        <h4 class="modal-title" id="myModalLabel"><%= t("case_show.suggestions.modals.thankyou_title") %></h4>
+      </div>
+      <div class="modal-body">
+        <span class="context-text">
+          <%= t("case_show.suggestions.modals.thankyou_text") %>
+        </span>
+      </div>
+      <div class="modal-footer">
+        <%= button_to t("case_show.suggestions.action_buttons.continue"), case_path(@case), :class => "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <div class="row">
   <div class="col-md-12">
-    <h2>Case Conditions</h2>
+    <div class="row">
+      <div class="col-md-4">
+        <h2><%= t("case_show.caption_case") %> <%= @case.id %></h2>
+      </div>
+      <div class="col-md-4">
+        <span><%= t("case_show.caption_status") %></span>
+        <span class="label label-success"><%= t("case_show.status.#{@case.status}") %></span>
+      </div>
+      <div class="col-md-4">
+
+        <div class="btn-group pull-right" role="group" aria-label="">
+          <%= link_to t("case_show.edit_button"), root_path, :class => "btn btn-default" %>
+          <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+        </div>
+
+      </div>
+    </div>
+
     <table class="table table-striped">
       <tr>
-        <td><%= t("case.case_type") %></td>
+        <td><%= t("case_show.case.case_type") %></td>
         <td><%= @case.case_type.name_i18n %></td>
       </tr>
       <tr>
-        <td><%= t("case.domain") %></td>
+        <td><%= t("case_show.case.domain") %></td>
         <td><%= @case.domain.name_i18n %></td>
       </tr>
       <tr>
-        <td><%= t("case.word_count") %></td>
+        <td><%= t("case_show.case.quality_level") %></td>
+        <td><%= t(@case.quality_level.name_i18n) %></td>
+      </tr>
+      <tr>
+        <td><%= t("case_show.case.word_count") %></td>
         <td><%= @case.word_count %></td>
       </tr>
       <tr>
-        <td><%= t("case.due") %></td>
+        <td><%= t("case_show.case.due") %></td>
         <td><%= @case.due.to_s(:short) %></td>
-      </tr>
-      <tr>
-        <td><%= t("case.valid_before") %></td>
-        <td><%= @case.valid_before.to_s(:short) %></td>
-      </tr>
-      <tr>
-        <td><%= t("case.quality_level") %></td>
-        <td><%= t(@case.quality_level.name_i18n) %></td>
       </tr>
     </table>
   </div>
 </div>
 
-<h2>Suggested Translators</h2>
-<table class="table">
+<ul class="nav nav-tabs">
+  <li role="presentation"><%= link_to t("case_show.tabs.messages") %></li>
+  <li role="presentation" class="active"><%= link_to t("case_show.tabs.suggestions") %></li>
+</ul>
+
+<table class="table table-hover suggestions">
+  <tr>
+    <th></th>
+    <th><%= t("case_show.suggestions.name") %></th>
+    <th><%= t("case_show.suggestions.rating") %></th>
+    <th><%= t("case_show.suggestions.pricing") %></th>
+    <th><%= t("case_show.suggestions.actions") %></th>
+  </tr>
   <% @suggested_translators.each do |profile| %>
+    <% user = profile.user %>
+
     <tr>
       <td>
-        <%= image_tag "https://robohash.org/#{profile.user.friendly_id}", :class => "avatar-sm pull-left" %>
+        <%= image_tag "https://robohash.org/#{user.username}", :class => "avatar-sm pull-left" %>
       </td>
       <td>
-        <h3><%= profile.full_name %></h3>
+        <h3><%= user.full_name %></h3>
         <span><%= profile.short_summary %></span>
       </td>
       <td>
-        <span><%= @case.word_count*Pricing.where("profile_id = #{profile.id} AND case_type_id = #{@case.case_type_id}").first.amount.to_f %></span>
+        <!-- stars -->
       </td>
       <td>
-        <%= link_to "Invite", user_profile_path(profile.user, profile), :class => "btn btn-success pull-right" %>
-        <%= link_to "Profile", user_profile_path(profile.user, profile), :class => "btn btn-default pull-right" %>
+        <span>$</span>
+        <span class="price">
+          <%= number_to_currency(@case.price_by_profile(profile), :precision => 0, :unit => "") %>
+        </span>
       </td>
+      <td>
+        <div class="btn-group pull-right" role="group" aria-label="">
+          <%= link_to t("case_show.suggestions.action_buttons.profile"), user_profile_path(profile.user), :class => "btn btn-default", :remote => true, 'data-toggle' => "modal", 'data-target' => "#modal-profile" %>
+
+          <% unless @case.invitation_sent?(:client => current_user, :translator => profile.user) %>
+
+            <%#= button_to t("case_show.suggestions.action_buttons.invite"), case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button" %>
+
+            <button type="button" class="btn btn-success button-confirm" data-toggle="modal" data-target="#modal-confirm" data-full_name="<%= user.full_name %>" data-username="<%= user.username %>" data-id="<%= user.id %>">
+              <%= t("case_show.suggestions.action_buttons.invite") %>
+            </button>
+
+          <% else %>
+
+            <%= button_to "Inviting", case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-warning disabled invite-button" %>
+          <% end %>
+
+        </div>
+      </td>
+
     </tr>
   <% end %>
 </table>
+
+<%= paginate @suggested_translators %>
+
+<script>
+$(".button-confirm").on("click", function(event) {
+  id = $(this).data("id");
+  full_name = $(this).data("full_name");
+  username = $(this).data("username");
+
+  $("#modal-confirm img").attr("src", "https://robohash.org/"+username);
+  $("#modal-confirm span.full-name").html(full_name);
+
+  $(".invite-button").hide();
+  $("#invite-"+id).show();
+});
+</script>

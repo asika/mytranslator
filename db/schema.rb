@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150508085233) do
+ActiveRecord::Schema.define(version: 20150509093821) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -22,18 +22,22 @@ ActiveRecord::Schema.define(version: 20150508085233) do
   end
 
   create_table "cases", force: :cascade do |t|
-    t.integer  "client_id",        limit: 4
-    t.integer  "translator_id",    limit: 4
-    t.integer  "case_type_id",     limit: 4
-    t.integer  "domain_id",        limit: 4
-    t.integer  "word_count",       limit: 4
-    t.decimal  "price",                        precision: 10
+    t.integer  "client_id",               limit: 4
+    t.integer  "translator_id",           limit: 4
+    t.integer  "case_type_id",            limit: 4
+    t.integer  "domain_id",               limit: 4
+    t.integer  "word_count",              limit: 4
+    t.decimal  "price",                               precision: 10
     t.datetime "due"
-    t.integer  "quality_level_id", limit: 4
-    t.string   "friendly_id",      limit: 255
-    t.string   "status",           limit: 255,                default: "new"
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
+    t.integer  "quality_level_id",        limit: 4
+    t.string   "friendly_id",             limit: 255
+    t.string   "status",                  limit: 255,                default: "new"
+    t.datetime "created_at",                                                         null: false
+    t.datetime "updated_at",                                                         null: false
+    t.string   "attachment_file_name",    limit: 255
+    t.string   "attachment_content_type", limit: 255
+    t.integer  "attachment_file_size",    limit: 4
+    t.datetime "attachment_updated_at"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -122,6 +126,10 @@ ActiveRecord::Schema.define(version: 20150508085233) do
     t.integer  "avatar_file_size",    limit: 4
     t.datetime "avatar_updated_at"
     t.integer  "user_id",             limit: 4
+    t.string   "sample_file_name",    limit: 255
+    t.string   "sample_content_type", limit: 255
+    t.integer  "sample_file_size",    limit: 4
+    t.datetime "sample_updated_at"
   end
 
   create_table "quality_levels", force: :cascade do |t|
@@ -148,10 +156,10 @@ ActiveRecord::Schema.define(version: 20150508085233) do
     t.string   "first_name",             limit: 255,              null: false
     t.string   "last_name",              limit: 255,              null: false
     t.string   "phone",                  limit: 255,              null: false
-    t.string   "friendly_id",            limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end

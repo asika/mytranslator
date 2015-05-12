@@ -35,7 +35,7 @@ class CasesController < ApplicationController
   def suggestion
     @case = Case.find(params[:case_id])
 
-    @suggested_translators = Profile.all
+    @suggested_translators = Profile.page(params[:page]).per(10)
   end
 
   protected
@@ -45,6 +45,6 @@ class CasesController < ApplicationController
   end
 
   def case_params
-    params.require(:case).permit(:client_id, :case_type_id, :domain_id, :word_count, :due, :valid_before, :quality_level_id)
+    params.require(:case).permit(:client_id, :case_type_id, :domain_id, :word_count, :due, :expire, :quality_level_id)
   end
 end
