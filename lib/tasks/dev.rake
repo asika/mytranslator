@@ -1,6 +1,10 @@
 namespace :dev do
-  task :create_users => :environment do
-    20.times do |i|
+  task :fakeup_users => :environment do
+    User.destroy_all
+
+    User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
+
+    50.times do |i|
       username = Faker::Internet.user_name.sub('.', '_')
 
       newuser = User.create(:password => "12345678", :email => username+"@ac.com", :username => username, :first_name => Faker::Name.first_name, :last_name => Faker::Name.last_name, :phone => Faker::PhoneNumber.cell_phone)
@@ -36,6 +40,73 @@ namespace :dev do
     end
   end
 
-  task :create_cases => :environment do
+  task :fakeup_cases => :environment do
+    Case.destroy_all
+
+    200.times do
+      q = User.order("RAND()")
+
+      status = ['new', 'ongoing', 'finish'].sample
+
+      # assure client not equal to translator
+      client = User.order("RAND()").first
+      unless status == 'new'
+        translator = User.order("RAND()").first
+
+        while client.id == translator.id
+          translator = User.order("RAND()").first
+        end
+      end
+
+      newcase = Case.create!(
+        :client => client,
+        :translator => translator,
+        :case_type => CaseType.order("RAND()").first,
+        :domain => Domain.order("RAND()").first,
+        :word_count => Random.rand(100000),
+        :quality_level => QualityLevel.order("RAND()").first,
+        :due => Time.now + Random.rand(20).days,
+        :status => status
+      )
+      puts "Created case #{newcase.id}"
+    end
   end
+
+  task :fakeup_invitations => :environment do
+    Invitation.destroy_all
+
+    Case.where(:status => 'new').each do |c|
+
+      translator = Profile.order("RAND()").first.user
+      while translator.id == c.client.id
+        translator = Profile.order("RAND()").first.user
+      end
+
+      c.invitations.build(
+        :client_id => c.client.id,
+        :translator_id => translator.id,
+        :expire => Time.now + 1.day
+        )
+      c.save!
+      puts "Created invitation: #{c.client.full_name} -> #{translator.full_name}"
+    end
+  end
+
+  task :fakeup_ratings => :environment do
+    Rating.destroy_all
+
+    Case.where(:status => 'finish').each do |c|
+      score = Random.rand(3) + 3
+
+      c.ratings.build(
+        :from => c.client,
+        :to => c.translator,
+        :score => score,
+        :comment => Faker::Lorem.sentence(50)
+        )
+      c.save!
+      puts "Created Rating: #{c.client.full_name} -> #{c.translator.full_name}, #{score}"
+    end
+  end
+
 end
