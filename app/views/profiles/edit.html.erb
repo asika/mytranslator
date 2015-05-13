@@ -1,6 +1,30 @@
-<h>編輯基本資料</h>
+<nav class="navbar <% if controller_name == "welcome" %>navbar-fixed-top<% end %> profile-navbar" role="navigation">
+    
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        </button>
+        <a class="navbar-brand" ><%= t("所在位置") %></a>
+    </div>
 
-<h1>User Profile </h1>
+    
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+            <li><%= link_to t("nav.譯者資料（一）"), edit_user_profile_path(current_user), class: "btn btn-info"
+            %></li>
+            <li><%= link_to t("nav.譯者資料（二）"), edit2_user_profile_path(current_user) %></li>
+            <li><%= link_to t("nav.已完成"), ''  %></li>
+
+        </ul>
+    </div>
+</nav>
+
+
+
+
+
+
+<h1>Profile </h1>
 
 <% if @profile.errors.any? %>
       <ul>
@@ -11,34 +35,43 @@
 <% end %>
 
 <%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch, :html => { :multipart => true } do |f| %>
+
   <div class="form-group">
-    <%= f.label :username, t("profile.username") %>
-    <%= f.text_field :username, :placeholder => t("profile.username_placeholder"), :class=> "form-control" %>
+    <%= f.label :short_summary, t("profile.short_summary") %> <br />
+    <%= f.text_field :short_summary, :placeholder => t("profile.short_summary_placeholder"), :class=> "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :first_name, t("profile.first_name") %> <br />
-    <%= f.text_field :first_name, :placeholder => t("profile.first_name_placeholder"), :class=> "form-control" %>
+    <%= f.label :about, t("profile.about") %> <br />
+    <%= f.text_area :about, :placeholder => t("profile.about_placeholder"), :class=> "form-control" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :last_name, t("profile.last_name"), :class => "has-tooltip", "data-toggle" => t("profile.last_name_placeholder") %> <br />
-    <%= f.text_field :last_name, :placeholder => t("profile.last_name_placeholder"), :class=> "form-control" %>
+    <%= f.label :professional, t("profile.professional") %> <br />
+    <%= f.text_area :professional, :placeholder => t("profile.professional_placeholder"), :class=> "form-control" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :avatar, t("profile.avatar") %> <br />
-    <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :phone, t("profile.phone") %> <br />
-    <%= f.text_field :phone, :placeholder => t("profile.phone_placeholder"), :class=> "form-control" %>
-  </div>
 
   
 
-  <div class="form-group">
-    <%= f.submit "送出", :class => "btn btn-primary" %>
-  </div>
+<nav class="navbar <% if controller_name == "welcome" %>navbar-fixed-top<% end %> under-profile-navbar" role="navigation">
+    
+    
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+            <li><%= link_to t("nav.上一頁"), edit_user_profile_path(current_user), class: "btn btn-info"
+            %></li>
+            <li><%= link_to t("nav.下一頁"), edit2_user_profile_path(current_user), class: "btn btn-info" %></li>
+            <li>
+           <%= f.submit "完成", :class => "location"  %>
+           </li>
+  
 <% end %>
+
+
+
+
+        </ul>
+    </div>
+</nav>

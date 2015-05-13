@@ -3,6 +3,8 @@ class ProfilesController < ApplicationController
   before_action :authenticate_user!, :except => %i[index show]
   before_action :get_user, :only => %i[show edit update destroy]
 
+  
+
   def index
     @q = Profile.all
 
@@ -39,19 +41,19 @@ class ProfilesController < ApplicationController
 
     @profile.attributes = profile_params
 
-    if @profile.save
+    if @profile.save 
       if params[:next] == "complete"
-        redirect_to complete_user_profile_url(current_user)
+        redirect_to complete_user_profile_url(current_user)  
       else
-        redirect_to edit2_user_profile_url(current_user)
+        redirect_to edit2_user_profile_url(current_user)    
       end
     else
-      render :action => :edit
+       render :action => :edit
     end
   end
 
   def edit2
-    @profile = current_user.profile
+      @profile = current_user.profile || Profile.new
   end
 
   def complete
@@ -60,10 +62,10 @@ class ProfilesController < ApplicationController
   protected
 
   def get_user
-    @user = User.find_by_username(params[:user_id])
+    @user = current_user # User.find_by_username(params[:user_id])
   end
 
   def profile_params
-    params.require(:profile).permit(:username, :first_name, :last_name, :phone, :avatar, :short_summary, :bio)
+    params.require(:profile).permit(:avatar, :sample, :short_summary, :bio, :about, :professional, :education, :certification, :payment_info)
   end
 end

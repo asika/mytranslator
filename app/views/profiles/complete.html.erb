@@ -1,3 +1,25 @@
+<nav class="navbar <% if controller_name == "welcome" %>navbar-fixed-top<% end %> profile-navbar" role="navigation">
+    
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+        </button>
+        <a class="navbar-brand" ><%= t("所在位置") %></a>
+    </div>
+
+    
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+
+            <li><%= link_to t("nav.譯者資料（一）"), edit_user_profile_path(current_user)
+            %></li>
+            <li><%= link_to t("nav.譯者資料（二）"), edit2_user_profile_path(current_user) %></li>
+            <li><%= link_to t("nav.完成"), nil ,class: "btn btn-info" %></li>
+
+        </ul>
+    </div>
+</nav>
+
 <h1>Profile Complete!</h1>
 
 <p>Put instructions for translators here.</p>
+

@@ -21,6 +21,18 @@ div {
 	background: -webkit-linear-gradient(top, #222, rgba(200, 200, 200, 0.3));
 	border: none;
 }
+.profile-navbar {
+	background-color: #000;
+	background: -webkit-linear-gradient(top, #1F6CBD, rgba(1, 200, 700, 0.3));
+	border: none;
+}
+
+.under-profile-navbar {
+	background-color:'' ;
+	background: -webkit-linear-gradient(top, #white, rgba(1, 200, 700, 0.3));
+	border: none;
+}
+
 .navbar-brand {
 	font-size: 20px;
     color: #fff;
@@ -249,4 +261,25 @@ h2.title-text {
 	/*font-weight: 900;*/
 	color: #4CAAC9;
 	font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+.location {
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+  display: inline-block;
+  margin-bottom: 0;
+  font-weight: normal;
+  text-align: center;
+  vertical-align: middle;
+  touch-action: manipulation;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  white-space: nowrap;
+  padding: 6px 12px;
+  font-size: 27px;
+  line-height: 1.42857143;
+  border-radius: 4px;
+  text-size:20;
 }
