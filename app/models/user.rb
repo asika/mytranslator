@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
 
   has_one :profile, :dependent => :destroy
 
-  has_many :client_cases, :class_name => "Case"
-  has_many :translator_cases, :class_name => "Case"
+  has_many :client_cases, :class_name => "Case", :foreign_key => "client_id", :dependent => :destroy
+  has_many :translator_cases, :class_name => "Case", :foreign_key => "translator_id", :dependent => :destroy
 
   # TODO: customize max number of invitees
   MAX_INVITATION = 1

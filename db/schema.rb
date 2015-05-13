@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150509093821) do
+ActiveRecord::Schema.define(version: 20150513080038) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 20150509093821) do
     t.integer  "case_id",       limit: 4
   end
 
+  add_index "invitations", ["case_id", "client_id", "translator_id"], name: "index_invitations_on_case_id_and_client_id_and_translator_id", unique: true, using: :btree
   add_index "invitations", ["client_id"], name: "index_invitations_on_client_id", using: :btree
   add_index "invitations", ["translator_id"], name: "index_invitations_on_translator_id", using: :btree
 
@@ -138,6 +139,21 @@ ActiveRecord::Schema.define(version: 20150509093821) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
+
+  create_table "ratings", force: :cascade do |t|
+    t.integer  "case_id",    limit: 4,     null: false
+    t.integer  "score",      limit: 4,     null: false
+    t.integer  "from",       limit: 4,     null: false
+    t.integer  "to",         limit: 4,     null: false
+    t.text     "comment",    limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  add_index "ratings", ["case_id", "from", "to"], name: "index_ratings_on_case_id_and_from_and_to", unique: true, using: :btree
+  add_index "ratings", ["case_id"], name: "index_ratings_on_case_id", using: :btree
+  add_index "ratings", ["from"], name: "index_ratings_on_from", using: :btree
+  add_index "ratings", ["to"], name: "index_ratings_on_to", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
