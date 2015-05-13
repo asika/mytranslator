@@ -44,8 +44,6 @@ namespace :dev do
     Case.destroy_all
 
     200.times do
-      q = User.order("RAND()")
-
       status = ['new', 'ongoing', 'finish'].sample
 
       # assure client not equal to translator
@@ -103,7 +101,7 @@ namespace :dev do
         :to => c.translator,
         :score => score,
         :comment => Faker::Lorem.sentence(50)
-        )
+      )
       c.save!
       puts "Created Rating: #{c.client.full_name} -> #{c.translator.full_name}, #{score}"
     end
