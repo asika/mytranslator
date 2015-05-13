@@ -112,8 +112,12 @@
   <tr>
     <th></th>
     <th><%= t("case_show.suggestions.name") %></th>
-    <th><%= t("case_show.suggestions.rating") %></th>
+<!--     <th><%= t("case_show.suggestions.rating") %></th>
     <th><%= t("case_show.suggestions.pricing") %></th>
+ -->
+    <th><%= sort_link @q, :ratings, t("case_show.suggestions.rating"), :default_order => :desc %></th>
+    <th><%= sort_link @q, :pricings, t("case_show.suggestions.pricing"), :default_order => :desc %></th>
+
     <th><%= t("case_show.suggestions.actions") %></th>
   </tr>
   <% @suggested_translators.each do |profile| %>
@@ -129,6 +133,7 @@
       </td>
       <td>
         <!-- stars -->
+        <%= render :partial => "users/ratings", :locals => {:user => user} %>
       </td>
       <td>
         <span>$</span>
