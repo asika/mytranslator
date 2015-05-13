@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
 
   has_one :profile, :dependent => :destroy
 
+  has_many :sent_ratings, :class_name => "Rating", :foreign_key => "from"
+  has_many :received_ratings, :class_name => "Rating", :foreign_key => "to"
+
   has_many :client_cases, :class_name => "Case", :foreign_key => "client_id", :dependent => :destroy
   has_many :translator_cases, :class_name => "Case", :foreign_key => "translator_id", :dependent => :destroy
 
@@ -65,6 +68,15 @@ class User < ActiveRecord::Base
   end
 
   def cases_other
+  end
+
+  def average_rating
+    ratings = received_ratings.pluck(:score)
+    if ratings.size > 0
+      (ratings.sum.to_f / ratings.size).round
+    else
+      0
+    end
   end
 
   def full_name
