@@ -34,8 +34,11 @@ class CasesController < ApplicationController
 
   def suggestion
     @case = Case.find(params[:case_id])
+    @users = User.joins(:profile)
 
-    @suggested_translators = Profile.page(params[:page]).per(10)
+    @q = @users.ransack(params[:q])
+    # @q.sorts = 'average_rating DESC' if @q.sorts.empty?
+    @suggested_translators = @q.result.page(params[:page]).per(10)
   end
 
   protected

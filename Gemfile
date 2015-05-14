@@ -4,6 +4,7 @@ gem 'omniauth-facebook'
 gem 'devise'
 gem "paperclip", "~> 4.2"
 gem 'kaminari'
+gem 'ransack'
 
 gem "font-awesome-rails"
 

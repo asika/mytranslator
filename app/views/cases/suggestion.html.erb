@@ -29,8 +29,9 @@
         <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("case_show.suggestions.modals.confirm_button_cancel") %></button>
 
         <!-- super violent, don't try it at home!! -->
-        <% @suggested_translators.each do |profile| %>
-          <%= button_to t("case_show.suggestions.action_buttons.invite")+profile.user.id.to_s, case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button", :id => "invite-#{profile.user.id}", :remote => true %>
+        <% @suggested_translators.each do |user| %>
+          <% profile = user.profile %>
+          <%= button_to t("case_show.suggestions.action_buttons.invite"), case_invitations_path(@case), :params => {:translator_id => user.id}, :class => "btn btn-success invite-button", :id => "invite-#{user.id}", :remote => true %>
 
         <% end %>
       </div>
@@ -112,16 +113,12 @@
   <tr>
     <th></th>
     <th><%= t("case_show.suggestions.name") %></th>
-<!--     <th><%= t("case_show.suggestions.rating") %></th>
+    <th><%= t("case_show.suggestions.rating") %></th>
     <th><%= t("case_show.suggestions.pricing") %></th>
- -->
-    <th><%= sort_link @q, :ratings, t("case_show.suggestions.rating"), :default_order => :desc %></th>
-    <th><%= sort_link @q, :pricings, t("case_show.suggestions.pricing"), :default_order => :desc %></th>
-
     <th><%= t("case_show.suggestions.actions") %></th>
   </tr>
-  <% @suggested_translators.each do |profile| %>
-    <% user = profile.user %>
+  <% @suggested_translators.each do |user| %>
+    <% profile = user.profile %>
 
     <tr>
       <td>
