@@ -57,7 +57,7 @@
     <%= f.label :avatar, t("profile.avatar") %> <br />
     <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control"  %>
    
-     <img id="preview_avatar" src="#" alt="your image" width="300" />
+     <img id="preview_avatar" src="#" alt="your image" width="300" height="300" />
     </div>
 
    
@@ -68,7 +68,7 @@
 
 <div class="clearfix"></div>
 
-<nav class="navbar <% if controller_name == "profile" %>navbar-fixed-top<% end %> under-profile-navbar" role="navigation">
+<nav class="navbar <% if controller_name == "profile" %>navbar-fixed-top<% end %> under-profile-navbar" role="navigation" >
     
     
     <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -76,7 +76,7 @@
 
             <li><%= link_to t("nav.上一頁"), edit_user_profile_path(current_user), class: "btn btn-info"
             %></li>
-            <li><%= link_to t("nav.下一頁"), edit2_user_profile_path(current_user), class: "btn btn-info" %></li>
+            
              <li>
              <%= f.submit "存檔", :class => "location"  %>
              </li>
@@ -87,7 +87,9 @@
 
 <% end %>
 
+<div class="clearfix"></div>
 <script>
+
 
 $("#preview_avatar").hide();
 
