@@ -53,20 +53,20 @@
     <%= f.text_area :payment_info, :placeholder => t("profile.payment_info_placeholder"), :class=> "form-control" %>
   </div>
 
-
     <div class="form-group col-lg-6 ">
     <%= f.label :avatar, t("profile.avatar") %> <br />
-    <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
+    <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control"  %>
+   
+     <img id="preview_avatar" src="#" alt="your image" width="300" />
     </div>
 
-
+   
     <div class="form-group col-lg-6 ">
     <%= f.label :sample, t("profile.sample") %> <br />
     <%= f.file_field :sample, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
     </div>
 
-  
-
+<div class="clearfix"></div>
 
 <nav class="navbar <% if controller_name == "profile" %>navbar-fixed-top<% end %> under-profile-navbar" role="navigation">
     
@@ -81,11 +81,32 @@
              <%= f.submit "存檔", :class => "location"  %>
              </li>
   
-<% end %>
-
-
-
         </ul>
     </div>
 </nav>
 
+<% end %>
+
+<script>
+
+$("#preview_avatar").hide();
+
+function readURL(input) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview_avatar').attr('src', e.target.result);
+            $('#preview_avatar').show();
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#profile_avatar").change(function(){
+    readURL(this);
+});
+
+</script>
