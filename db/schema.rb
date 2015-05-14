@@ -12,7 +12,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 20150513080038) do
-
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "unit",       limit: 255
