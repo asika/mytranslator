@@ -62,8 +62,15 @@ div {
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
-.btn-primary.main-button {
+.main .focus {
+	width: 40%;
+	min-width: 300px;
+	margin: auto;
+	text-align: center;
+}
+.main-button {
 	font-size: 28px !important;
+	margin:0 10px;
 }
 .joinus {
 	text-align: center;
