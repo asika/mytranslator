@@ -1,4 +1,4 @@
-<nav class="navbar <% if controller_name == "welcome" %>navbar-fixed-top<% end %> profile-navbar" role="navigation">
+<nav class="navbar <% if controller_name == "profile" %>navbar-fixed-top<% end %> profile-navbar" role="navigation">
     
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -10,9 +10,9 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
 
-            <li><%= link_to t("nav.譯者資料（一）"), edit_user_profile_path(current_user) 
+            <li><%= link_to t("nav.填寫譯者資料（一）"), edit_user_profile_path(current_user) 
             %></li>
-            <li><%= link_to t("nav.譯者資料（二）"), edit2_user_profile_path(current_user), class: "btn btn-info" %></li>
+            <li><%= link_to t("nav.填寫譯者資料（二）"), edit2_user_profile_path(current_user), class: "btn btn-info" %></li>
             <li><%= link_to t("nav.已完成"), '' %></li>
 
         </ul>
@@ -68,7 +68,7 @@
   
 
 
-<nav class="navbar <% if controller_name == "welcome" %>navbar-fixed-top<% end %> under-profile-navbar" role="navigation">
+<nav class="navbar <% if controller_name == "profile" %>navbar-fixed-top<% end %> under-profile-navbar" role="navigation">
     
     
     <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -78,7 +78,7 @@
             %></li>
             <li><%= link_to t("nav.下一頁"), edit2_user_profile_path(current_user), class: "btn btn-info" %></li>
              <li>
-             <%= f.submit "完成", :class => "location"  %>
+             <%= f.submit "存檔", :class => "location"  %>
              </li>
   
 <% end %>
