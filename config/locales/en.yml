@@ -66,6 +66,8 @@ en:
       title: "搜尋譯者的全新方法"
       subtitle: "現在就試試！"
       search_button: "委託翻譯案件"
+      main_search_button: "我是客戶"
+      main_join_button: "我是譯者"
     joinus:
       title: "加入我們，現在就開始承接你的翻譯案件吧！"
       join_button: "現在就加入"
