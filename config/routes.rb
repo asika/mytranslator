@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }
 
   namespace :welcome do
     get :about
+    get :intro
   end
 
   resources :users do

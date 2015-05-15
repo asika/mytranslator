@@ -1,0 +1,42 @@
+<div class="bg-about"></div>
+<div class="row section">
+  <div class="intro">
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 align-center">
+    <h1><%= t("welcome.intro.title") %></h1>
+    <h3><%= t("welcome.intro.you_can") %></h3>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12 align-center">
+    <div class="col-md-6">
+     <%= link_to t("welcome.intro.button_client"), new_case_path, :class => "btn btn-primary main-button" %>
+
+      <div class="col-md-8 col-md-push-2">
+        <p class="content-text">
+          <%= t("welcome.intro.helper_client") %>
+        </p>
+      </div>
+
+    </div>
+    <div class="col-md-6">
+      <% unless current_user %>
+        <%= link_to t("welcome.intro.button_translator"), new_user_registration_path, :class => "btn btn-success main-button" %>
+      <% else %>
+        <%= link_to t("welcome.intro.button_translator"), new_user_profile_path(current_user), :class => "btn btn-success main-button" %>
+      <% end %>
+
+      <div class="col-md-8 col-md-push-2">
+        <p class="content-text">
+          <%= t("welcome.intro.helper_translator") %>
+        </p>
+      </div>
+
+
+    </div>
+  </div>
+</div>

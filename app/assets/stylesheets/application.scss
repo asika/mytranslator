@@ -265,3 +265,15 @@ h2.title-text {
 h2.inline {
 	display: inline;
 }
+
+.intro {
+  height: 200px;
+  color: white;
+  text-shadow: #444 0 1px 1px;
+  background:transparent;
+}
+
+.intro h1,
+.intro h3 {
+	color: #fff;
+}
