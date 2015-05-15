@@ -1,0 +1,5 @@
+<% label = {'new' => 'success', 'matching' => 'warning', 'ongoing' => 'primary', 'finish' => 'default'} %>
+
+<span class="label label-<%= label[c.status] %>">
+  <%= t("case_show.status.#{c.status}") %>
+</span>

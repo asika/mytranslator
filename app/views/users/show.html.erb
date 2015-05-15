@@ -1,24 +1,43 @@
 <h1>Dashboard</h1>
 
-<p>我很醜可是我很有用！</p>
-
 <div class="row">
   <div class="col-md-12">
-    <h2>My New Cases</h2>
+    <div>
+      <h2 class="inline"><%= t("dashboard.cases.title") %></h2>
+      <%= link_to new_case_path, :class => "btn btn-primary main-button pull-right" do %>
+        <span class="glyphicon glyphicon-plus"></span> <%= t("dashboard.cases.new_button") %>
+      <% end %>
+
+      <div class="clearfix"></div>
+    </div>
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="active"><%= link_to "進行中" %></li>
+    <li role="presentation"><%= link_to "已結束" %></li>
+  </ul>
+
     <table class="table table-striped">
       <tr>
         <th><%= t("dashboard.table.case_id") %></th>
+        <th><%= t("dashboard.table.case_type") %></th>
+        <th><%= t("dashboard.table.domain") %></th>
         <th><%= t("dashboard.table.due") %></th>
-        <th><%= t("dashboard.table.actions") %></th>
+        <th><%= t("dashboard.table.status") %></th>
+        <th></th>
       </tr>
-      <% @user.cases_new.each do |c| %>
+      <% @user.cases_ongoing.each do |c| %>
         <tr>
           <td><%= c.id %></td>
+          <td><%= t(c.case_type.name_i18n) %></td>
+          <td><%= t(c.domain.name_i18n) %></td>
           <td><%= c.due.to_s(:short) %></td>
+          <td>
+            <%= render :partial => "cases/status", :locals => {:c => c} %>
+          </td>
           <td>
             <div class="btn-group pull-right" role="group" aria-label="">
               <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
-              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
+              <%= link_to t("dashboard.case.rate"), root_path, :class => "btn btn-default#{ ' disabled' unless c.status == 'finish'}" %>
+              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-danger" %>
             </div>
 
           </td>
@@ -28,10 +47,9 @@
   </div>
 
   <div class="col-md-12">
-    <h2>Invitations</h2>
+    <h2><%= t("dashboard.invitations.title") %></h2>
     <table class="table">
       <tr>
-        <th>ID</th>
         <th>From</th>
         <th>To</th>
         <th>Expires</th>
@@ -40,66 +58,14 @@
       </tr>
       <% @user.invitations.each do |inv| %>
         <tr>
-          <td><%= inv.id %></td>
-          <td><%= inv.client_id %></td>
-          <td><%= inv.translator_id %></td>
+          <td><%= inv.client.full_name %></td>
+          <td><%= inv.translator.full_name %></td>
           <td><%= inv.expire %></td>
           <td><%= inv.status %></td>
           <td></td>
         </tr>
       <% end %>
     </table>
-  </div>
-
-  <div class="col-md-12">
-    <h2>Ongoing Cases</h2>
-    <table class="table table-striped">
-      <tr>
-        <th><%= t("dashboard.table.case_id") %></th>
-        <th><%= t("dashboard.table.due") %></th>
-        <th><%= t("dashboard.table.actions") %></th>
-      </tr>
-      <% @user.cases_ongoing.each do |c| %>
-        <tr>
-          <td><%= c.id %></td>
-          <td><%= c.due.to_s(:short) %></td>
-          <td>
-            <div class="btn-group pull-right" role="group" aria-label="">
-              <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
-              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
-            </div>
-
-          </td>
-        </tr>
-      <% end %>
-    </table>
-
-  </div>
-
-  <div class="col-md-12">
-    <h2>Finished Cases</h2>
-
-    <table class="table table-striped">
-      <tr>
-        <th><%= t("dashboard.table.case_id") %></th>
-        <th><%= t("dashboard.table.due") %></th>
-        <th><%= t("dashboard.table.actions") %></th>
-      </tr>
-      <% @user.cases_finish.each do |c| %>
-        <tr>
-          <td><%= c.id %></td>
-          <td><%= c.due.to_s(:short) %></td>
-          <td>
-            <div class="btn-group pull-right" role="group" aria-label="">
-              <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
-              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-default" %>
-            </div>
-
-          </td>
-        </tr>
-      <% end %>
-    </table>
-
   </div>
 
 </div>

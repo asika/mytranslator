@@ -67,7 +67,7 @@
       </div>
       <div class="col-md-4">
         <span><%= t("case_show.caption_status") %></span>
-        <span class="label label-success"><%= t("case_show.status.#{@case.status}") %></span>
+        <%= render :partial => "cases/status", :locals => {:c => @case} %>
       </div>
       <div class="col-md-4">
 
@@ -114,7 +114,10 @@
     <th></th>
     <th><%= t("case_show.suggestions.name") %></th>
     <th><%= t("case_show.suggestions.rating") %></th>
-    <th><%= t("case_show.suggestions.pricing") %></th>
+    <!-- <th><%= t("case_show.suggestions.pricing") %></th> -->
+
+    <th><%= sort_link @q, :comments_count, t("case_show.suggestions.pricing"), :default_order => :desc %></th>
+
     <th><%= t("case_show.suggestions.actions") %></th>
   </tr>
   <% @suggested_translators.each do |user| %>

@@ -25,7 +25,9 @@ en:
     signup: "註冊帳號"
     login: "登入"
     backstage: "系統管理者"
-    dashboard: "案件管理"
+    dashboard: "管理我的案件"
+    translators: "譯者資料"
+    about: "關於我們"
   profile:
     username: "User ID"
     username_placeholder: "Helper text"
@@ -57,10 +59,11 @@ en:
   pricing: "收費列表"
   domain_ids: "專業領域"
   domain:
-    group01: "文史哲？"
-    group02: "理工？"
-    group03: "生物醫學？"
-    group04: "其他？"
+    group01: "人文社會"
+    group02: "經濟金融"
+    group03: "法律政治"
+    group04: "科技理工"
+    group05: "生物醫學"
   mytrans:
     main:
       title: "搜尋譯者的全新方法"
@@ -72,6 +75,11 @@ en:
       title: "加入我們，現在就開始承接你的翻譯案件吧！"
       join_button: "現在就加入"
   case:
+    case_type: "案件類型"
+    domain: "專業領域"
+    quality_level: "專業程度"
+    word_count: "字數"
+    due: "交稿時間"
     quality_level: "案件難度"
     quality_low: "一般"
     quality_median: "中等"
@@ -119,3 +127,9 @@ en:
     jpn: "日文"
     fra: "法文"
     esp: "西文"
+  dashboard:
+    cases:
+      title: "我的案件列表"
+      new_button: "新增案件"
+    invitations:
+      title: "案件邀請"

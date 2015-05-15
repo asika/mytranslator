@@ -237,6 +237,10 @@ h2.title-text {
   background:transparent;
 }
 
+.stars {
+	color: #F0AD4E;
+}
+
 .modal {}
 .modal .custom-class {
     width: 75%;
@@ -256,4 +260,8 @@ h2.title-text {
 	/*font-weight: 900;*/
 	color: #4CAAC9;
 	font-family: Tahoma, Verdana, Segoe, sans-serif;
+}
+
+h2.inline {
+	display: inline;
 }
