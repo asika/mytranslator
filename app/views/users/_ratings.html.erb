@@ -1,8 +1,10 @@
-<% if user.average_rating > 0 %>
-  <% (user.average_rating).times do %>
-    <span class="glyphicon glyphicon-star"></span>
+<div class="stars">
+  <% if user.average_rating > 0 %>
+    <% (user.average_rating).times do %>
+      <span class="glyphicon glyphicon-star"></span>
+    <% end %>
+    <% (5-user.average_rating).times do %>
+      <span class="glyphicon glyphicon-star-empty"></span>
+    <% end %>
   <% end %>
-  <% (5-user.average_rating).times do %>
-    <span class="glyphicon glyphicon-star-empty"></span>
-  <% end %>
-<% end %>
+</div>
