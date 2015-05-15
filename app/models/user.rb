@@ -56,7 +56,8 @@ class User < ActiveRecord::Base
   end
 
   def cases_ongoing
-    Case.where(:client => self, :status => "ongoing")
+    # Case.where(:client => self, :status => "ongoing")
+    Case.where(:client => self, :status => ['new', 'matching', 'ongoing'])
   end
 
   def cases_finish
@@ -68,6 +69,7 @@ class User < ActiveRecord::Base
   end
 
   def cases_other
+    Case.where(:client => self, :status.not => ['new', 'matching', 'ongoing', 'finish'])
   end
 
   def average_rating
