@@ -34,7 +34,7 @@
           <td>
             <div class="btn-group pull-right" role="group" aria-label="">
               <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
-              <%= link_to t("dashboard.case.rate"), root_path, :class => "btn btn-default#{ ' disabled' unless c.status == 'finish'}" %>
+              <%= link_to t("dashboard.case.rate"), root_path, :class => "btn btn-warning#{ ' disabled' unless c.status == 'finish'}" %>
               <%#= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-danger" %>
             </div>
 
@@ -45,6 +45,11 @@
 
     <%= paginate @cases %>
   </div>
+
+  <ul class="nav nav-tabs">
+    <li role="presentation" class="<%= 'active' if !params[:inv] or params[:inv] == 'sent' %>"><%= link_to "送出的", user_path(@user) %></li>
+    <li role="presentation" class="<%= 'active' if params[:inv] and params[:inv] == 'received' %>"><%= link_to "收到的", user_path(@user, :status => 'finish') %></li>
+  </ul>
 
   <div class="col-md-12">
     <h2><%= t("dashboard.invitations.title") %></h2>
