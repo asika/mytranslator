@@ -1,5 +1,3 @@
-<h1>Dashboard</h1>
-
 <div class="row">
   <div class="col-md-12">
     <div>
@@ -11,8 +9,8 @@
       <div class="clearfix"></div>
     </div>
   <ul class="nav nav-tabs">
-    <li role="presentation" class="active"><%= link_to "進行中" %></li>
-    <li role="presentation"><%= link_to "已結束" %></li>
+    <li role="presentation" class="<%= 'active' if !params[:status] or params[:status] == 'ongoing' %>"><%= link_to "進行中", user_path(@user) %></li>
+    <li role="presentation" class="<%= 'active' if params[:status] and params[:status] == 'finish' %>"><%= link_to "已結束", user_path(@user, :status => 'finish') %></li>
   </ul>
 
     <table class="table table-striped">
@@ -20,11 +18,11 @@
         <th><%= t("dashboard.table.case_id") %></th>
         <th><%= t("dashboard.table.case_type") %></th>
         <th><%= t("dashboard.table.domain") %></th>
-        <th><%= t("dashboard.table.due") %></th>
-        <th><%= t("dashboard.table.status") %></th>
+        <th><%= sort_link @q, :due, t("dashboard.table.due"), :default_order => :desc %></th>
+        <th><%= sort_link @q, :status, t("dashboard.table.status"), :default_order => :desc %></th>
         <th></th>
       </tr>
-      <% @user.cases_ongoing.each do |c| %>
+      <% @cases.each do |c| %>
         <tr>
           <td><%= c.id %></td>
           <td><%= t(c.case_type.name_i18n) %></td>
@@ -37,13 +35,15 @@
             <div class="btn-group pull-right" role="group" aria-label="">
               <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
               <%= link_to t("dashboard.case.rate"), root_path, :class => "btn btn-default#{ ' disabled' unless c.status == 'finish'}" %>
-              <%= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-danger" %>
+              <%#= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-danger" %>
             </div>
 
           </td>
         </tr>
       <% end %>
     </table>
+
+    <%= paginate @cases %>
   </div>
 
   <div class="col-md-12">
