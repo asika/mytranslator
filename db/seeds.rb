@@ -14,6 +14,7 @@ Domain.create(:name => "domain.group01")
 Domain.create(:name => "domain.group02")
 Domain.create(:name => "domain.group03")
 Domain.create(:name => "domain.group04")
+Domain.create(:name => "domain.group05")
 
 Language.create(:name => "language.eng")
 Language.create(:name => "language.cht")
