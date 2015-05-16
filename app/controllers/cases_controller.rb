@@ -42,7 +42,7 @@ class CasesController < ApplicationController
 
     if params[:sort] == "pricing"
       @suggested_translators = @suggested_translators.order("pricings.amount ASC")
-   end
+    end
 
   end
 
