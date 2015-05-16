@@ -127,7 +127,9 @@
       <td>
         <%#= image_tag "https://robohash.org/#{user.username}", :class => "avatar-sm pull-left" %>
 
-        <%= image_tag profile.avatar.url, :class => "avatar-sm pull-left" %>
+        <% unless profile.avatar.url == "/images/original/missing.png" %>
+          <%= image_tag profile.avatar.url, :class => "avatar-sm pull-left" %>
+        <% end %>
       </td>
       <td>
         <h3><%= user.full_name %></h3>
