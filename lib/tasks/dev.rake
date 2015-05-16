@@ -1,70 +1,70 @@
-require 'CSV'
+# require 'CSV'
 
 namespace :dev do
-  task :fakeup_users_from_csv => :environment do
-    User.destroy_all
-    Profile.destroy_all
+  # task :fakeup_users_from_csv => :environment do
+  #   User.destroy_all
+  #   Profile.destroy_all
 
-    User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
+  #   User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
 
-    users = CSV.parse(File.read('/tmp/0517/trans.csv'))
+  #   users = CSV.parse(File.read('/tmp/0517/trans.csv'))
 
-    cnt = 0
-    users.each do |u|
-      username = "user#{cnt}"
-      cnt += 1
+  #   cnt = 0
+  #   users.each do |u|
+  #     username = "user#{cnt}"
+  #     cnt += 1
 
-      newuser = User.create(
-        :password => "12345678",
-        :email => "#{username}@ac.com",
-        :username => username,
-        :first_name => u[1],
-        :last_name => "#",
-        :phone => Faker::PhoneNumber.cell_phone
-        )
+  #     newuser = User.create(
+  #       :password => "12345678",
+  #       :email => "#{username}@ac.com",
+  #       :username => username,
+  #       :first_name => u[1],
+  #       :last_name => "#",
+  #       :phone => Faker::PhoneNumber.cell_phone
+  #       )
 
-      np = newuser.build_profile(
-          :short_summary => u[41],
-          :about => u[34],
-          :education => u[33],
-          :professional => u[32]
-        )
+  #     np = newuser.build_profile(
+  #         :short_summary => u[41],
+  #         :about => u[34],
+  #         :education => u[33],
+  #         :professional => u[32]
+  #       )
 
-      domain_ids = []
-      domain_mapping = [
-        [42, 1], [43, 2], [44, 3], [45, 4], [46, 5]
-      ]
-      domain_mapping.each do |k, v|
-        unless u[k].nil?
-          domain_ids << v
-        end
-      end
-      np.domain_ids = domain_ids.uniq
+  #     domain_ids = []
+  #     domain_mapping = [
+  #       [42, 1], [43, 2], [44, 3], [45, 4], [46, 5]
+  #     ]
+  #     domain_mapping.each do |k, v|
+  #       unless u[k].nil?
+  #         domain_ids << v
+  #       end
+  #     end
+  #     np.domain_ids = domain_ids.uniq
 
-      language_ids = []
-      language_mapping = [
-        [10, 1], [11, 2], [12, 5], [13, 2], [14, 4], [15, 2], [16, 6], [17, 2]
-      ]
-      language_mapping.each do |k, v|
-        unless u[k].nil?
-          language_ids << v
-        end
-      end
-      np.language_ids = language_ids.uniq
+  #     language_ids = []
+  #     language_mapping = [
+  #       [10, 1], [11, 2], [12, 5], [13, 2], [14, 4], [15, 2], [16, 6], [17, 2]
+  #     ]
+  #     language_mapping.each do |k, v|
+  #       unless u[k].nil?
+  #         language_ids << v
+  #       end
+  #     end
+  #     np.language_ids = language_ids.uniq
 
-      np.quality_level_id = u[40].to_i
+  #     np.quality_level_id = u[40].to_i
 
-      price_base = {
-        1 => 1.0, 2 => 2.5, 3 => 4.0
-      }
-      CaseType.all.each do |ct|
-        np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(1.0)+price_base[np.quality_level_id])
-      end
+  #     price_base = {
+  #       1 => 1.0, 2 => 2.5, 3 => 4.0
+  #     }
+  #     CaseType.all.each do |ct|
+  #       np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(1.0)+price_base[np.quality_level_id])
+  #     end
 
-      np.save!
-      puts "Created user #{newuser.id}: #{newuser.first_name}"
-    end
-  end
+  #     np.save!
+  #     puts "Created user #{newuser.id}: #{newuser.first_name}"
+  #   end
+  # end
 
   task :fakeup_users => :environment do
     User.destroy_all
