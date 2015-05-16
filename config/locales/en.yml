@@ -131,6 +131,8 @@ en:
     cases:
       title: "我的案件列表"
       new_button: "新增案件"
+      details: "詳細資料"
+      rate: "評價"
     invitations:
       title: "案件邀請"
   welcome:

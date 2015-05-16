@@ -33,8 +33,12 @@
           </td>
           <td>
             <div class="btn-group pull-right" role="group" aria-label="">
-              <%= link_to t("dashboard.case.details"), case_suggestion_path(c), :class => "btn btn-default" %>
-              <%= link_to t("dashboard.case.rate"), root_path, :class => "btn btn-warning#{ ' disabled' unless c.status == 'finish'}" %>
+              <%= link_to t("dashboard.cases.details"), case_suggestion_path(c), :class => "btn btn-default" %>
+
+              <%= link_to root_path, :class => "btn btn-warning#{ ' disabled' unless c.status == 'finish'}" do %>
+                <span class="glyphicon glyphicon-star-empty"></span><%= t("dashboard.cases.rate") %>
+              <% end %>
+
               <%#= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-danger" %>
             </div>
 
