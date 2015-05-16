@@ -34,6 +34,16 @@ class CasesController < ApplicationController
 
   def suggestion
     @case = Case.find(params[:case_id])
+
+    # skill matching
+    # @profiles = Domain.find(@case.domain_id).profiles
+
+    # @topics = Topic.where(id: uncat.map(&:id))
+    # @users = @profiles.
+
+    # !skill matching
+
+
     @users = User.includes(:profile => :pricings).where( "pricings.case_type_id" => @case.case_type_id )
 
     @q = @users.ransack(params[:q])
