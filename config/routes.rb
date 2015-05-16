@@ -8,6 +8,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resource :profile do
+      get :edit2
+      patch :update2
+
       get :complete, :on => :collection
     end
   end
