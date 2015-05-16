@@ -114,9 +114,9 @@
     <th></th>
     <th><%= t("case_show.suggestions.name") %></th>
     <th><%= t("case_show.suggestions.rating") %></th>
-    <!-- <th><%= t("case_show.suggestions.pricing") %></th> -->
+    <th><%= link_to t("case_show.suggestions.pricing"), case_suggestion_path(@case, :sort => "pricing") %></th>
 
-    <th><%= sort_link @q, :comments_count, t("case_show.suggestions.pricing"), :default_order => :desc %></th>
+    <!--<th><%= sort_link @q, :comments_count, t("case_show.suggestions.pricing"), :default_order => :desc %></th>-->
 
     <th><%= t("case_show.suggestions.actions") %></th>
   </tr>
