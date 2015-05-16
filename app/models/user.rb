@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def is_translator?
-    !profile.nil?
+    profile.present?
   end
 
   def is_admin?
@@ -73,12 +73,14 @@ class User < ActiveRecord::Base
   end
 
   def average_rating
-    ratings = received_ratings.pluck(:score)
-    if ratings.size > 0
-      (ratings.sum.to_f / ratings.size).round
-    else
-      0
-    end
+    received_ratings.average(:score).try(:round) || 0
+
+    #ratings = received_ratings.pluck(:score)
+    #if ratings.size > 0
+    #  (ratings.sum.to_f / ratings.size).round
+    #else
+    #  0
+    #end
   end
 
   def full_name
