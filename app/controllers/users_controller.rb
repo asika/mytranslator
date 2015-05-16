@@ -6,10 +6,8 @@ class UsersController < ApplicationController
   end
 
   def show
-    if params[:status]
-      if params[:status] == 'finish'
-        @cases = @user.cases_finish
-      end
+    if params[:status] && params[:status] == 'finish'
+      @cases = @user.cases_finish
     else
       @cases = @user.cases_ongoing
     end
