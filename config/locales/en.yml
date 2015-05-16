@@ -69,7 +69,7 @@ en:
       title: "搜尋譯者的全新方法"
       subtitle: "現在就試試！"
       search_button: "委託翻譯案件"
-      main_search_button: "我是客戶"
+      main_search_button: "我需要專業翻譯"
       main_join_button: "我是譯者"
     joinus:
       title: "加入我們，現在就開始承接你的翻譯案件吧！"
@@ -81,9 +81,9 @@ en:
     word_count: "字數"
     due: "交稿時間"
     quality_level: "案件難度"
-    quality_low: "一般"
-    quality_median: "中等"
-    quality_high: "高難度"
+    low: "一般"
+    mid: "中等"
+    high: "高難度"
   case_show:
     caption_case: "案件"
     caption_status: "狀態"

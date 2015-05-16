@@ -1,4 +1,61 @@
+require 'CSV'
+
 namespace :dev do
+  task :fakeup_users_from_csv => :environment do
+    User.destroy_all
+    Profile.destroy_all
+
+    User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
+
+    users = CSV.parse(File.read('/tmp/trans.csv'))
+
+    cnt = 0
+    users.each do |u|
+      username = "user#{cnt}"
+      cnt += 1
+
+      newuser = User.create(
+        :password => "12345678",
+        :email => u[3],
+        :username => username,
+        :first_name => u[1],
+        :last_name => "#",
+        :phone => Faker::PhoneNumber.cell_phone
+        )
+
+      np = newuser.build_profile(
+          :short_summary => Faker::Lorem.sentence(3),
+          :about => u[34],
+          :education => u[33],
+          :professional => u[32]
+        )
+
+      domain_ids = []
+      (0..rand(Domain.all.count)).each do
+        domain_ids << Domain.offset(rand(Domain.all.count)).first.id
+      end
+      np.domain_ids = domain_ids.uniq
+
+      language_ids = []
+      language_mapping = [
+        [10, 1], [11, 2], [12, 5], [13, 2], [14, 4], [15, 2], [16, 6], [17, 2]
+      ]
+      language_mapping.each do |k, v|
+        unless u[k].nil?
+          language_ids << v
+        end
+      end
+      np.language_ids = language_ids.uniq
+
+      CaseType.all.each do |ct|
+        np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
+      end
+
+      np.save!
+      puts "Created user #{newuser.id}: #{newuser.first_name}"
+    end
+  end
+
   task :fakeup_users => :environment do
     User.destroy_all
 
@@ -94,7 +151,7 @@ namespace :dev do
     Rating.destroy_all
 
     Case.where(:status => 'finish').each do |c|
-      score = Random.rand(3) + 3
+      score = Random.rand(2) + 4
 
       c.ratings.build(
         :from => c.client,

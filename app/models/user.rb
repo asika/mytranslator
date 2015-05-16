@@ -84,6 +84,8 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    "#{first_name} #{last_name}"
+    # "#{first_name} #{last_name}"
+    # irresponsible for demo
+    first_name
   end
 end

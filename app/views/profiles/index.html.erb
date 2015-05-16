@@ -29,7 +29,6 @@
       </tr>
       <% @profiles.each do |profile| %>
         <% user = profile.user %>
-
         <tr>
           <td>
             <%= image_tag "https://robohash.org/#{user.username}", :class => "avatar-sm pull-left" %>
