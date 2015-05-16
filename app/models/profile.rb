@@ -1,6 +1,8 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
 
+  has_one :quality_level
+
   has_many :profile_domainships
   has_many :domains, :through => :profile_domainships
 

@@ -11,7 +11,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150513080038) do
+ActiveRecord::Schema.define(version: 20150516134721) do
+
   create_table "case_types", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "unit",       limit: 255
@@ -130,6 +131,7 @@ ActiveRecord::Schema.define(version: 20150513080038) do
     t.string   "sample_content_type", limit: 255
     t.integer  "sample_file_size",    limit: 4
     t.datetime "sample_updated_at"
+    t.integer  "quality_level_id",    limit: 4
   end
 
   create_table "quality_levels", force: :cascade do |t|
