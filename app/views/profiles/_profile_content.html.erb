@@ -3,7 +3,9 @@
     <div class="media">
       <div class="media-left">
         <a href="#">
-          <%= image_tag "https://robohash.org/#{profile.user.username}", :class => "media-object avatar" %>
+          <%#= image_tag "https://robohash.org/#{profile.user.username}", :class => "media-object avatar" %>
+
+          <%= image_tag profile.avatar.url, :class => "avatar pull-left" %>
         </a>
       </div>
       <div class="media-body">
