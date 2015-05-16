@@ -15,7 +15,13 @@ class Case < ActiveRecord::Base
   belongs_to :quality_level
 
   def price_by_profile(profile)
-    (word_count * Pricing.where("profile_id = #{profile.id} AND case_type_id = #{case_type_id}").first.amount).round
+    unit_price = profile.price_by_case(self)
+
+    if unit_price
+      (word_count.to_i * unit_price ).round
+    else
+      nil
+    end
   end
 
   def invitation_sent? (kwargs)

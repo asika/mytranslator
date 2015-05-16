@@ -34,11 +34,16 @@ class CasesController < ApplicationController
 
   def suggestion
     @case = Case.find(params[:case_id])
-    @users = User.joins(:profile)
+    @users = User.includes(:profile => :pricings).where( "pricings.case_type_id" => @case.case_type_id )
 
     @q = @users.ransack(params[:q])
     # @q.sorts = 'average_rating DESC' if @q.sorts.empty?
     @suggested_translators = @q.result.page(params[:page]).per(10)
+
+    if params[:sort] == "pricing"
+      @suggested_translators = @suggested_translators.order("pricings.amount ASC")
+   end
+
   end
 
   protected
