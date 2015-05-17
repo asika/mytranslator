@@ -35,16 +35,14 @@ class CasesController < ApplicationController
   def suggestion
     @case = Case.find(params[:case_id])
 
-    # skill matching
-    # @profiles = Domain.find(@case.domain_id).profiles
+    # quality matching
+    @users = User.includes(:profile => :pricings).where("quality_level_id = ?", @case.quality_level_id)
 
-    # @topics = Topic.where(id: uncat.map(&:id))
-    # @users = @profiles.
-
-    # !skill matching
+    @q = @users.where( "pricings.case_type_id" => @case.case_type_id )
+    # !quality matching
 
 
-    @users = User.includes(:profile => :pricings).where( "pricings.case_type_id" => @case.case_type_id )
+    # @users = User.includes(:profile => :pricings).where( "pricings.case_type_id" => @case.case_type_id )
 
     @q = @users.ransack(params[:q])
     # @q.sorts = 'average_rating DESC' if @q.sorts.empty?
