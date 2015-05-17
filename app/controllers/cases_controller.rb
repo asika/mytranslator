@@ -39,12 +39,13 @@ class CasesController < ApplicationController
     @users = User.includes(:profile => :pricings).where("quality_level_id = ?", @case.quality_level_id)
 
     @q = @users.where( "pricings.case_type_id" => @case.case_type_id )
+    @q = @q.ransack(params[:q])
     # !quality matching
 
 
     # @users = User.includes(:profile => :pricings).where( "pricings.case_type_id" => @case.case_type_id )
 
-    @q = @users.ransack(params[:q])
+    # @q = @users.ransack(params[:q])
     # @q.sorts = 'average_rating DESC' if @q.sorts.empty?
     @suggested_translators = @q.result.page(params[:page]).per(10)
 
