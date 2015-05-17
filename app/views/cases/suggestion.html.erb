@@ -153,7 +153,7 @@
 
             <%#= button_to t("case_show.suggestions.action_buttons.invite"), case_invitations_path(@case), :params => {:translator_id => profile.user.id}, :class => "btn btn-success invite-button" %>
 
-            <button type="button" class="btn btn-success button-confirm" data-toggle="modal" data-target="#modal-confirm" data-full_name="<%= user.full_name %>" data-username="<%= user.username %>" data-id="<%= user.id %>">
+            <button type="button" class="btn btn-success button-confirm" data-toggle="modal" data-target="#modal-confirm" data-full_name="<%= user.full_name %>" data-username="<%= user.username %>" data-id="<%= user.id %>" data-avatar="<%= profile.avatar.url %>">
               <%= t("case_show.suggestions.action_buttons.invite") %>
             </button>
 
@@ -176,8 +176,10 @@ $(".button-confirm").on("click", function(event) {
   id = $(this).data("id");
   full_name = $(this).data("full_name");
   username = $(this).data("username");
+  avatar = $(this).data("avatar");
 
-  $("#modal-confirm img").attr("src", "https://robohash.org/"+username);
+  //$("#modal-confirm img").attr("src", "https://robohash.org/"+username);
+  $("#modal-confirm img").attr("src", avatar);
   $("#modal-confirm span.full-name").html(full_name);
 
   $(".invite-button").hide();
