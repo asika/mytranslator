@@ -36,39 +36,40 @@
             <li><%= link_to t("nav.about"), welcome_about_path %></li>
             <li><%= link_to t("nav.translators"), profiles_path %></li>
 
-            <% if user_signed_in? %>
-                <% if current_user.is_admin? %>
-                    <li><%= link_to t("nav.backstage"), admin_root_path %></li>
-                <% end %>
-                <% if current_user %>
-                    <li><%= link_to t("nav.dashboard"), user_path(current_user) %></li>
-                <% end %>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <%= current_user.email %><b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <%= link_to "編輯Profile", edit_user_profile_path(current_user) %>
-                        </li>
-                        <li>
-                            <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
-                        </li>
-                        <li>
-                            <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-                        </li>
-                    </ul>
-                </li>
+            <% unless controller_name == 'welcome' %>
+                <% if user_signed_in? %>
+                    <% if current_user.is_admin? %>
+                        <li><%= link_to t("nav.backstage"), admin_root_path %></li>
+                    <% end %>
+                    <% if current_user %>
+                        <li><%= link_to t("nav.dashboard"), user_path(current_user) %></li>
+                    <% end %>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <%= current_user.email %><b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <%= link_to "編輯Profile", edit_user_profile_path(current_user) %>
+                            </li>
+                            <li>
+                                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %>
+                            </li>
+                            <li>
+                                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+                            </li>
+                        </ul>
+                    </li>
 
-            <% else %>
-                <li>
-                    <%= link_to t("nav.signup"), new_user_registration_path, :class => 'navbar-link'  %>
-                </li>
-                <li>
-                    <%= link_to t("nav.login"), new_user_session_path, :class => 'navbar-link'  %>
-                </li>
+                <% else %>
+                    <li>
+                        <%= link_to t("nav.signup"), new_user_registration_path, :class => 'navbar-link'  %>
+                    </li>
+                    <li>
+                        <%= link_to t("nav.login"), new_user_session_path, :class => 'navbar-link'  %>
+                    </li>
+                <% end %>
             <% end %>
-
 
         </ul>
     </div><!-- /.navbar-collapse -->

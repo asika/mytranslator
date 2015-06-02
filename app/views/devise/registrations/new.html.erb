@@ -1,49 +1,111 @@
-<h2>Sign up</h2>
+<!-- Modal -->
+<div class="modal fade" id="modal-agreement" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog custom-class">
+        <div class="modal-content">
+          <div class="modal-body">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt minima alias minus, expedita inventore repudiandae neque nisi aspernatur quia et sint cupiditate quod sunt ratione, nostrum aut optio illum quisquam.
+            </p>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<div class="row">
+  <div class="col-md-4">
+    <h2><%= t("views.devise.registrations.new.title") %></h2>
+    <span><%= t("views.devise.registrations.new.helper") %></span>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="field">
+        <%= f.label t("views.devise.registrations.new.username") %><br />
+        <%= f.text_field :username, autofocus: true, :class=> "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label t("views.devise.registrations.new.email") %><br />
+        <%= f.email_field :email, :class=> "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label t("views.devise.registrations.new.password") %>
+        <% if @validatable %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", :class=> "form-control" %>
+      </div>
+
+      <div class="field">
+        <%= f.label t("views.devise.registrations.new.password_confirmation") %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", :class=> "form-control" %>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="field">
+            <%= f.label t("views.devise.registrations.new.first_name") %><br />
+            <%= f.text_field :first_name, :class=> "form-control" %>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="field">
+            <%= f.label t("views.devise.registrations.new.last_name") %><br />
+            <%= f.text_field :last_name, :class=> "form-control" %>
+          </div>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label t("views.devise.registrations.new.phone") %><br />
+        <%= f.text_field :phone, :class=> "form-control" %>
+      </div>
+
+      <div class="field form-inline">
+        <%= f.check_box :agreement, :class=> "form-control" %> <%= f.label t("views.devise.registrations.new.agreement_prefix") %><%= link_to t("views.devise.registrations.new.agreement"), "#", :remote => true, 'data-toggle' => "modal", 'data-target' => "#modal-agreement" %>
+      </div>
+      <br>
+
+      <div class="actions pull-right">
+        <%= f.submit t("views.devise.registrations.new.btn_signup"), :class => "btn btn-primary" %>
+        <%= render "devise/shared/links" %>
+      </div>
+    <% end %>
+
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @validatable %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+  <div class="col-md-8 align-center registration-intro">
+    <h2>加入譯者好簡單</h2>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+    <div class="row">
+      <div class="col-md-4 align-center">
+        <%= image_tag 'https://tvocrats.files.wordpress.com/2011/05/4_595.jpeg', :class => "img-responsive" %>
+        <h3>Step 1</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, earum.
+        </p>
+      </div>
+      <div class="col-md-4 align-center">
+        <%= image_tag 'https://tvocrats.files.wordpress.com/2011/05/4_595.jpeg', :class => "img-responsive" %>
+        <h3>Step 2</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, sapiente.
+        </p>
+      </div>
+      <div class="col-md-4 align-center">
+        <%= image_tag 'https://tvocrats.files.wordpress.com/2011/05/4_595.jpeg', :class => "img-responsive" %>
+        <h3>Step 3</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, accusamus!
+        </p>
+      </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username %>
-  </div>
+    </div>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
