@@ -28,38 +28,7 @@
         <th><%= t("case_show.suggestions.actions") %></th>
       </tr>
       <% @profiles.each do |profile| %>
-        <% user = profile.user %>
-        <tr>
-          <td>
-            <%#= image_tag "https://robohash.org/#{user.username}", :class => "avatar-sm pull-left" %>
-            <%= image_tag profile.avatar.url, :class => "avatar-sm pull-left" %>
-          </td>
-          <td>
-            <h3><%= user.full_name %></h3>
-            <span><%= profile.short_summary %></span>
-          </td>
-
-          <td>
-            <div>
-              <% profile.languages.each do |l| %>
-                <span class="label label-warning"><%= t(l.name_i18n) %></span>
-              <% end %>
-            </div>
-            <div>
-              <% profile.domains.each do |d| %>
-                <span class="label label-success"><%= t(d.name_i18n) %></span>
-              <% end %>
-            </div>
-          </td>
-
-          <td>
-            <%= render :partial => "users/ratings", :locals => {:user => user} %>
-          </td>
-
-          <td>
-            <%= link_to t("case_show.suggestions.action_buttons.profile"), user_profile_path(profile.user), :class => "btn btn-primary" %>
-          </td>
-        </tr>
+        <%= render :partial => "oneprofile", :locals => {:profile => profile} %>
       <% end %>
     </table>
 
