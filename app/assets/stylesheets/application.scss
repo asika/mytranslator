@@ -15,8 +15,14 @@ div {
 .section {
 	margin-bottom: 30px;
 }
+textarea {
+	resize: none;
+}
 
 .main-navbar {
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
 	background-color: #000;
 	background: -webkit-linear-gradient(top, #222, rgba(200, 200, 200, 0.3));
 	border: none;
@@ -41,8 +47,8 @@ div {
 
 
 .main {
-	/*background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg");*/
-	/*background-size: cover;*/
+	background: url("http://cdn1.editmysite.com/uploads/5/0/0/6/50063493/background-images/814720481.jpg") no-repeat center center;
+	background-size: cover;
 	/*max-height: 600px;*/
 	height: 600px;
 	text-align: center;
@@ -315,4 +321,42 @@ h2.inline {
 
 #preview_avatar {
 		height: 160px;
+}
+
+/*flash*/
+.alert-error {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-alert {
+    background-color: #f2dede;
+    border-color: #eed3d7;
+    color: #b94a48;
+    text-align: left;
+ }
+
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.alert-notice {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+    text-align: left;
+ }
+
+.registration-intro {
+	vertical-align: middle;
+}
+.registration-intro img {
+	width: 160px;
+	height: 160px;
+	border-radius: 50%;
 }

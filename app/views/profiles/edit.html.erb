@@ -1,153 +1,138 @@
-<h1>Profile</h1>
-
-<% if @profile.errors.any? %>
-      <ul>
-      <% @profile.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-<% end %>
-
-<%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch, :html => { :multipart => true } do |f| %>
-
-  <table class="table">
-    <tr>
-      <td class="col-md-8">
-        <div class="row">
-          <div class="form-group col-md-6">
-            <%= f.label :avatar, t("profile.avatar") %> <br />
-            <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
-
-          </div>
-          <div class="col-md-6">
-            <img id="preview_avatar" src="#" alt="image preview" />
-          </div>
-
-        </div>
-      </td>
-      <td class="col-md-4"></td>
-    </tr>
-
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :language_ids, t("profile.languages") %> <br />
-          <%= f.collection_check_boxes(:language_ids, Language.all, :id, :name_i18n) %>
-        </div>
-
-      </td>
-      <td class="col-md-4"></td>
-    </tr>
-
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :domain_ids, t("profile.domains") %> <br />
-          <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
-        </div>
-
-      </td>
-      <td class="col-md-4"></td>
-    </tr>
-
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :short_summary, t("profile.short_summary") %> <br />
-          <%= f.text_area :short_summary, :rows => 3, :placeholder => t("profile.short_summary_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :about, t("profile.about") %> <br />
-          <%= f.text_area :about, :rows => 8, :placeholder => t("profile.about_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :professional, t("profile.professional") %> <br />
-          <%= f.text_area :professional, :rows => 12, :placeholder => t("profile.professional_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :education, t("profile.education") %> <br />
-          <%= f.text_area :education, :rows => 12, :placeholder => t("profile.education_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :certification, t("profile.certification") %> <br />
-          <%= f.text_area :certification, :rows => 12, :placeholder => t("profile.certification_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group">
-          <%= f.label :payment_info, t("profile.payment_info") %> <br />
-          <%= f.text_area :payment_info, :rows => 6, :placeholder => t("profile.payment_info_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-    <tr>
-      <td class="col-md-8">
-        <div class="form-group col-lg-6 ">
-        <%= f.label :sample, t("profile.sample") %> <br />
-        <%= f.file_field :sample, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
-        </div>
-
-      </td>
-      <td class="col-md-4">
-        這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。這裏要放說明文字。
-      </td>
-    </tr>
-  </table>
-
-  <div class="row">
-    <div class="col-md-12">
-      <%= f.submit "更新資訊", :class => "btn btn-primary main-button" %>
-      <%#= f.submit "下一頁", :class => "btn btn-default pull-right"  %>
-      <%#= link_to t("nav.下一頁"), edit2_user_profile_path(current_user), class: "btn btn-default pull-right" %>
-    </div>
+<div class="row">
+  <div class="col-md-2">
+    <%= render :partial => 'users/sidebar', :locals => {:active => 'profile'} %>
   </div>
+  <div class="col-md-10">
+    <h2><%= t("views.profiles.edit.title") %></h2>
 
-<%# form_for %>
-<% end %>
+    <% if @profile.errors.any? %>
+          <ul>
+          <% @profile.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+    <% end %>
+
+    <%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch, :html => { :multipart => true } do |f| %>
+
+      <table class="table">
+        <tr>
+          <td class="col-md-8">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <%= f.label :avatar, t("views.profiles.edit.avatar") %> <br />
+                <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
+
+              </div>
+              <div class="col-md-6">
+                <img id="preview_avatar" src="#" alt="image preview" />
+              </div>
+
+            </div>
+          </td>
+          <td class="col-md-4"></td>
+        </tr>
+
+        <tr>
+          <td class="col-md-8">
+            <div class="form-group">
+              <%= f.label :language_ids, t("views.profiles.edit.languages") %> <br />
+              <%= f.collection_check_boxes(:language_ids, Language.all, :id, :name_i18n) %>
+            </div>
+
+          </td>
+          <td class="col-md-4"></td>
+        </tr>
+
+        <tr>
+          <td class="col-md-8">
+            <div class="form-group">
+              <%= f.label :domain_ids, t("views.profiles.edit.domains") %> <br />
+              <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
+            </div>
+
+          </td>
+          <td class="col-md-4"></td>
+        </tr>
+
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group">
+              <%= f.label :short_summary, t("views.profiles.edit.short_summary") %> <br />
+              <%= f.text_field :short_summary, :rows => 3, :placeholder => t("profile.short_summary_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group">
+              <%= f.label :about, t("views.profiles.edit.about") %> <br />
+              <%= f.text_area :about, :rows => 8, :placeholder => t("profile.about_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group">
+              <%= f.label :professional, t("views.profiles.edit.professional") %> <br />
+              <%= f.text_area :professional, :rows => 12, :placeholder => t("profile.professional_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group">
+              <%= f.label :education, t("views.profiles.edit.education") %> <br />
+              <%= f.text_area :education, :rows => 12, :placeholder => t("profile.education_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group">
+              <%= f.label :certification, t("views.profiles.edit.certification") %> <br />
+              <%= f.text_area :certification, :rows => 12, :placeholder => t("profile.certification_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group">
+              <%= f.label :payment_info, t("views.profiles.edit.payment_info") %> <br />
+              <%= f.text_area :payment_info, :rows => 6, :placeholder => t("profile.payment_info_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+        <tr>
+          <td class="col-md-12">
+            <div class="form-group col-lg-6 ">
+            <%= f.label :sample, t("views.profiles.edit.sample") %> <br />
+            <%= f.file_field :sample, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
+            </div>
+
+          </td>
+        </tr>
+      </table>
+
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.submit t("views.profiles.edit.button_update"), :class => "btn btn-primary" %>
+        </div>
+      </div>
+
+    <%# form_for %>
+    <% end %>
+  </div>
+</div>
+
 
 
 

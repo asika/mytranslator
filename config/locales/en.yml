@@ -20,6 +20,41 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  views:
+    devise:
+      registrations:
+        new:
+          title: "註冊帳號"
+          helper: "（以下皆為必填項目）"
+          username: "用戶名"
+          email: "電子郵件"
+          password: "密碼"
+          password_confirmation: "確認密碼"
+          first_name: "名字"
+          last_name: "姓"
+          phone: "聯絡電話"
+          btn_signup: "送出"
+          link_login: "登入"
+          agreement_prefix: "我同意遵守本平台的"
+          agreement: "使用條款"
+    users:
+      _sidebar:
+        dashboard: "案件管理"
+        update_profile: "更新譯者資料"
+        change_password: "修改密碼"
+    profiles:
+      edit:
+        avatar: "上傳頭像"
+        languages: "擅長語言"
+        domains: "專業領域"
+        short_summary: "一句話自我簡介"
+        about: "關於我"
+        professional: "工作經驗"
+        education: "教育背景"
+        certification: "持有證照"
+        payment_info: "付款資訊"
+        sample: "上傳過往作品"
+        button_update: "完成"
   nav:
     logo: "公平翻譯交易所"
     signup: "註冊帳號"
