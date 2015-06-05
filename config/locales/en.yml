@@ -25,7 +25,8 @@ en:
       registrations:
         new:
           title: "註冊帳號"
-          helper: "（以下皆為必填項目）"
+          helper: "（以下皆為必填）"
+          role: "我的身份"
           username: "用戶名"
           email: "電子郵件"
           password: "密碼"
@@ -40,10 +41,12 @@ en:
     users:
       _sidebar:
         dashboard: "案件管理"
+        update_user_information: "更新基本資料"
         update_profile: "更新譯者資料"
         change_password: "修改密碼"
     profiles:
       edit:
+        title: "更新譯者資料"
         avatar: "上傳頭像"
         languages: "擅長語言"
         domains: "專業領域"
@@ -55,6 +58,45 @@ en:
         payment_info: "付款資訊"
         sample: "上傳過往作品"
         button_update: "完成"
+        popover:
+          short_summary: "Tooltip"
+          about: "Tooltip"
+          professional: "Tooltip"
+          education: "Tooltip"
+          certification: "Tooltip"
+          payment_info: "Tooltip"
+    cases:
+      new:
+        title: "翻譯案件委託"
+        case_type: "案件類型"
+        domain: "專業領域"
+        quality_level: "專業程度"
+        word_count: "字數"
+        due: "交稿時間"
+        quality_level: "案件難度"
+        attachment: "上傳翻譯稿"
+  models:
+    domains:
+      group01: "人文社會"
+      group02: "經濟金融"
+      group03: "法律政治"
+      group04: "科技理工"
+      group05: "生物醫學"
+    roles:
+      client: "翻譯委託人"
+      translator: "譯者"
+      admin: "系統管理者"
+    languages:
+      cht: "中文"
+      chs: "簡中"
+      eng: "英文"
+      jpn: "日文"
+      fra: "法文"
+      esp: "西文"
+    quality_levels:
+      low: "一般"
+      mid: "中等"
+      high: "高難度"
   nav:
     logo: "公平翻譯交易所"
     signup: "註冊帳號"
@@ -155,13 +197,6 @@ en:
         confirm_button_invite: "邀請"
         thankyou_title: ""
         thankyou_text: "已經為你送出邀請！"
-  language:
-    cht: "中文"
-    chs: "簡中"
-    eng: "英文"
-    jpn: "日文"
-    fra: "法文"
-    esp: "西文"
   dashboard:
     cases:
       title: "我的案件列表"
