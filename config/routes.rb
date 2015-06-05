@@ -10,9 +10,6 @@ Rails.application.routes.draw do
     get :registered, :on => :collection
 
     resource :profile do
-      get :edit2
-      patch :update2
-
       get :complete, :on => :collection
     end
   end
