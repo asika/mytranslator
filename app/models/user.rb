@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   validates_presence_of :username, :first_name, :last_name, :phone
   validates_uniqueness_of :username
 
+  belongs_to :role
+
   has_one :profile, :dependent => :destroy
 
   has_many :sent_ratings, :class_name => "Rating", :foreign_key => "from"
@@ -20,11 +22,7 @@ class User < ActiveRecord::Base
 
   def self.get_random_translators(number=10)
     # https://ihower.tw/rails4/activerecord-relationships.html#joins--includes-
-    # self.includes(:profile).order("RAND()").limit(number)
-
-    # demo hack
-    # self.includes(:profile).find_by_username(['user0', 'user3', 'user16'])
-    self.includes(:profile).find(464, 467, 480)
+    self.includes(:profile).order("RAND()").limit(number)
   end
 
   def to_param
