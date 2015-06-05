@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   def self.get_random_translators(number=10)
     # https://ihower.tw/rails4/activerecord-relationships.html#joins--includes-
-    self.includes(:profile).order("RAND()").limit(number)
+    self.joins(:profile).includes(:profile).order("RAND()").limit(number)
   end
 
   def to_param
