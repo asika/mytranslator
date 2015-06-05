@@ -58,7 +58,7 @@
       <% User.get_random_translators(3).each do |t| %>
         <div class="col-md-4 demo-translator">
           <%#= image_tag "https://robohash.org/#{t.username}", :class => "avatar-lg" %>
-          <%= image_tag t.profile.avatar.url, :class => "avatar-lg" %>
+          <%= image_tag (t.profile.avatar.nil?)?'':t.profile.avatar.url, :class => "avatar-lg" %>
 
           <h2><%= t.full_name %></h2>
           <p class="content-text"><%= t.profile.try(:short_summary) || '' %></p>
