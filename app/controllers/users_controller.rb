@@ -1,8 +1,14 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_user, :only => %i[show edit update destroy]
+  before_action :get_user
 
   def index
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   def show
@@ -15,6 +21,9 @@ class UsersController < ApplicationController
     @q = @cases.ransack(params[:q])
     @q.sorts = 'status DESC' if @q.sorts.empty?
     @cases = @q.result.page(params[:page]).per(10)
+  end
+
+  def registered
   end
 
   protected
