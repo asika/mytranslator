@@ -1,4 +1,4 @@
-<h1>New Case</h1>
+<h2><%= t("views.cases.new.title") %></h2>
 
 <% if @case.errors.any? %>
       <ul>
@@ -8,68 +8,98 @@
       </ul>
 <% end %>
 
-<%= form_for @case do |f| %>
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-      <%= f.label :case_type_id, t("case.case_type") %>
-      <%= collection_select :case, :case_type_id, CaseType.all, :id, :name_i18n, {}, {:class => "form-control"} %>
+<div class="row">
+  <div class="col-md-4">
+    <%= form_for @case do |f| %>
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.label :case_type_id, t("views.cases.new.case_type") %>
+          <%= collection_select :case, :case_type_id, CaseType.all, :id, :name_i18n, {}, {:class => "form-control"} %>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.label :domain_id, t("views.cases.new.domain") %>
+          <%= collection_select :case, :domain_id, Domain.all, :id, :name_i18n, {}, {:class => "form-control"} %>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.label :quality_level, t("views.cases.new.quality_level") %>
+          <%= collection_select :case, :quality_level_id, QualityLevel.all, :id, :name_i18n, {}, {:class => "form-control"} %>
+          </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.label :word_count, t("views.cases.new.word_count") %>
+          <%= f.text_field :word_count, :class => "form-control" %>
+         </div>
+        </div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.label :due, t("views.cases.new.due") %>
+          <%= f.text_field :due, :class => "form-control datepicker" %>
+          </div>
+        </div>
+
+        <div class="col-md-12 form-group">
+          <%= f.label :attachment, t("views.cases.new.attachment") %>
+          <%= f.file_field :attachment, :class=> "form-control" %>
+        </div>
+
+        <div style="clear: both"></div>
+
+        <div class="col-md-12">
+          <div class="form-group">
+          <%= f.submit "送出", :class => "btn btn-primary" %>
+          </div>
+        </div>
+
+
+    <% end %>
+
+  </div>
+  <div class="col-md-8">
+    <div class="col-md-12 align-center registration-intro">
+      <h2>發案流程</h2>
+
+      <div class="row">
+        <div class="col-md-4 align-center">
+          <%= image_tag 'https://tvocrats.files.wordpress.com/2011/05/4_595.jpeg', :class => "img-responsive" %>
+          <h3>Step 1</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim, earum.
+          </p>
+        </div>
+        <div class="col-md-4 align-center">
+          <%= image_tag 'https://tvocrats.files.wordpress.com/2011/05/4_595.jpeg', :class => "img-responsive" %>
+          <h3>Step 2</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nesciunt, sapiente.
+          </p>
+        </div>
+        <div class="col-md-4 align-center">
+          <%= image_tag 'https://tvocrats.files.wordpress.com/2011/05/4_595.jpeg', :class => "img-responsive" %>
+          <h3>Step 3</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium, accusamus!
+          </p>
+        </div>
+
       </div>
-    </div>
 
+  </div>
+  </div>
+</div>
 
-
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-      <%= f.label :domain_id, t("case.domain") %>
-      <%= collection_select :case, :domain_id, Domain.all, :id, :name_i18n, {}, {:class => "form-control"} %>
-      </div>
-    </div>
-
-
-
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-      <%= f.label :word_count, t("case.word_count") %>
-      <%= f.text_field :word_count, :class => "form-control" %>
-     </div>
-    </div>
-
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-      <%= f.label :quality_level, t("case.quality_level") %>
-      <%= collection_select :case, :quality_level_id, QualityLevel.all, :id, :name_i18n, {}, {:class => "form-control"} %>
-      </div>
-    </div>
-
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-      <%= f.label :due, t("case.due") %>
-      <%= f.text_field :due, :class => "form-control datepicker" %>
-      </div>
-    </div>
-
-
-  <div style="clear: both"></div>
-
-
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-      <div class="form-group">
-      <%= f.submit "送出", :class => "btn btn-primary" %>
-      </div>
-    </div>
-
-
-<% end %>
 
 
 <script>
-
 $('.datepicker').datepicker({
   format:  "yyyy/mm/dd"
 });
-
 </script>
