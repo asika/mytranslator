@@ -11,14 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150530141340) do
+ActiveRecord::Schema.define(version: 20150604063506) do
 
   create_table "case_types", force: :cascade do |t|
-    t.string   "name",       limit: 255
-    t.string   "unit",       limit: 255
-    t.decimal  "min_price",              precision: 3, scale: 1
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
+    t.string   "unit",             limit: 255
+    t.decimal  "min_price",                    precision: 3, scale: 1
+    t.datetime "created_at",                                           null: false
+    t.datetime "updated_at",                                           null: false
+    t.integer  "from_language_id", limit: 4,                           null: false
+    t.integer  "to_language_id",   limit: 4,                           null: false
   end
 
   create_table "cases", force: :cascade do |t|
@@ -157,6 +158,13 @@ ActiveRecord::Schema.define(version: 20150530141340) do
   add_index "ratings", ["from"], name: "index_ratings_on_from", using: :btree
   add_index "ratings", ["to"], name: "index_ratings_on_to", using: :btree
 
+  create_table "roles", force: :cascade do |t|
+    t.string   "name",       limit: 255,                 null: false
+    t.boolean  "privileged", limit: 1,   default: false, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
     t.string   "encrypted_password",     limit: 255, default: "",    null: false
@@ -175,6 +183,7 @@ ActiveRecord::Schema.define(version: 20150530141340) do
     t.string   "last_name",              limit: 255,                 null: false
     t.string   "phone",                  limit: 255,                 null: false
     t.boolean  "agreement",              limit: 1,   default: false, null: false
+    t.integer  "role_id",                limit: 4,                   null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
