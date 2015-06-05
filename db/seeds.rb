@@ -3,26 +3,30 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
+#   cities = City.where([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.where(name: 'Emanuel', city: cities.first)
+Role.where(:name => "client").first_or_create
+Role.where(:name => "translator").first_or_create
+Role.where(:name => "admin", :privileged => true).first_or_create
 
-CaseType.create(:name => "case_type.e2c", :unit => "case_type.unit.word", :min_price => 0.7)
-CaseType.create(:name => "case_type.c2e", :unit => "case_type.unit.word", :min_price => 0.7)
+Domain.where(:name => "group01").first_or_create
+Domain.where(:name => "group02").first_or_create
+Domain.where(:name => "group03").first_or_create
+Domain.where(:name => "group04").first_or_create
+Domain.where(:name => "group05").first_or_create
 
-Domain.create(:name => "domain.group01")
-Domain.create(:name => "domain.group02")
-Domain.create(:name => "domain.group03")
-Domain.create(:name => "domain.group04")
-Domain.create(:name => "domain.group05")
+Language.where(:name => "cht").first_or_create
+Language.where(:name => "eng").first_or_create
+Language.where(:name => "chs").first_or_create
+Language.where(:name => "jpn").first_or_create
+Language.where(:name => "fra").first_or_create
+Language.where(:name => "esp").first_or_create
 
-Language.create(:name => "language.eng")
-Language.create(:name => "language.cht")
-Language.create(:name => "language.chs")
-Language.create(:name => "language.jpn")
-Language.create(:name => "language.fra")
-Language.create(:name => "language.esp")
+QualityLevel.where(:level => 1, :name => "low").first_or_create
+QualityLevel.where(:level => 2, :name => "mid").first_or_create
+QualityLevel.where(:level => 3, :name => "high").first_or_create
 
-QualityLevel.create(:level => 1, :name => "case.low")
-QualityLevel.create(:level => 2, :name => "case.mid")
-QualityLevel.create(:level => 3, :name => "case.high")
+CaseType.where(:from_language_id => Language.find_by_name("eng").id, :to_language_id => Language.find_by_name("cht").id, :unit => "word", :min_price => 1.0 ).first_or_create
+CaseType.where(:from_language_id => Language.find_by_name("cht").id, :to_language_id => Language.find_by_name("eng").id, :unit => "word", :min_price => 1.0 ).first_or_create
+CaseType.where(:from_language_id => Language.find_by_name("jpn").id, :to_language_id => Language.find_by_name("cht").id, :unit => "word", :min_price => 1.0 ).first_or_create
+CaseType.where(:from_language_id => Language.find_by_name("cht").id, :to_language_id => Language.find_by_name("jpn").id, :unit => "word", :min_price => 1.0 ).first_or_create
