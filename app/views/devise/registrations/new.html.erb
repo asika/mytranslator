@@ -17,19 +17,28 @@
 <div class="row">
   <div class="col-md-4">
     <h2><%= t("views.devise.registrations.new.title") %></h2>
-    <span><%= t("views.devise.registrations.new.helper") %></span>
+    <!-- <span><%= t("views.devise.registrations.new.helper") %></span> -->
 
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <%= devise_error_messages! %>
 
+      <div class="form-group">
+        <%= f.label :role_id, t("views.devise.registrations.new.role") %> <br />
+        <%#= f.collection_radio_buttons(:role_id, Role.unprivileged, :id, :name_i18n, {}, {:checked => 1}) %>
+
+        <% Role.unprivileged.each do |r| %>
+          <%= radio_button :user, :role_id, r.id, :checked => (r.id == Role.unprivileged.first.id) %> <%= r.name_i18n %>
+        <% end %>
+      </div>
+
       <div class="field">
         <%= f.label t("views.devise.registrations.new.username") %><br />
-        <%= f.text_field :username, autofocus: true, :class=> "form-control" %>
+        <%= f.text_field :username, :class=> "form-control" %>
       </div>
 
       <div class="field">
         <%= f.label t("views.devise.registrations.new.email") %><br />
-        <%= f.email_field :email, :class=> "form-control" %>
+        <%= f.email_field :email, :class => "form-control" %>
       </div>
 
       <div class="field">
