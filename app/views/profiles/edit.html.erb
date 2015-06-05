@@ -15,112 +15,69 @@
 
     <%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch, :html => { :multipart => true } do |f| %>
 
-      <table class="table">
-        <tr>
-          <td class="col-md-8">
-            <div class="row">
-              <div class="form-group col-md-6">
-                <%= f.label :avatar, t("views.profiles.edit.avatar") %> <br />
-                <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
+      <div class="row">
+        <div class="form-group col-md-6">
+          <%= f.label :avatar, t("views.profiles.edit.avatar") %> <br />
+          <%= f.file_field :avatar, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
 
-              </div>
-              <div class="col-md-6">
-                <img id="preview_avatar" src="#" alt="image preview" />
-              </div>
+        </div>
+        <div class="col-md-6">
+          <% if !@profile.nil? && @profile.avatar.url != "/images/original/missing.png" %>
+            <%= image_tag @profile.avatar.url, :id => "preview_avatar" %>
+          <% else %>
+            <img id="preview_avatar" src="#" alt="image preview" />
+          <% end %>
+        </div>
 
-            </div>
-          </td>
-          <td class="col-md-4"></td>
-        </tr>
+      </div>
 
-        <tr>
-          <td class="col-md-8">
-            <div class="form-group">
-              <%= f.label :language_ids, t("views.profiles.edit.languages") %> <br />
-              <%= f.collection_check_boxes(:language_ids, Language.all, :id, :name_i18n) %>
-            </div>
+      <div class="form-group">
+        <%= f.label :language_ids, t("views.profiles.edit.languages") %> <br />
+        <%#= f.collection_check_boxes(:language_ids, Language.all, :id, :name_i18n) %>
 
-          </td>
-          <td class="col-md-4"></td>
-        </tr>
+        <% Language.all.each do |l| %>
+        <% end %>
+      </div>
 
-        <tr>
-          <td class="col-md-8">
-            <div class="form-group">
-              <%= f.label :domain_ids, t("views.profiles.edit.domains") %> <br />
-              <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
-            </div>
+      <div class="form-group">
+        <%= f.label :domain_ids, t("views.profiles.edit.domains") %> <br />
+        <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
+      </div>
 
-          </td>
-          <td class="col-md-4"></td>
-        </tr>
+      <div class="form-group">
+        <%= f.label :short_summary, t("views.profiles.edit.short_summary") %> <br />
+        <%= f.text_field :short_summary, :rows => 3, :placeholder => t("profile.short_summary_placeholder"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.short_summary") %>
+      </div>
 
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group">
-              <%= f.label :short_summary, t("views.profiles.edit.short_summary") %> <br />
-              <%= f.text_field :short_summary, :rows => 3, :placeholder => t("profile.short_summary_placeholder"), :class=> "form-control" %>
-            </div>
+      <div class="form-group">
+        <%= f.label :about, t("views.profiles.edit.about") %> <br />
+        <%= f.text_area :about, :rows => 3, :placeholder => t("profile.about_placeholder"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.about") %>
+      </div>
 
-          </td>
-        </tr>
+      <div class="form-group">
+        <%= f.label :professional, t("views.profiles.edit.professional") %> <br />
+        <%= f.text_area :professional, :rows => 6, :placeholder => t("profile.professional_placeholder"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.professional") %>
+      </div>
 
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group">
-              <%= f.label :about, t("views.profiles.edit.about") %> <br />
-              <%= f.text_area :about, :rows => 8, :placeholder => t("profile.about_placeholder"), :class=> "form-control" %>
-            </div>
+      <div class="form-group">
+        <%= f.label :education, t("views.profiles.edit.education") %> <br />
+        <%= f.text_area :education, :rows => 6, :placeholder => t("profile.education_placeholder"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.education") %>
+      </div>
 
-          </td>
-        </tr>
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group">
-              <%= f.label :professional, t("views.profiles.edit.professional") %> <br />
-              <%= f.text_area :professional, :rows => 12, :placeholder => t("profile.professional_placeholder"), :class=> "form-control" %>
-            </div>
+      <div class="form-group">
+        <%= f.label :certification, t("views.profiles.edit.certification") %> <br />
+        <%= f.text_area :certification, :rows => 6, :placeholder => t("profile.certification_placeholder"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.certification") %>
+      </div>
 
-          </td>
-        </tr>
+      <div class="form-group">
+        <%= f.label :payment_info, t("views.profiles.edit.payment_info") %> <br />
+        <%= f.text_area :payment_info, :rows => 3, :placeholder => t("profile.payment_info_placeholder"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.payment_info") %>
+      </div>
 
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group">
-              <%= f.label :education, t("views.profiles.edit.education") %> <br />
-              <%= f.text_area :education, :rows => 12, :placeholder => t("profile.education_placeholder"), :class=> "form-control" %>
-            </div>
-
-          </td>
-        </tr>
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group">
-              <%= f.label :certification, t("views.profiles.edit.certification") %> <br />
-              <%= f.text_area :certification, :rows => 12, :placeholder => t("profile.certification_placeholder"), :class=> "form-control" %>
-            </div>
-
-          </td>
-        </tr>
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group">
-              <%= f.label :payment_info, t("views.profiles.edit.payment_info") %> <br />
-              <%= f.text_area :payment_info, :rows => 6, :placeholder => t("profile.payment_info_placeholder"), :class=> "form-control" %>
-            </div>
-
-          </td>
-        </tr>
-        <tr>
-          <td class="col-md-12">
-            <div class="form-group col-lg-6 ">
-            <%= f.label :sample, t("views.profiles.edit.sample") %> <br />
-            <%= f.file_field :sample, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
-            </div>
-
-          </td>
-        </tr>
-      </table>
+      <div class="form-group col-lg-6 ">
+      <%= f.label :sample, t("views.profiles.edit.sample") %> <br />
+      <%= f.file_field :sample, :placeholder => t("profile.avatar_placeholder"), :class=> "form-control" %>
+      </div>
 
       <div class="row">
         <div class="col-md-12">
@@ -137,7 +94,7 @@
 
 
 <script>
-$("#preview_avatar").hide();
+// $("#preview_avatar").hide();
 
 function readURL(input) {
     if (input.files && input.files[0]) {
@@ -153,6 +110,10 @@ function readURL(input) {
 
 $("#profile_avatar").change(function(){
     readURL(this);
+});
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();
 });
 
 </script>
