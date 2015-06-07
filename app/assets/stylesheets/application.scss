@@ -20,6 +20,11 @@ textarea {
 }
 
 .main-navbar {
+	width: 100%;
+	background-color: #000;
+	/*border: none;*/
+}
+.main-navbar-landing {
 	width: 90%;
 	margin-left: auto;
 	margin-right: auto;
@@ -34,12 +39,13 @@ textarea {
 .navbar-brand:hover {
 	color: #ccc;
 }
-.nav.navbar-nav.navbar-right li a {
+.main-navbar-landing .nav.navbar-nav.navbar-right li a {
 	font-size: 16px;
     color: #fff;
 }
-.nav.navbar-nav.navbar-right li a:hover {
-	background-color: rgba(255, 0, 255, 0.5);
+.main-navbar-landing .nav.navbar-nav.navbar-right li a:hover {
+	/*background-color: rgba(255, 0, 255, 0.5);*/
+	color: rgba(255, 0, 255, 0.5);
 }
 .dropdown-menu {
 	background-color: rgba(0, 0, 0, 0.5);
