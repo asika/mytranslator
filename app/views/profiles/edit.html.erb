@@ -1,3 +1,21 @@
+<div class="modal fade dialog-box" id="confirm-test">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= t("views.profiles.edit.confirm-test.title") %></h4>
+      </div>
+      <div class="modal-body">
+        <p><%= t("views.profiles.edit.confirm-test.content") %></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-cancel") %></button>
+        <button type="button" class="btn btn-primary"><%= t("views.profiles.edit.confirm-test.button-confirm") %></button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <div class="row">
   <div class="col-md-2">
     <%= render :partial => 'users/sidebar', :locals => {:active => 'profile'} %>
@@ -31,17 +49,34 @@
 
       </div>
 
-      <div class="form-group">
-        <%= f.label :language_ids, t("views.profiles.edit.languages") %> <br />
-        <%#= f.collection_check_boxes(:language_ids, Language.all, :id, :name_i18n) %>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :language_ids, t("views.profiles.edit.languages") %> <br />
 
-        <% Language.all.each do |l| %>
-        <% end %>
-      </div>
+            <table class="table">
+              <% CaseType.all.each do |ct| %>
+                <tr>
+                  <td><%= ct.name_i18n %></td>
+                  <% if @profile.passed(ct) %>
+                    <td>Passed</td>
+                  <% else %>
+                    <td><%= link_to t("views.profiles.edit.button_test"), '#', :class => "btn btn-primary pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test' %></td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
 
-      <div class="form-group">
-        <%= f.label :domain_ids, t("views.profiles.edit.domains") %> <br />
-        <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.label :domain_ids, t("views.profiles.edit.domains") %> <br />
+            <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
+          </div>
+
+        </div>
       </div>
 
       <div class="form-group">

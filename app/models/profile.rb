@@ -22,6 +22,10 @@ class Profile < ActiveRecord::Base
     self.pricings.where( :case_type_id => c.case_type_id ).first.try(:amount)
   end
 
+  def passed(case_type)
+    !self.pricings.where(:case_type => case_type).empty?
+  end
+
   def avatar_remote_url=(url_value)
     self.avatar = URI.parse(url_value)
     # Assuming url_value is http://example.com/photos/face.png
