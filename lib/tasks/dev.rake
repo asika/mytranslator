@@ -69,41 +69,59 @@ namespace :dev do
   task :fakeup_users => :environment do
     User.destroy_all
 
-    User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321")
+    User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321", :role => Role.find_by_name('admin'))
 
     50.times do |i|
-      username = Faker::Internet.user_name.sub('.', '_')
+      # username = Faker::Internet.user_name.sub('.', '_')
+      username = "user#{i}"
 
-      newuser = User.create(:password => "12345678", :email => username+"@ac.com", :username => username, :first_name => Faker::Name.first_name, :last_name => Faker::Name.last_name, :phone => Faker::PhoneNumber.cell_phone)
-
-      np = newuser.build_profile(
-          :short_summary => Faker::Lorem.sentence(3),
-          :about => Faker::Lorem.sentence(50),
-          :education => Faker::Lorem.sentence(100),
-          :professional => Faker::Lorem.sentence(100),
-          :certification => Faker::Lorem.sentence(100),
-          :payment_info => Faker::Lorem.sentence(20)
+      newuser = User.create(
+        :password => "10101010",
+        :email => username+"@gmail.com",
+        :username => username,
+        :first_name => Faker::Name.first_name,
+        :last_name => Faker::Name.last_name,
+        :phone => Faker::PhoneNumber.cell_phone,
+        :role => (rand(2) == 0)?(Role.find_by_name('client')):(Role.find_by_name('translator'))
         )
 
-      domain_ids = []
-      (0..rand(Domain.all.count)).each do
-        domain_ids << Domain.offset(rand(Domain.all.count)).first.id
+      if newuser.role_id == Role.find_by_name('translator').id
+
+        np = newuser.build_profile(
+            :short_summary => Faker::Lorem.sentence(3),
+            :about => Faker::Lorem.sentence(50),
+            :education => Faker::Lorem.sentence(100),
+            :professional => Faker::Lorem.sentence(100),
+            :certification => Faker::Lorem.sentence(100),
+            :payment_info => Faker::Lorem.sentence(20)
+          )
+
+        domain_ids = []
+        (0..rand(Domain.all.count)).each do
+          domain_ids << Domain.offset(rand(Domain.all.count)).first.id
+        end
+        np.domain_ids = domain_ids.uniq
+
+        language_ids = []
+        (0..rand(Language.all.count)).each do
+          language_ids << Language.offset(rand(Language.all.count)).first.id
+        end
+        np.language_ids = language_ids.uniq
+
+        CaseType.all.each do |ct|
+          np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
+        end
+
+        # fakeup face
+        conn = Faraday.new(:url => "http://uifaces.com/api/v1/random")
+        response = conn.get
+        uifaces = eval(response.body.delete('\\'))
+
+        np.avatar_remote_url = uifaces[:image_urls][:epic]
+        np.save!
       end
-      np.domain_ids = domain_ids.uniq
 
-      language_ids = []
-      (0..rand(Language.all.count)).each do
-        language_ids << Language.offset(rand(Language.all.count)).first.id
-      end
-      np.language_ids = language_ids.uniq
-
-      CaseType.all.each do |ct|
-        np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
-      end
-
-      np.save!
-
-      puts "Created user #{newuser.id}: #{newuser.username}"
+      puts "Created user #{newuser.id}: #{newuser.username}, is a #{newuser.role.name}"
     end
   end
 
