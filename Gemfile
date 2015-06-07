@@ -62,5 +62,6 @@ group :development, :test do
   gem 'awesome_print'
   gem 'faker'
   gem "letter_opener"
+  gem 'faraday'
 end
 
