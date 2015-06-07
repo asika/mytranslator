@@ -30,3 +30,12 @@ CaseType.where(:from_language_id => Language.find_by_name("eng").id, :to_languag
 CaseType.where(:from_language_id => Language.find_by_name("cht").id, :to_language_id => Language.find_by_name("eng").id, :unit => "word", :min_price => 1.0 ).first_or_create
 CaseType.where(:from_language_id => Language.find_by_name("jpn").id, :to_language_id => Language.find_by_name("cht").id, :unit => "word", :min_price => 1.0 ).first_or_create
 CaseType.where(:from_language_id => Language.find_by_name("cht").id, :to_language_id => Language.find_by_name("jpn").id, :unit => "word", :min_price => 1.0 ).first_or_create
+
+CaseType.all.each do |c|
+  t = TestSource.where(:case_type => c).first_or_initialize
+
+  if t.new_record?
+    t.source_remote_url = "http://fzs.sve-mo.ba/sites/default/files/dokumenti-vijesti/sample.pdf"
+    t.save
+  end
+end

@@ -108,9 +108,9 @@ namespace :dev do
         end
         np.language_ids = language_ids.uniq
 
-        CaseType.all.each do |ct|
-          np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
-        end
+        # CaseType.all.each do |ct|
+        #   np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
+        # end
 
         # fakeup face
         conn = Faraday.new(:url => "http://uifaces.com/api/v1/random")

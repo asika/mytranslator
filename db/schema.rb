@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604063506) do
+ActiveRecord::Schema.define(version: 20150607054534) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "unit",             limit: 255
@@ -94,6 +94,7 @@ ActiveRecord::Schema.define(version: 20150604063506) do
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.integer  "profile_id",   limit: 4
+    t.integer  "pass_test_id", limit: 4,                         null: false
   end
 
   create_table "profile_domainships", force: :cascade do |t|
@@ -163,6 +164,27 @@ ActiveRecord::Schema.define(version: 20150604063506) do
     t.boolean  "privileged", limit: 1,   default: false, null: false
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
+  end
+
+  create_table "test_sources", force: :cascade do |t|
+    t.integer  "case_type_id",        limit: 4,   null: false
+    t.string   "source_file_name",    limit: 255, null: false
+    t.string   "source_content_type", limit: 255, null: false
+    t.integer  "source_file_size",    limit: 4,   null: false
+    t.datetime "source_updated_at",               null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  create_table "tests", force: :cascade do |t|
+    t.integer  "profile_id",     limit: 4,     null: false
+    t.integer  "test_source_id", limit: 4,     null: false
+    t.datetime "submit_time"
+    t.text     "answer",         limit: 65535
+    t.integer  "score",          limit: 4
+    t.text     "comment",        limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "users", force: :cascade do |t|
