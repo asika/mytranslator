@@ -1,6 +1,5 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
-
   belongs_to :quality_level
 
   has_many :profile_domainships
@@ -9,6 +8,7 @@ class Profile < ActiveRecord::Base
   has_many :profile_langships
   has_many :languages, :through => :profile_langships
 
+  has_many :tests
   has_many :pricings, :dependent => :destroy
 
   accepts_nested_attributes_for :pricings
