@@ -73,6 +73,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:username, :first_name, :last_name, :phone, :avatar, :short_summary, :about, :professional, :education, :certification, :payment_info, :pricings_attributes => [:case_type_id, :amount], :domain_ids => [], :language_ids => [])
+    params.require(:profile).permit(:username, :first_name, :last_name, :phone, :avatar, :short_summary, :about, :professional, :education, :certification, :payment_info, :pricings_attributes => [:id, :case_type_id, :amount], :domain_ids => [], :language_ids => [])
   end
 end

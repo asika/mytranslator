@@ -33,5 +33,4 @@ class Profile < ActiveRecord::Base
     # avatar_content_type == "image/png"
     @avatar_remote_url = url_value
   end
-
 end

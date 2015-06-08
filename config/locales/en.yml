@@ -79,9 +79,11 @@ en:
         button_test: "進行測驗"
         confirm-test:
           title: "實力測驗"
-          content: "為了確保平台譯者的品質，我們準備了一份簡單的測驗，請於開始測驗後的兩小時之內完成，通過之後即可於公平翻譯交易所承接案件！"
+          # content: "為了確保平台譯者的品質，我們準備了一份簡單的測驗，請於開始測驗後的兩小時之內完成，通過之後即可於公平翻譯交易所承接案件！"
+          content: "為確保翻譯品質，在平台接案之譯者皆須俱備國內外翻譯研究所學位，或通過平台考試，方能開始接案。請於開始測驗後的兩小時之內完成。"
           button-cancel: "稍後"
-          button-confirm: "我準備好了"
+          button-graduate: "我擁有國內外翻譯研究所學位，無需測驗"
+          button-confirm: "開始測驗"
         popover:
           short_summary: "Tooltip"
           about: "Tooltip"

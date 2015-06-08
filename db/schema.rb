@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607054534) do
+ActiveRecord::Schema.define(version: 20150607151747) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "unit",             limit: 255
@@ -94,7 +94,7 @@ ActiveRecord::Schema.define(version: 20150607054534) do
     t.datetime "created_at",                                     null: false
     t.datetime "updated_at",                                     null: false
     t.integer  "profile_id",   limit: 4
-    t.integer  "pass_test_id", limit: 4,                         null: false
+    t.integer  "pass_test_id", limit: 4
   end
 
   create_table "profile_domainships", force: :cascade do |t|

@@ -10,6 +10,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-cancel") %></button>
+        <button type="button" class="btn btn-default"><%= t("views.profiles.edit.confirm-test.button-graduate") %></button>
         <button type="button" class="btn btn-primary"><%= t("views.profiles.edit.confirm-test.button-confirm") %></button>
       </div>
     </div><!-- /.modal-content -->
@@ -59,8 +60,16 @@
                 <tr>
                   <td><%= ct.name_i18n %></td>
                   <% if @profile.passed(ct) %>
-                    <td>Passed</td>
+                    <td>PASS</td>
+                    <% pp = @profile.pricings.find_by_case_type_id(ct.id) %>
+                    <%= f.fields_for :pricings, pp do |ff| %>
+                      <td>
+                        <%= ff.hidden_field :case_type_id, :value => pp.case_type_id %>
+                        <%= ff.number_field :amount, :step => 0.1 %>
+                      </td>
+                    <% end %>
                   <% else %>
+                    <td></td>
                     <td><%= link_to t("views.profiles.edit.button_test"), '#', :class => "btn btn-primary pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test' %></td>
                   <% end %>
                 </tr>
