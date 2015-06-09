@@ -11,6 +11,11 @@ Rails.application.routes.draw do
 
     resource :profile do
       get :complete, :on => :collection
+
+      resources :tests do
+        post :submit
+        get :complete
+      end
     end
   end
 
