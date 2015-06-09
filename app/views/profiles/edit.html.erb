@@ -1,4 +1,4 @@
-<div class="modal fade dialog-box" id="confirm-test">
+<div class="modal fade dialog-box modal-confirm" id="confirm-test">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,9 +9,17 @@
         <p><%= t("views.profiles.edit.confirm-test.content") %></p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-cancel") %></button>
-        <button type="button" class="btn btn-default"><%= t("views.profiles.edit.confirm-test.button-graduate") %></button>
-        <button type="button" class="btn btn-primary"><%= t("views.profiles.edit.confirm-test.button-confirm") %></button>
+        <% CaseType.all.each do |ct| %>
+          <% unless @profile.passed(ct) %>
+            <div class="confirm-button-group" id="confirm-button-group-<%= ct.id %>">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-cancel") %></button>
+              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-graduate") %></button>
+
+              <%= button_to t("views.profiles.edit.confirm-test.button-confirm")+ct.id.to_s, user_profile_tests_path(@profile.user, :case_type_id => ct.id), :class => "btn btn-primary", :form => {:target => '_blank'}, 'data-dismiss' => "modal" %>
+
+            </div>
+          <% end %>
+        <% end %>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
@@ -37,7 +45,7 @@
       <div class="row">
         <div class="form-group col-md-6">
           <%= f.label :avatar, t("views.profiles.edit.avatar") %> <br />
-          <%= f.file_field :avatar, :placeholder => t("views.profiles.edit.avatar_helper"), :class=> "form-control" %>
+          <%= f.file_field :avatar, :placeholder => t("views.profiles.edit.avatar_helper"), :class => "form-control" %>
 
         </div>
         <div class="col-md-6">
@@ -60,7 +68,7 @@
                 <tr>
                   <td><%= ct.name_i18n %></td>
                   <% if @profile.passed(ct) %>
-                    <td>PASS</td>
+                    <td><%= t("views.profiles.edit.passed_test") %></td>
                     <% pp = @profile.pricings.find_by_case_type_id(ct.id) %>
                     <%= f.fields_for :pricings, pp do |ff| %>
                       <td>
@@ -70,7 +78,9 @@
                     <% end %>
                   <% else %>
                     <td></td>
-                    <td><%= link_to t("views.profiles.edit.button_test"), '#', :class => "btn btn-primary pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test' %></td>
+                    <td>
+                      <%= link_to t("views.profiles.edit.button_test"), '#', :class => "btn btn-primary button-confirm pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test', 'data-case_type_id' => ct.id %>
+                    </td>
                   <% end %>
                 </tr>
               <% end %>
@@ -90,37 +100,37 @@
 
       <div class="form-group">
         <%= f.label :short_summary, t("views.profiles.edit.short_summary") %> <br />
-        <%= f.text_field :short_summary, :rows => 3, :placeholder => t("views.profiles.edit.short_summary_helper"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.short_summary") %>
+        <%= f.text_field :short_summary, :rows => 3, :placeholder => t("views.profiles.edit.short_summary_helper"), :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.short_summary") %>
       </div>
 
       <div class="form-group">
         <%= f.label :about, t("views.profiles.edit.about") %> <br />
-        <%= f.text_area :about, :rows => 3, :placeholder => t("views.profiles.edit.about_helper"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.about") %>
+        <%= f.text_area :about, :rows => 3, :placeholder => t("views.profiles.edit.about_helper"), :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.about") %>
       </div>
 
       <div class="form-group">
         <%= f.label :professional, t("views.profiles.edit.professional") %> <br />
-        <%= f.text_area :professional, :rows => 6, :placeholder => t("views.profiles.edit.professional_helper"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.professional") %>
+        <%= f.text_area :professional, :rows => 6, :placeholder => t("views.profiles.edit.professional_helper"), :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.professional") %>
       </div>
 
       <div class="form-group">
         <%= f.label :education, t("views.profiles.edit.education") %> <br />
-        <%= f.text_area :education, :rows => 6, :placeholder => t("views.profiles.edit.education_helper"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.education") %>
+        <%= f.text_area :education, :rows => 6, :placeholder => t("views.profiles.edit.education_helper"), :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.education") %>
       </div>
 
       <div class="form-group">
         <%= f.label :certification, t("views.profiles.edit.certification") %> <br />
-        <%= f.text_area :certification, :rows => 6, :placeholder => t("views.profiles.edit.certification_helper"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.certification") %>
+        <%= f.text_area :certification, :rows => 6, :placeholder => t("views.profiles.edit.certification_helper"), :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.certification") %>
       </div>
 
       <div class="form-group">
         <%= f.label :payment_info, t("views.profiles.edit.payment_info") %> <br />
-        <%= f.text_area :payment_info, :rows => 3, :placeholder => t("views.profiles.edit.payment_info_helper"), :class=> "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.payment_info") %>
+        <%= f.text_area :payment_info, :rows => 3, :placeholder => t("views.profiles.edit.payment_info_helper"), :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.payment_info") %>
       </div>
 
       <div class="form-group col-lg-6 ">
       <%= f.label :sample, t("views.profiles.edit.sample") %> <br />
-      <%= f.file_field :sample, :placeholder => t("views.profiles.edit.avatar_helper"), :class=> "form-control" %>
+      <%= f.file_field :sample, :placeholder => t("views.profiles.edit.avatar_helper"), :class => "form-control" %>
       </div>
 
       <div class="row">
@@ -160,4 +170,10 @@ $(document).ready(function(){
     $('[data-toggle="popover"]').popover();
 });
 
+$(".button-confirm").on("click", function(event) {
+  case_type_id = $(this).data("case_type_id");
+
+  $(".confirm-button-group").hide();
+  $("#confirm-button-group-"+case_type_id).show();
+});
 </script>
