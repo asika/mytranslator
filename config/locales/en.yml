@@ -52,6 +52,12 @@ en:
         update_user_information: "更新基本資料"
         update_profile: "更新譯者資料"
         change_password: "修改密碼"
+    tests:
+      edit:
+        instructions_title: "測驗指示"
+        instructions: "這裏要改成測驗的instructions"
+        button_update: "儲存回答"
+        button_submit: "完成回答"
     profiles:
       edit:
         title: "更新譯者資料"
@@ -75,6 +81,7 @@ en:
         payment_info_helper: "付款資訊"
         sample: "上傳過往作品"
         sample_helper: "上傳過往作品"
+        passed_test: "通過"
         button_update: "完成"
         button_test: "進行測驗"
         confirm-test:
@@ -123,6 +130,13 @@ en:
       low: "一般"
       mid: "中等"
       high: "高難度"
+  controller:
+    tests:
+      update:
+        update_success: "更新成功"
+        update_failed: "更新失敗，請通知系統管理員"
+      submit:
+        error_multiple_submit: "重複提交答案！"
   nav:
     logo: "公平翻譯交易所"
     signup: "註冊帳號"
