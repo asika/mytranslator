@@ -26,6 +26,20 @@ class Profile < ActiveRecord::Base
     !self.pricings.where(:case_type => case_type).empty?
   end
 
+  def ongoing_test(case_type)
+    self.tests.joins(:test_source).where(:test_sources => {:case_type_id => case_type.id}).where("due >= ?", Time.now).first
+  end
+
+  def get_or_create_test(case_type)
+    ongoing = self.ongoing_test(case_type)
+
+    unless ongoing.nil?
+      ongoing
+    else
+      self.tests.build(:test_source => TestSource.get_by_type(case_type))
+    end
+  end
+
   def avatar_remote_url=(url_value)
     self.avatar = URI.parse(url_value)
     # Assuming url_value is http://example.com/photos/face.png
