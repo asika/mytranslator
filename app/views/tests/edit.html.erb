@@ -1,0 +1,23 @@
+<h2><%= @test.test_source.case_type.name_i18n %></h2>
+<h3><%= t("views.tests.edit.instructions_title") %></h3>
+<p><%= t("views.tests.edit.instructions") %></p>
+
+<div class="row">
+  <div class="col-md-6">
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <%= form_for @test, :url => user_profile_test_path(current_user, @test) do |f| %>
+      <%= f.text_area :answer, :rows => 20, :class => "form-control" %>
+
+      <%= f.submit t("views.tests.edit.button_update"), :class => "btn btn-success" %>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <iframe src="<%= @test.test_source.source.url %>" frameborder="0" width="100%" height="400px"></iframe>
+  </div>
+</div>
