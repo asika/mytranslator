@@ -50,6 +50,7 @@ en:
       _sidebar:
         dashboard: "案件管理"
         update_user_information: "更新基本資料"
+        update_profile_pricings: "譯者收費設定"
         update_profile: "更新譯者資料"
         change_password: "修改密碼"
     tests:
@@ -61,10 +62,10 @@ en:
     profiles:
       edit:
         title: "更新譯者資料"
+        nickname: "暱稱"
+        nickname_helper: "暱稱"
         avatar: "上傳頭像"
         avatar_helper: "上傳頭像"
-        languages: "擅長語言與收費"
-        languages_helper: "擅長語言"
         domains: "專業領域"
         domains_helper: "專業領域"
         short_summary: "一句話自我簡介"
@@ -81,9 +82,25 @@ en:
         payment_info_helper: "付款資訊"
         sample: "上傳過往作品"
         sample_helper: "上傳過往作品"
-        passed_test: "通過"
         button_update: "完成"
+        popover:
+          nickname: "Tooltip"
+          short_summary: "Tooltip"
+          about: "Tooltip"
+          professional: "Tooltip"
+          education: "Tooltip"
+          certification: "Tooltip"
+          payment_info: "Tooltip"
+      edit_pricings:
+        languages: "擅長語言與收費"
+        languages_helper: "擅長語言"
+        passed_test: "通過"
+        language: "案件語言"
+        qualified: "合格"
+        pricing: "自訂收費"
+        button_continue: "繼續測驗"
         button_test: "進行測驗"
+        button_update: "完成"
         confirm-test:
           title: "實力測驗"
           # content: "為了確保平台譯者的品質，我們準備了一份簡單的測驗，請於開始測驗後的兩小時之內完成，通過之後即可於公平翻譯交易所承接案件！"
@@ -91,13 +108,6 @@ en:
           button-cancel: "稍後"
           button-graduate: "我擁有國內外翻譯研究所學位，無需測驗"
           button-confirm: "開始測驗"
-        popover:
-          short_summary: "Tooltip"
-          about: "Tooltip"
-          professional: "Tooltip"
-          education: "Tooltip"
-          certification: "Tooltip"
-          payment_info: "Tooltip"
     cases:
       new:
         title: "翻譯案件委託"
@@ -119,6 +129,8 @@ en:
       client: "翻譯委託人"
       translator: "譯者"
       admin: "系統管理者"
+    case_types:
+      word: "字"
     languages:
       cht: "中文"
       chs: "簡中"
