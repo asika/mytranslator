@@ -20,10 +20,18 @@ textarea {
 }
 
 .main-navbar {
-	width: 100%;
-	background-color: #000;
-	/*border: none;*/
+	/*width: 100%;*/
+	/*background-color: #000;*/
 }
+
+.navbar-brand {
+	font-size: 20px;
+    color: #fff;
+}
+.navbar-brand:hover {
+	color: #ccc;
+}
+
 .main-navbar-landing {
 	width: 90%;
 	margin-left: auto;
@@ -31,13 +39,6 @@ textarea {
 	background-color: #000;
 	background: -webkit-linear-gradient(top, #222, rgba(200, 200, 200, 0.3));
 	border: none;
-}
-.navbar-brand {
-	font-size: 20px;
-    color: #fff;
-}
-.navbar-brand:hover {
-	color: #ccc;
 }
 .main-navbar-landing .nav.navbar-nav.navbar-right li a {
 	font-size: 16px;
@@ -47,7 +48,7 @@ textarea {
 	/*background-color: rgba(255, 0, 255, 0.5);*/
 	color: rgba(255, 0, 255, 0.5);
 }
-.dropdown-menu {
+.main-navbar-landing .dropdown-menu {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
