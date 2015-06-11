@@ -1,0 +1,95 @@
+<div class="modal fade dialog-box modal-confirm" id="confirm-test">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= t("views.profiles.edit_pricings.confirm-test.title") %></h4>
+      </div>
+      <div class="modal-body">
+        <p><%= t("views.profiles.edit_pricings.confirm-test.content") %></p>
+      </div>
+      <div class="modal-footer">
+        <% CaseType.all.each do |ct| %>
+          <% unless @profile.passed(ct) %>
+            <div class="confirm-button-group" id="confirm-button-group-<%= ct.id %>">
+              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit_pricings.confirm-test.button-cancel") %></button>
+
+              <%= button_to t("views.profiles.edit_pricings.confirm-test.button-graduate"), certify_user_profile_tests_path(@profile.user, @test, :case_type_id => ct.id), :class => "btn btn-default" %>
+
+              <%= button_to t("views.profiles.edit_pricings.confirm-test.button-confirm")+ct.id.to_s, user_profile_tests_path(@profile.user, :case_type_id => ct.id), :class => "btn btn-primary" %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="row">
+  <div class="col-md-2">
+    <%= render :partial => 'users/sidebar', :locals => {:active => 'profile'} %>
+  </div>
+  <div class="col-md-10">
+
+    <%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch  do |f| %>
+
+      <div class="row">
+        <div class="col-md-12">
+            <%= f.label :language_ids, t("views.profiles.edit_pricings.languages") %> <br />
+
+            <table class="table">
+              <tr>
+                <th><%= t("views.profiles.edit_pricings.language") %></th>
+                <th><%= t("views.profiles.edit_pricings.qualified") %></th>
+                <th><%= t("views.profiles.edit_pricings.pricing") %></th>
+              </tr>
+              <% CaseType.all.each do |ct| %>
+                <tr>
+                  <td><%= ct.name_i18n %></td>
+                  <% if @profile.passed(ct) %>
+                    <td><%= t("views.profiles.edit_pricings.passed_test") %></td>
+                    <% pp = @profile.pricings.find_by_case_type_id(ct.id) %>
+                    <%= f.fields_for :pricings, pp do |ff| %>
+                      <td>
+                        <div class="form-group form-inline">
+
+                          <%= ff.hidden_field :case_type_id, :value => pp.case_type_id %>
+                          NT$ <%= ff.number_field :amount, :step => 0.1, :class => "form-control form-inline" %> / <%= ct.unit_i18n %>
+
+                        </div>
+                      </td>
+                    <% end %>
+                  <% else %>
+                    <td></td>
+                    <td>
+                      <% t = @profile.ongoing_test(ct) %>
+                      <% unless t.nil? %>
+                        <%= link_to t("views.profiles.edit_pricings.button_continue"), edit_user_profile_test_path(@profile.user, t), :class => "btn btn-danger pull-right", :target => '_blank' %>
+                      <% else %>
+                        <%= link_to t("views.profiles.edit_pricings.button_test"), '#', :class => "btn btn-primary button-confirm pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test', 'data-case_type_id' => ct.id %>
+                      <% end %>
+
+                    </td>
+                  <% end %>
+                </tr>
+              <% end %>
+            </table>
+
+          <%= f.submit t("views.profiles.edit_pricings.button_update"), :class => "btn btn-primary" %>
+        </div>
+
+      </div>
+    <% end %>
+
+  </div>
+</div>
+
+
+<script>
+$(".button-confirm").on("click", function(event) {
+  case_type_id = $(this).data("case_type_id");
+
+  $(".confirm-button-group").hide();
+  $("#confirm-button-group-"+case_type_id).show();
+});
+</script>

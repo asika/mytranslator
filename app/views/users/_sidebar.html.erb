@@ -1,8 +1,8 @@
 <div class="row">
   <div class="col-md-12">
-    <span><%= link_to t("views.users._sidebar.dashboard"), user_path(current_user) %></span> <br>
-    <span><%= link_to t("views.users._sidebar.update_user_information"), edit_user_path(current_user) %></span> <br>
     <span><%= link_to t("views.users._sidebar.update_profile"), edit_user_profile_path(current_user) %></span> <br>
+    <span><%= link_to t("views.users._sidebar.update_profile_pricings"), edit_pricings_user_profile_path(current_user) %></span> <br>
+    <span><%= link_to t("views.users._sidebar.update_user_information"), edit_user_path(current_user) %></span> <br>
     <span><%= link_to t("views.users._sidebar.change_password"), root_path %></span> <br>
   </div>
 </div>
