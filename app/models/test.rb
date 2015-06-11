@@ -1,5 +1,6 @@
 class Test < ActiveRecord::Base
   before_create :update_due
+  after_create :update_pricing
   after_update :update_pricing
 
   validates_presence_of :friendly_id
@@ -14,6 +15,10 @@ class Test < ActiveRecord::Base
     self.friendly_id
   end
 
+  def expire?
+    self.due < Time.now
+  end
+
   protected
 
   def update_due
@@ -21,7 +26,7 @@ class Test < ActiveRecord::Base
   end
 
   def update_pricing
-    if self.score && self.score >= 60
+    if self.score >= 60
       p = self.profile.pricings.build(
         :pass_test => self,
         :case_type => self.test_source.case_type
