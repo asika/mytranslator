@@ -10,9 +10,13 @@ Rails.application.routes.draw do
     get :registered, :on => :collection
 
     resource :profile do
+      get :edit_pricings
+      post :update_pricings
+
       get :complete, :on => :collection
 
       resources :tests do
+        post :certify, :on => :collection
         post :submit
         get :complete
       end
