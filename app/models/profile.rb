@@ -19,7 +19,7 @@ class Profile < ActiveRecord::Base
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 
   def price_by_case(c)
-    self.pricings.where( :case_type_id => c.case_type_id ).first.try(:amount)
+    self.pricings.where(:case_type_id => c.case_type_id).first.try(:amount)
   end
 
   def passed(case_type)
