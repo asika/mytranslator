@@ -13,10 +13,10 @@
           <% unless @profile.passed(ct) %>
             <div class="confirm-button-group" id="confirm-button-group-<%= ct.id %>">
               <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-cancel") %></button>
-              <button type="button" class="btn btn-default" data-dismiss="modal"><%= t("views.profiles.edit.confirm-test.button-graduate") %></button>
 
-              <%= button_to t("views.profiles.edit.confirm-test.button-confirm")+ct.id.to_s, user_profile_tests_path(@profile.user, :case_type_id => ct.id), :class => "btn btn-primary", :form => {:target => '_blank'}, 'data-dismiss' => "modal" %>
+              <%= button_to t("views.profiles.edit.confirm-test.button-graduate"), certify_user_profile_tests_path(@profile.user, @test, :case_type_id => ct.id), :class => "btn btn-default" %>
 
+              <%= button_to t("views.profiles.edit.confirm-test.button-confirm")+ct.id.to_s, user_profile_tests_path(@profile.user, :case_type_id => ct.id), :class => "btn btn-primary", :form => {:target => '_blank'} %>
             </div>
           <% end %>
         <% end %>
@@ -32,6 +32,13 @@
   <div class="col-md-10">
     <h2><%= t("views.profiles.edit.title") %></h2>
 
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
     <% if @profile.errors.any? %>
           <ul>
           <% @profile.errors.full_messages.each do |msg| %>
@@ -42,25 +49,36 @@
 
     <%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch, :html => { :multipart => true } do |f| %>
 
+
       <div class="row">
         <div class="form-group col-md-6">
-          <%= f.label :avatar, t("views.profiles.edit.avatar") %> <br />
-          <%= f.file_field :avatar, :placeholder => t("views.profiles.edit.avatar_helper"), :class => "form-control" %>
-
+          <%= f.label :nickname, t("views.profiles.edit.nickname") %> <br />
+          <%= f.text_field :nickname, :class => "form-control", 'data-toggle' => "popover", 'data-placement' => "top", 'data-trigger' => "focus", 'data-content' => t("views.profiles.edit.popover.nickname") %>
         </div>
+
         <div class="col-md-6">
-          <% if !@profile.nil? && @profile.avatar.url != "/images/original/missing.png" %>
-            <%= image_tag @profile.avatar.url, :id => "preview_avatar" %>
-          <% else %>
-            <img id="preview_avatar" src="#" alt="image preview" />
-          <% end %>
+          <div class="row">
+            <div class="col-md-6">
+              <%= f.label :avatar, t("views.profiles.edit.avatar") %> <br />
+              <%= f.file_field :avatar, :placeholder => t("views.profiles.edit.avatar_helper"), :class => "form-control" %>
+            </div>
+            <div class="col-md-6">
+              <% if !@profile.nil? && @profile.avatar.url != "/images/original/missing.png" %>
+                <%= image_tag @profile.avatar.url, :id => "preview_avatar" %>
+              <% else %>
+                <img id="preview_avatar" src="#" alt="image preview" />
+              <% end %>
+            </div>
+          </div>
         </div>
 
+
+      <!-- row -->
       </div>
 
       <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
+        <!-- <div class="col-md-6">
+           <div class="form-group">
             <%= f.label :language_ids, t("views.profiles.edit.languages") %> <br />
 
             <table class="table">
@@ -79,7 +97,13 @@
                   <% else %>
                     <td></td>
                     <td>
-                      <%= link_to t("views.profiles.edit.button_test"), '#', :class => "btn btn-primary button-confirm pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test', 'data-case_type_id' => ct.id %>
+                      <% t = @profile.ongoing_test(ct) %>
+                      <% unless t.nil? %>
+                        <%= link_to t("views.profiles.edit.button_continue"), edit_user_profile_test_path(@profile.user, t), :class => "btn btn-danger pull-right", :target => '_blank' %>
+                      <% else %>
+                        <%= link_to t("views.profiles.edit.button_test"), '#', :class => "btn btn-primary button-confirm pull-right", 'data-toggle' => 'modal', 'data-target' => '#confirm-test', 'data-case_type_id' => ct.id %>
+                      <% end %>
+
                     </td>
                   <% end %>
                 </tr>
@@ -88,8 +112,8 @@
 
           </div>
 
-        </div>
-        <div class="col-md-6">
+        </div> -->
+        <div class="col-md-12">
           <div class="form-group">
             <%= f.label :domain_ids, t("views.profiles.edit.domains") %> <br />
             <%= f.collection_check_boxes(:domain_ids, Domain.all, :id, :name_i18n) %>
