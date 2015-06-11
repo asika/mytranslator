@@ -7,4 +7,8 @@ class CaseType < ActiveRecord::Base
   def name_i18n
     I18n.t("models.languages.#{self.from_language.name}")+"-->"+I18n.t("models.languages.#{self.to_language.name}")
   end
+
+  def unit_i18n
+    I18n.t("models.case_types.#{self.unit}")
+  end
 end
