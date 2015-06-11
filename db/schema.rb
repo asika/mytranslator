@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609073715) do
+ActiveRecord::Schema.define(version: 20150611075231) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "unit",             limit: 255
@@ -89,12 +89,14 @@ ActiveRecord::Schema.define(version: 20150609073715) do
   add_index "messages", ["to"], name: "index_messages_on_to", using: :btree
 
   create_table "pricings", force: :cascade do |t|
-    t.integer  "case_type_id", limit: 4
-    t.decimal  "amount",                 precision: 3, scale: 1
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-    t.integer  "profile_id",   limit: 4
-    t.integer  "pass_test_id", limit: 4
+    t.integer  "case_type_id",  limit: 4
+    t.decimal  "amount",                  precision: 3, scale: 1
+    t.datetime "created_at",                                                      null: false
+    t.datetime "updated_at",                                                      null: false
+    t.integer  "profile_id",    limit: 4
+    t.integer  "pass_test_id",  limit: 4
+    t.boolean  "certified",     limit: 1,                         default: false, null: false
+    t.boolean  "admin_invited", limit: 1,                         default: false, null: false
   end
 
   create_table "profile_domainships", force: :cascade do |t|
@@ -135,6 +137,7 @@ ActiveRecord::Schema.define(version: 20150609073715) do
     t.datetime "sample_updated_at"
     t.integer  "quality_level_id",    limit: 4
     t.string   "status",              limit: 255,   default: "unverified", null: false
+    t.string   "nickname",            limit: 255
   end
 
   create_table "quality_levels", force: :cascade do |t|
