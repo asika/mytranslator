@@ -53,6 +53,8 @@ en:
         update_profile_pricings: "譯者收費設定"
         update_profile: "更新譯者資料"
         change_password: "修改密碼"
+      edit:
+        title: "更新基本資料"
     tests:
       edit:
         instructions_title: "測驗指示"
