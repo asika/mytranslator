@@ -1,27 +1,29 @@
 <div class="row">
   <div class="col-md-12">
     <div>
-      <h2 class="inline"><%= t("dashboard.cases.title") %></h2>
-      <%= link_to new_case_path, :class => "btn btn-primary main-button pull-right" do %>
-        <span class="glyphicon glyphicon-plus"></span> <%= t("dashboard.cases.new_button") %>
+      <h2 class="inline"><%= t("views.users.show.cases.title") %></h2>
+      <%= link_to new_case_path, :class => "btn btn-primary pull-right" do %>
+        <span class="glyphicon glyphicon-plus"></span> <%= t("views.users.show.cases.new_button") %>
       <% end %>
 
       <div class="clearfix"></div>
     </div>
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="<%= 'active' if !params[:status] or params[:status] == 'ongoing' %>"><%= link_to "進行中", user_path(@user) %></li>
-    <li role="presentation" class="<%= 'active' if params[:status] and params[:status] == 'finish' %>"><%= link_to "已結束", user_path(@user, :status => 'finish') %></li>
-  </ul>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="<%= 'active' if !params[:status] or params[:status] == 'ongoing' %>"><%= link_to "進行中", user_path(@user) %></li>
+      <li role="presentation" class="<%= 'active' if params[:status] and params[:status] == 'finish' %>"><%= link_to "已結束", user_path(@user, :status => 'finish') %></li>
+    </ul>
 
     <table class="table table-striped">
       <tr>
-        <th><%= t("dashboard.table.case_id") %></th>
-        <th><%= t("dashboard.table.case_type") %></th>
-        <th><%= t("dashboard.table.domain") %></th>
-        <th><%= sort_link @q, :due, t("dashboard.table.due"), :default_order => :desc %></th>
-        <th><%= sort_link @q, :status, t("dashboard.table.status"), :default_order => :desc %></th>
+        <th><%= t("views.users.show.table.case_id") %></th>
+        <th><%= t("views.users.show.table.case_type") %></th>
+        <th><%= t("views.users.show.table.domain") %></th>
+        <th><%= sort_link @q, :due, t("views.users.show.table.due"), :default_order => :desc %></th>
+        <th><%= sort_link @q, :status, t("views.users.show.table.status"), :default_order => :desc %></th>
         <th></th>
       </tr>
+
       <% @cases.each do |c| %>
         <tr>
           <td><%= c.id %></td>
@@ -33,10 +35,10 @@
           </td>
           <td>
             <div class="btn-group pull-right" role="group" aria-label="">
-              <%= link_to t("dashboard.cases.details"), case_suggestion_path(c), :class => "btn btn-default" %>
+              <%= link_to t("views.users.show.cases.details"), case_suggestion_path(c), :class => "btn btn-default" %>
 
               <%= link_to root_path, :class => "btn btn-warning#{ ' disabled' unless c.status == 'finish'}" do %>
-                <span class="glyphicon glyphicon-star-empty"></span><%= t("dashboard.cases.rate") %>
+                <span class="glyphicon glyphicon-star-empty"></span><%= t("views.users.show.cases.rate") %>
               <% end %>
 
               <%#= link_to t("case_show.cancel_button"), root_path, :class => "btn btn-danger" %>
@@ -50,13 +52,14 @@
     <%= paginate @cases %>
   </div>
 
-  <ul class="nav nav-tabs">
-    <li role="presentation" class="<%= 'active' if !params[:inv] or params[:inv] == 'sent' %>"><%= link_to "送出的", user_path(@user) %></li>
-    <li role="presentation" class="<%= 'active' if params[:inv] and params[:inv] == 'received' %>"><%= link_to "收到的", user_path(@user, :status => 'finish') %></li>
-  </ul>
-
   <div class="col-md-12">
-    <h2><%= t("dashboard.invitations.title") %></h2>
+    <h2><%= t("views.users.show.invitations.title") %></h2>
+
+    <ul class="nav nav-tabs">
+      <li role="presentation" class="<%= 'active' if !params[:inv] or params[:inv] == 'sent' %>"><%= link_to "送出的", user_path(@user) %></li>
+      <li role="presentation" class="<%= 'active' if params[:inv] and params[:inv] == 'received' %>"><%= link_to "收到的", user_path(@user, :status => 'finish') %></li>
+    </ul>
+
     <table class="table">
       <tr>
         <th>From</th>
