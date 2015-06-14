@@ -27,6 +27,7 @@ Rails.application.routes.draw do
 
   resources :cases do
     get :suggestion
+    post :submit_request
 
     resources :invitations, :only => [:create, :update, :destroy]
   end

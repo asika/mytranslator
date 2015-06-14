@@ -27,6 +27,11 @@ class CasesController < ApplicationController
   end
 
   def update
+    if @case.update(case_params)
+      redirect_to case_suggestion_path(@case)
+    else
+      render :suggestion
+    end
   end
 
   def destroy
@@ -52,6 +57,10 @@ class CasesController < ApplicationController
     if params[:sort] == "pricing"
       @suggested_translators = @suggested_translators.order("pricings.amount ASC")
     end
+
+  end
+
+  def submit_request
 
   end
 
