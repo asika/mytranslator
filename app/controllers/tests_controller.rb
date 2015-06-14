@@ -41,6 +41,16 @@ class TestsController < ApplicationController
 
   end
 
+  def self.certify
+    case_type_id = params[:case_type_id]
+
+    pr = current_user.profile.pricings.find_or_initialize_by(:case_type_id => case_type_id)
+    pr.update(:certified => true)
+
+    pr.save!
+    redirect_to edit_user_profile_path(current_user)
+  end
+
   protected
 
   def get_test
