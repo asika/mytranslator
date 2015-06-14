@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150611075231) do
+ActiveRecord::Schema.define(version: 20150612143413) do
 
   create_table "case_types", force: :cascade do |t|
+    t.string   "name",             limit: 255
     t.string   "unit",             limit: 255
     t.decimal  "min_price",                    precision: 3, scale: 1
     t.datetime "created_at",                                           null: false
@@ -39,6 +40,7 @@ ActiveRecord::Schema.define(version: 20150611075231) do
     t.string   "attachment_content_type", limit: 255
     t.integer  "attachment_file_size",    limit: 4
     t.datetime "attachment_updated_at"
+    t.boolean  "confirmed",               limit: 1,                  default: false, null: false
   end
 
   create_table "categories", force: :cascade do |t|
