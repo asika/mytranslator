@@ -72,7 +72,6 @@ namespace :dev do
     User.create(:email => "admin@ac.com", :password => "12345678", :username => "admin", :first_name => "Mister", :last_name => "Admin", :phone => "0987654321", :role => Role.find_by_name('admin'))
 
     50.times do |i|
-      # username = Faker::Internet.user_name.sub('.', '_')
       username = "user#{i}"
 
       newuser = User.create(
@@ -108,9 +107,16 @@ namespace :dev do
         end
         np.language_ids = language_ids.uniq
 
-        # CaseType.all.each do |ct|
-        #   np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(4.0)+1.0)
-        # end
+        np.quality_level_id = Random.rand(3)+1
+
+        price_base = {
+          1 => 1.0, 2 => 2.5, 3 => 4.0
+        }
+        CaseType.all.each do |ct|
+          if Random.rand(2) == 1
+            np.pricings.build(:case_type_id => ct.id, :amount => Random.rand(1.0)+price_base[np.quality_level_id])
+          end
+        end
 
         # fakeup face
         conn = Faraday.new(:url => "http://uifaces.com/api/v1/random")
