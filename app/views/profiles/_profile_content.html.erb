@@ -34,8 +34,8 @@
     <table class="table">
       <% profile.pricings.each do |pr| %>
         <tr>
-          <td><%= t(pr.case_type.name) %></td>
-          <td><%= t(pr.case_type.unit) %></td>
+          <td><%= pr.case_type.name_i18n %></td>
+          <td><%= pr.case_type.unit_i18n %></td>
           <td><%= pr.amount.to_f %></td>
         </tr>
       <% end %>
