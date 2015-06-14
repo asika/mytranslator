@@ -21,6 +21,8 @@
 
 en:
   views:
+    application:
+      new_case: "委託翻譯案件"
     devise:
       registrations:
         new:
@@ -120,6 +122,11 @@ en:
         due: "交稿時間"
         quality_level: "案件難度"
         attachment: "上傳翻譯稿"
+      suggestion:
+        title: "您的案件委託內容"
+        translators: "推薦譯者"
+        button_submit_request: "送出委託"
+        button_edit: "修改內容"
   models:
     domains:
       group01: "人文社會"
