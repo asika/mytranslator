@@ -5,6 +5,6 @@ class Language < ActiveRecord::Base
   has_many :profiles, :through => :profile_langships
 
   def name_i18n
-    I18n.t(self.name)
+    I18n.t("models.languages.#{self.name}")
   end
 end
