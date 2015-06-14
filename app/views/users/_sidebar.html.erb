@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-    <% if current_user.role == 'translator' %>
+    <% if current_user.role.name == 'translator' %>
       <span><%= link_to t("views.users._sidebar.update_profile"), edit_user_profile_path(current_user) %></span> <br>
       <span><%= link_to t("views.users._sidebar.update_profile_pricings"), edit_pricings_user_profile_path(current_user) %></span> <br>
     <% end %>
