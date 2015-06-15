@@ -86,8 +86,10 @@ class User < ActiveRecord::Base
   end
 
   def full_name
-    # "#{first_name} #{last_name}"
-    # irresponsible for demo
-    first_name
+    if self.profile && self.profile.nickname
+      self.profile.nickname
+    else
+      "#{first_name} #{last_name}"
+    end
   end
 end

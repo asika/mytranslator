@@ -49,7 +49,6 @@
 
     <%= form_for [current_user, @profile], :url => user_profile_path(current_user, @profile), :method => :patch, :html => { :multipart => true } do |f| %>
 
-
       <div class="row">
         <div class="form-group col-md-6">
           <%= f.label :nickname, t("views.profiles.edit.nickname") %> <br />

@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :users do
     get :registered, :on => :collection
+    get :ratings
 
     resource :profile do
       get :edit_pricings

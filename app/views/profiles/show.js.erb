@@ -1,1 +1,8 @@
-$("#modal-profile .modal-body").html("<%= j(render :partial => 'profile_content', :locals => {:profile => @profile}) %>");
+<% if target == "tab" %>
+	$("#tab-profile").addClass("active");
+	$("#tab-ratings").removeClass("active");
+	$(".profile-contents").html("<%= j(render :partial => 'profile_table', :locals => {:profile => @profile}) %>");
+	console.log("profiles");
+<% else %>
+	$("#modal-profile .modal-body").html("<%= j(render :partial => 'profile_content', :locals => {:profile => @profile}) %>");
+<% end %>

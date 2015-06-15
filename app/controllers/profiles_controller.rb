@@ -24,11 +24,15 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @profile = @user.profile
+    unless @user.nil?
+      @profile = @user.profile
+    else
+      @profile = Profile.find(params[:id])
+    end
 
     respond_to do |format|
       format.html
-      format.js
+      format.js { render "show", :locals => {:target => params[:target]} }
     end
   end
 

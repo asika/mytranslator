@@ -1,0 +1,4 @@
+$("#tab-profile").removeClass("active");
+$("#tab-ratings").addClass("active");
+
+$(".profile-contents").html("<%= j(render :partial => 'ratings_content', :locals => {:profile => @profile}) %>");

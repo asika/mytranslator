@@ -112,6 +112,10 @@ en:
           button-cancel: "稍後"
           button-graduate: "我擁有國內外翻譯研究所學位，無需測驗"
           button-confirm: "開始測驗"
+      _profile_content:
+        pricings: "價格"
+        profile: "譯者資料"
+        ratings: "評價"
     cases:
       new:
         title: "翻譯案件委託"

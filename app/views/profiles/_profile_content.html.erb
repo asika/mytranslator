@@ -29,8 +29,7 @@
   </div>
 
   <div class="col-md-4">
-    <!-- <h4><%= t("profile.pricings") %></h4> -->
-    <h4>價格</h4>
+    <h4><%= t("views.profiles._profile_content.pricings") %></h4>
     <table class="table">
       <% profile.pricings.each do |pr| %>
         <tr>
@@ -43,23 +42,13 @@
   </div>
 </div>
 
-<hr>
+<br>
 
-<table class="table">
-  <tr>
-    <td><%= t("profile.about") %></td>
-    <td><%= simple_format profile.about %></td>
-  </tr>
-  <tr>
-    <td><%= t("profile.professional") %></td>
-    <td><%= simple_format profile.professional %></td>
-  </tr>
-  <tr>
-    <td><%= t("profile.education") %></td>
-    <td><%= simple_format profile.education %></td>
-  </tr>
-  <tr>
-    <td><%= t("profile.certification") %></td>
-    <td><%= simple_format profile.certification %></td>
-  </tr>
-</table>
+<ul class="nav nav-tabs">
+  <li role="presentation" id="tab-profile" class="active"><%= link_to t("views.profiles._profile_content.profile"), user_profile_path(profile.user, :target => "tab"), :remote => true %></li>
+  <li role="presentation" id="tab-ratings"><%= link_to t("views.profiles._profile_content.ratings"), user_ratings_path(profile.user), :remote => true %></li>
+</ul>
+
+<div class="profile-contents">
+  <%= render :partial => "profile_table", :locals => {:profile => profile} %>
+</div>

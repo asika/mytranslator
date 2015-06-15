@@ -26,6 +26,19 @@ class UsersController < ApplicationController
   def registered
   end
 
+  def ratings
+    unless @user.nil?
+      @profile = @user.profile
+    else
+      @profile = User.find_by_username(params[:user_id]).profile
+    end
+
+    respond_to do |format|
+      format.html
+      format.js { render "ratings", :locals => {:target => params[:target]} }
+    end
+  end
+
   protected
 
   def get_user

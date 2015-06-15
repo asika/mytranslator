@@ -1,0 +1,22 @@
+<% if @profile.user.received_ratings.empty? %>
+  <h2><%= t("views.users._ratings_content.empty") %></h2>
+<% else %>
+  <% @profile.user.received_ratings.each do |r| %>
+    <div class="media">
+      <div class="media-left">
+        <%= link_to user_profile_path(r.from) do %>
+          <% if r.from.profile && r.from.profile.avatar && r.from.profile.avatar.url %>
+            <%= image_tag r.from.profile.avatar.url, :class => "media-object avatar-sm" %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <div class="media-body">
+        <h4 class="media-heading">
+          <%= render :partial => "users/ratings", :locals => {:user => @profile.user} %>
+        </h4>
+        <p><%= simple_format r.comment %></p>
+      </div>
+    </div>
+  <% end %>
+<% end %>
