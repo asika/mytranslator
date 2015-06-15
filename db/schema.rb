@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150612143413) do
+ActiveRecord::Schema.define(version: 20150615061631) do
 
   create_table "case_types", force: :cascade do |t|
     t.string   "name",             limit: 255
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150612143413) do
     t.integer  "quality_level_id",    limit: 4
     t.string   "status",              limit: 255,   default: "unverified", null: false
     t.string   "nickname",            limit: 255
+    t.boolean  "available",           limit: 1,     default: false
+    t.boolean  "enable",              limit: 1,     default: true
   end
 
   create_table "quality_levels", force: :cascade do |t|

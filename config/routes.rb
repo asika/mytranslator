@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resource :profile do
       get :edit_pricings
       post :update_pricings
+      post :toggle_available
 
       get :complete, :on => :collection
 

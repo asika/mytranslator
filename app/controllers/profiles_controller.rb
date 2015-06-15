@@ -78,6 +78,15 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def toggle_available
+    if current_user.profile.update_attributes(:available => params[:available])
+      # ... update successful
+      render :nothing => true, :status => 200
+    else
+      # ... update failed
+    end
+  end
+
   def destroy
   end
 
